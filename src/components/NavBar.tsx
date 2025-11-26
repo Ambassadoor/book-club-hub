@@ -83,7 +83,10 @@ export const NavBar = (): JSX.Element =>{
                             }}
                             open={Boolean(anchorEl)}
                             onClose={handleCloseMenu}
-                        >
+                        >   
+                            <MenuItem onClick={() => navigate("profile")}>
+                                <Typography>Profile</Typography>
+                            </MenuItem>
                             {pages.map(page => (
                                 <MenuItem 
                                     key={page.text} onClick={() => handleNavLinkClick(page.path)}>
