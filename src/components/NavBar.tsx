@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu"
-import { Book } from "@mui/icons-material";
+import { AccountCircle, Book } from "@mui/icons-material";
 import { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -94,6 +94,11 @@ export const NavBar = (): JSX.Element =>{
                                 </MenuItem>
                             ))}
                         </Menu>
+                    </Box>
+                    <Box className="hidden md:flex">
+                        <IconButton size="large" color="inherit">
+                            <AccountCircle/>
+                        </IconButton>                        
                     </Box>
                   </Toolbar>
             </AppBar>
