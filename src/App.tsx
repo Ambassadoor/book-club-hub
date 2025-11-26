@@ -1,11 +1,12 @@
 import './App.css'
 import { Outlet, Route, Routes } from 'react-router-dom'
+import { NavBar } from './components/NavBar'
 
 const App = () => {
   const user = {}
   return (
     <Routes>
-      <Route path="/" element={<><Outlet/></>}>
+      <Route path="/" element={<><NavBar/><Outlet/></>}>
         <Route index element={
           user ? <>Login</> : <>Dashboard</>
         }/>
