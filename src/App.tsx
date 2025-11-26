@@ -13,13 +13,13 @@ const App = () => {
           <Route index element={<></>}/>
           <Route path=":clubId" element={<></>}/>
           <Route path=":userId" element={<></>}/>
-          <Route path="newClub" element={<>NewClubForm</>}/>
-          <Route path="deleteClub" element={<>Club Delete</>}/>
         </Route>
         <Route path="library/userId">
           <Route index element={<></>}/>
         </Route>
-        <Route path="book:bookId" element={<>Book</>}/>
+        <Route path="books" element={<>Books</>}>
+          <Route path="bookId" element={<>Book</>}/>
+        </Route>
       </Route>
     </Routes>
   )
