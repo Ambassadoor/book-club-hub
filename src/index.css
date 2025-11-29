@@ -1,2 +1,80 @@
 @import "tailwindcss";
 
+@theme {
+  /* Color Palette */
+  --color-primary: #606c38;
+  --color-primary-dark: #283618;
+  --color-accent: #dda15e;
+  --color-accent-dark: #bc6c25;
+  --color-surface: #fafae0;
+
+  /* Semantic Color Tokens */
+  --color-background: #fafae0;
+  --color-card: #606c38;
+  --color-card-border: #283618;
+  --color-button-positive: #dda15e;
+  --color-button-positive-border: #bc6c25;
+  --color-button-positive-hover: #bc6c25;
+  --color-input: #fafae0;
+  --color-input-border: #606c38;
+
+  /* Text Colors */
+  --color-text-on-primary: #fafae0;
+  --color-text-on-accent: #283618;
+  --color-text-on-surface: #283618;
+  --color-text-primary: #283618;
+  --color-text-secondary: #606c38;
+
+  /* Status & Feedback Colors */
+  --color-success: #606c38;
+  --color-success-border: #283618;
+  --color-success-light: #7f8c52;
+
+  --color-info: #4a7c9e;
+  --color-info-border: #2d5573;
+  --color-info-light: #6b9dbd;
+
+  --color-warning: #dda15e;
+  --color-warning-border: #bc6c25;
+  --color-warning-light: #e8b67d;
+
+  --color-error: #a04b4b;
+  --color-error-border: #7a2e2e;
+  --color-error-light: #c26565;
+
+  --color-danger: #a04b4b;
+  --color-danger-border: #7a2e2e;
+
+  /* Neutral/Gray Scale */
+  --color-neutral-50: #fafae0;
+  --color-neutral-100: #f0f0d8;
+  --color-neutral-200: #e0e0c0;
+  --color-neutral-300: #c8c8a8;
+  --color-neutral-400: #a0a088;
+  --color-neutral-500: #606c38;
+  --color-neutral-600: #4e5a2e;
+  --color-neutral-700: #3c4823;
+  --color-neutral-800: #283618;
+  --color-neutral-900: #1a2410;
+
+  /* Disabled States */
+  --color-disabled: #c8c8a8;
+  --color-disabled-text: #a0a088;
+
+  /* Spacing Scale (optional enhancement) */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border Radius (optional enhancement) */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Shadows (optional enhancement) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
