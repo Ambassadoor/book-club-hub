@@ -1,5 +1,5 @@
 import "./App.css";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { NavBar } from "./components/navbar/NavBar";
 import { SignUpButton } from "./components/profile/SignUpButton";
 import { useSessionManager } from "./hooks/useSessionManager";
@@ -8,14 +8,15 @@ import { Login } from "./components/login/Login";
 import { Box } from "@mui/material";
 
 const App = () => {
-  const { active, getCurrentUserId } = useSessionManager()
+  const { getCurrentUserId } = useSessionManager()
   const [user, setUser] = useState(null);
 
+  const location = useLocation();
+
   useEffect(() => {
-    if (active) {
-      setUser(getCurrentUserId())
-    }
-  }, [])
+    const u = getCurrentUserId()
+    if (u) setUser(u)
+  }, [location])
 
   return (
     <Routes>

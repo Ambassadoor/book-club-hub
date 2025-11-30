@@ -79,8 +79,8 @@ export const SignUpButton = () => {
                         ...decoded,
                     }).then(() => {
                         signIn(decoded.email)
-                    }).then(() => {
-                        navigate("/")
+                    }).then((res) => {
+                        navigate("/", {state: {userId: res} })
                     }).catch(res => {
                         console.error(res)
                     })

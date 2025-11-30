@@ -55,13 +55,13 @@ export const useSessionManager = () => {
   const signIn = useCallback(async (email: string) => {
     const user = await fetch(`http://localhost:8088/users?email=${email}`);
     if (user.ok) {
-      const res: User = await user.json();
+      const res: User[] = await user.json();
       const sessionToken = JSON.stringify({
-        userId: res.id,
+        userId: res[0].id,
         expiresAt: Date.now() + 3600000,
       });
       localStorage.setItem("sessionToken", sessionToken);
-      return user;
+      return res[0].id;
     } else {
       throw new Error("User not found");
     }
