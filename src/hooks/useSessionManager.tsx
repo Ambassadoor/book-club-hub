@@ -8,6 +8,17 @@ export const useSessionManager = () => {
   const navigate = useNavigate();
   const timerRef = useRef<number | null>(null);
 
+  const getCurrentUserId = useCallback(() => {
+    const token = localStorage.getItem("sessionToken");
+    if (!token) return null;
+    try {
+        const { userId } = JSON.parse(token);
+        return userId;
+    } catch {
+        return null;
+    }
+  }, [])
+
   const isSessionActive = useCallback(() => {
     const token = localStorage.getItem("sessionToken");
     if (!token) return false;
@@ -90,6 +101,7 @@ export const useSessionManager = () => {
   return {
     warning,
     active,
+    getCurrentUserId,
     refreshSession,
     logout,
     signIn,
