@@ -1,6 +1,7 @@
 import "./App.css";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
+import { SignUpButton } from "./components/profile/SignUpButton";
 
 const App = () => {
   const user = {};
@@ -27,7 +28,7 @@ const App = () => {
         <Route path="books" element={<>Books</>}>
           <Route path="bookId" element={<>Book</>} />
         </Route>
-        <Route path="profile" element={<>Profile</>} />
+        <Route path="profile" element={<><SignUpButton/></>} />
       </Route>
     </Routes>
   );
