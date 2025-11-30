@@ -3,9 +3,11 @@ import { useEffect, useState } from "react"
 import {jwtDecode, type JwtPayload} from "jwt-decode"
 import { postUser } from "../../services/userServices/userServices"
 import { useNavigate } from "react-router-dom"
+import { useSessionManager } from "../../hooks/useSessionManager"
 
 export const SignUpButton = () => {
     const [googleLoaded, setGoogleLoaded] = useState(false);
+    const { signIn } = useSessionManager()
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
     const navigate = useNavigate()
@@ -70,14 +72,17 @@ export const SignUpButton = () => {
                     Date.now() / 1000 < decoded.nbf
                     ) {
                         throw new Error("Invalid sign up request")
-                    } else {
-                    
+                    } else {      
                     
                     postUser({
                         method: "google",
                         ...decoded,
-
-
+                    }).then(() => {
+                        signIn(decoded.email)
+                    }).then(() => {
+                        navigate("/")
+                    }).catch(res => {
+                        console.error(res)
                     })
                 }
                 },
