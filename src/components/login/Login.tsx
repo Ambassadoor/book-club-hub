@@ -1,12 +1,58 @@
-import { Box, Button, Icon, Typography } from "@mui/material";
-import { useSessionManager } from "../../hooks/useSessionManager"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { SignUpButton } from "../profile/SignUpButton";
-import { Book, BookOutlined } from "@mui/icons-material";
+import { BookOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { bchSignIn } from "../../services/userServices/userServices";
+import { useSessionManager } from "../../hooks/useSessionManager";
 
 export const Login = () => {
-    const { signIn, getCurrentUserId } = useSessionManager();
+    const [signInOpen, setSignInOpen] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [email, setEmail] = useState<string>();
+    // For demo purposes only: NEVER STORE REAL PASSWORDS IN STATE
+    const [password, setPassword] = useState<string>();
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const {signIn} = useSessionManager();
 
+    const handleClickSignInOpen = () => {
+        setSignInOpen(true)
+    }
 
+    const handleSignInClose = () => {
+        setSignInOpen(false)
+    }
+
+    const handleSignIn = async () => {
+        if (email && password) {
+            setEmailError(false)
+            setPasswordError(false)
+            setErrorMessage("")
+
+            try {
+                const user = await bchSignIn({email: email, password: password})
+                console.log(user)
+                signIn(user.email)
+
+            } catch (error: any) {
+                setErrorMessage(error.message)
+                if (error.name === "EmailError") {
+                    setEmailError(true)
+                } else if (error.name === "MethodError") {
+                    handleSignInClose()
+                    window.google.accounts.id.prompt();
+                    
+                } else {
+                    setPasswordError(true)
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+
+    }, [emailError, passwordError, errorMessage])
 
     return (
         <Box className="flex justify-center items-center flex-1 max-h-3/4">
@@ -37,11 +83,66 @@ export const Login = () => {
                         variant="outlined"
                         sx={{borderRadius: "999px", textTransform: "none", letterSpacing: "0.25px", textSizeAdjust: "100%"}}
                         startIcon={<BookOutlined/>}
+                        onClick={handleClickSignInOpen}
                         >
                         <Typography className=" text-[14px]">Sign in with BCH</Typography>
                     </Button>
+                    <Dialog open={signInOpen} onClose={handleSignInClose}>
+                        <DialogTitle>Sign in to BCH</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Please enter your username and password.
+                            </DialogContentText>
+                            <Box>
+                                <TextField 
+                                    error={emailError ? true : false}
+                                    autoFocus
+                                    required
+                                    margin="dense"
+                                    id="email"
+                                    label="Email"
+                                    type="email"
+                                    fullWidth
+                                    variant="standard"
+                                    onChange={(e) => {setEmail(e.target.value)}}
+                                    helperText={emailError && errorMessage}
+                                />
+                                <TextField
+                                    error={passwordError ? true : false}
+                                    required   
+                                    margin="dense"
+                                    id="password"
+                                    label="Password"
+                                    type={showPassword ? "text" : "password"}
+                                    fullWidth
+                                    variant="standard"
+                                    slotProps={{
+                                        input: {
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton onClick={() => setShowPassword((b) => !b)}>
+                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
+                                        }
+                                    }}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    helperText={passwordError && errorMessage}
+                                />
+                            </Box>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleSignInClose} className="text-accent">Cancel</Button>
+                            <Button variant="contained" onClick={handleSignIn}className="bg-primary" disabled={!email || !password ? true : false}>
+                                Sign In
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Box>
-                <Button className="mb-5 text-black">Create Account</Button>
+                <Box className="flex justify-center">
+                    <Button className="mb-5 text-black rounded-[999px] w-[173.51px] ">Create Account</Button>
+                </Box>
             </Box>
         </Box>
     )

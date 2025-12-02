@@ -26,6 +26,7 @@ export interface User {
     sso_id: string | null,
     picture: string,
     method: string,
+    password: string,
     id: number
 
 }
@@ -54,7 +55,8 @@ const transformUser = (user: GoogleUser) => {
             created_at: new Date(),
             sso_id: user.sub,
             picture: user.picture,
-            method: user.method
+            method: user.method,
+            password: null
         }
     } else {
         throw new Error("Invalid User Data")
@@ -62,3 +64,27 @@ const transformUser = (user: GoogleUser) => {
     }
 }
 
+export const bchSignIn = async (data:{email: string, password: string}) => {
+    const {email, password} = data
+    const user = await fetch(`http://localhost:8088/users?email=${email}`).then(res => res.json())
+
+    if (user.length > 0) {
+        const foundUser = user[0]
+        if (foundUser.method !== "bch") {
+            const methodError = new Error(`Account created using: ${foundUser.method}`)
+            methodError.name="MethodError"
+            throw methodError
+        }
+        if (foundUser.password === password) {
+            return foundUser
+        } else {
+            const pError = new Error("Invalid password")
+            pError.name = "PasswordError";
+            throw pError
+        }
+    } else {
+        const eError = new Error("Unable to locate account for this email.")
+        eError.name = "EmailError";
+        throw eError
+    }
+}
