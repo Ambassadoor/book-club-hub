@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { SignUpButton } from "../profile/SignUpButton";
 import { BookOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ export const Login = () => {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const [googleSignIn, setGoogleSignIn] = useState(false)
     const {signIn} = useSessionManager();
 
     const handleClickSignInOpen = () => {
@@ -41,8 +42,7 @@ export const Login = () => {
                     setEmailError(true)
                 } else if (error.name === "MethodError") {
                     handleSignInClose()
-                    window.google.accounts.id.prompt();
-                    
+                    setGoogleSignIn(true)                    
                 } else {
                     setPasswordError(true)
                 }
@@ -52,7 +52,7 @@ export const Login = () => {
 
     useEffect(() => {
 
-    }, [emailError, passwordError, errorMessage])
+    },[setErrorMessage])
 
     return (
         <Box className="flex justify-center items-center flex-1 max-h-3/4">
@@ -60,7 +60,10 @@ export const Login = () => {
                 <Box className="pt-5 flex justify-center">
                     <Typography>Choose your sign in method</Typography>
                 </Box>
-                <SignUpButton/>
+                <Box className="flex flex-col justify-center mb-5">
+                        <SignUpButton/>
+                    <Alert className="border-primary rounded-[999px]" variant="outlined" hidden={googleSignIn ? false : true} severity="info" onClose={() => {setGoogleSignIn(false)}}>Please Sign in with Google</Alert>
+                </Box>
                 <Box className="
                     flex
                     justify-center
