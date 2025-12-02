@@ -94,9 +94,9 @@ export const SignUpButton = () => {
                     type: "standard",
                     shape: "pill",
                     theme: "outline",
-                    text: "signup_with",
-                    size: "large",
-                    logo_alignment: "left"
+                    text: "signin_with",
+                    size: "medium",
+                    logo_alignment: "left",
                 }
             )
         }

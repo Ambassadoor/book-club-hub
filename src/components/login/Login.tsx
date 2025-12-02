@@ -1,6 +1,7 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Icon, Typography } from "@mui/material";
 import { useSessionManager } from "../../hooks/useSessionManager"
 import { SignUpButton } from "../profile/SignUpButton";
+import { Book, BookOutlined } from "@mui/icons-material";
 
 export const Login = () => {
     const { signIn, getCurrentUserId } = useSessionManager();
@@ -27,20 +28,20 @@ export const Login = () => {
                         bg-white
                         border
                         text-black
-                        text-[14px]
-                        font-normal
-                        min-w-[224.938px]
-                        h-[38.8571]
+                        w-[173.51px]
+                        h-[30.667px]
                         text-nowrap
                         font-google-sans
                         hover:border-[#d2e3fc]
                         "
                         variant="outlined"
-                        sx={{borderRadius: "999px"}}
+                        sx={{borderRadius: "999px", textTransform: "none", letterSpacing: "0.25px", textSizeAdjust: "100%"}}
+                        startIcon={<BookOutlined/>}
                         >
-                        Sign in with BCH
+                        <Typography className=" text-[14px]">Sign in with BCH</Typography>
                     </Button>
                 </Box>
+                <Button className="mb-5 text-black">Create Account</Button>
             </Box>
         </Box>
     )
