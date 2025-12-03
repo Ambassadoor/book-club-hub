@@ -61,7 +61,7 @@ export const Login = () => {
                     <Typography>Choose your sign in method</Typography>
                 </Box>
                 <Box className="flex flex-col justify-center mb-5">
-                        <SignUpButton/>
+                        <SignUpButton method="signin"/>
                     <Alert className="border-primary rounded-[999px]" variant="outlined" hidden={googleSignIn ? false : true} severity="info" onClose={() => {setGoogleSignIn(false)}}>Please Sign in with Google</Alert>
                 </Box>
                 <Box className="

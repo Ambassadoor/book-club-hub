@@ -5,12 +5,16 @@ import { postUser } from "../../services/userServices/userServices"
 import { useNavigate } from "react-router-dom"
 import { useSessionManager } from "../../hooks/useSessionManager"
 
-export const SignUpButton = () => {
+type SignUpButtonProps = {
+    method: string;
+}
+export const SignUpButton = ({method}: SignUpButtonProps)=> {
     const [googleLoaded, setGoogleLoaded] = useState(false);
     const { signIn } = useSessionManager()
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
     const navigate = useNavigate()
+    console.log(method)
 
     // Adds eventlistener to check that google has loaded
     useEffect(() => {
@@ -60,7 +64,7 @@ export const SignUpButton = () => {
 
             window.google.accounts.id.initialize({
                 client_id: clientId,
-                context: "signup",
+                context: method,
                 nonce: "",
                 auto_prompt: "false",
                 callback: (response: GoogleCredentialResponse) => {
@@ -74,6 +78,7 @@ export const SignUpButton = () => {
                         throw new Error("Invalid sign up request")
                     } else {      
                     
+                    if (method === "signup") {
                     postUser({
                         method: "google",
                         ...decoded,
@@ -84,6 +89,13 @@ export const SignUpButton = () => {
                     }).catch(res => {
                         console.error(res)
                     })
+                    } else if (method === "signin") {
+                        signIn(decoded.email).then((res) => {
+                            navigate("/", {state: {userId: res}})
+                        }).catch(res => {
+                            console.error(res)
+                        })
+                    }
                 }
                 },
                 ux_mode: "popup",
@@ -94,7 +106,7 @@ export const SignUpButton = () => {
                     type: "standard",
                     shape: "pill",
                     theme: "outline",
-                    text: "signin_with",
+                    text: `${method}_with`,
                     size: "medium",
                     logo_alignment: "left",
                 }
