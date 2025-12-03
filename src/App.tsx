@@ -4,8 +4,8 @@ import { NavBar } from "./components/navbar/NavBar";
 import { SignUpButton } from "./components/profile/SignUpButton";
 import { useSessionManager } from "./hooks/useSessionManager";
 import { useEffect, useState } from "react";
-import { Login } from "./components/login/Login";
 import { Box } from "@mui/material";
+import { CreateAccountDialog } from "./components/createAccountDialog/CreateAccountDialog";
 
 const App = () => {
   const { getCurrentUserId } = useSessionManager()
@@ -40,10 +40,10 @@ const App = () => {
         <Route path="library/:userId">
           <Route index element={<></>} />
         </Route>
-        <Route path="books" element={<>Books</>}>
+        <Route path="books" element={<CreateAccountDialog setUser={setUser}/>}>
           <Route path="bookId" element={<>Book</>} />
         </Route>
-        <Route path="profile" element={<><SignUpButton method="signup"/></>} />
+        <Route path="profile" element={<>Profile</>} />
       </Route>
     </Routes>
   );

@@ -16,6 +16,17 @@ export interface GoogleUser {
     method: string
 }
 
+export interface BchUser {
+    firstName: string,
+    lastName: string,
+    userName: string,
+    email: string,
+    tagline: string,
+    picture: string,
+    method: string,
+    password: string
+}
+
 export interface User {
     firstName: string,
     lastName: string,
@@ -28,11 +39,10 @@ export interface User {
     method: string,
     password: string,
     id: number
-
 }
 
 // Adds user to database
-export const postUser = async (user: GoogleUser) => {
+export const postUser = async (user: GoogleUser | BchUser) => {
     const transformedUser = transformUser(user)
     return fetch("http://localhost:8088/users", {
         method: "POST",
@@ -44,19 +54,24 @@ export const postUser = async (user: GoogleUser) => {
 }
 
 // Ensures user is set correctly in database
-const transformUser = (user: GoogleUser) => {
+const transformUser = (user: GoogleUser | BchUser) => {
     if (user.method === "google") {
+        const googleUser = user as GoogleUser
         return {
-            firstName: user.given_name,
-            lastName: user.family_name,
-            userName: user.email,
-            email: user.email,
+            firstName: googleUser.given_name,
+            lastName: googleUser.family_name,
+            googleUserName: googleUser.email,
+            email: googleUser.email,
             tagline: null,
             created_at: new Date(),
-            sso_id: user.sub,
-            picture: user.picture,
-            method: user.method,
+            sso_id: googleUser.sub,
+            picture: googleUser.picture,
+            method: googleUser.method,
             password: null
+        }
+    } else if (user.method ==="bch") {
+        return {
+            ...user, created_at: new Date(), sso_id: null
         }
     } else {
         throw new Error("Invalid User Data")

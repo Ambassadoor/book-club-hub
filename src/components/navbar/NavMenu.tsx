@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionManager } from "../../hooks/useSessionManager";
 import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
