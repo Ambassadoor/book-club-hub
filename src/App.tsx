@@ -31,7 +31,7 @@ const App = () => {
           </Box>
         }
       >
-        <Route index element={!user ? <Login /> : <>Dashboard</>} />
+        <Route index element={ <>Dashboard</>} />
         <Route path="clubs">
           <Route index element={<></>} />
           <Route path=":clubId" element={<></>} />

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionManager } from "../../hooks/useSessionManager";
 import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu"
 import { AccountCircle} from "@mui/icons-material"
-
+import { Login } from "../login/Login";
 type NavMenuProps = {
     user: number | null
     setUser: React.Dispatch<React.SetStateAction<number | null>>
@@ -12,6 +12,7 @@ type NavMenuProps = {
 
 export const NavMenu = ({user, setUser}:NavMenuProps) => {
     const [anchorEl, setAnchorEl] = useState<null | Element>(null)
+    const [open, setOpen] = useState(false)
     const {logout} = useSessionManager()
 
     const pages = [
@@ -75,7 +76,11 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
                 <MenuItem onClick={() => navigate("/profile")}>
                     <Typography>Profile</Typography>
                 </MenuItem> :
-                <MenuItem onClick={() => navigate("/signin")}>
+                <MenuItem onClick={() => {
+                    setOpen(true)
+                    handleCloseMenu()
+                    
+                    }}>
                     <Typography>Sign In</Typography>
                 </MenuItem>
                 }  
@@ -96,6 +101,7 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
                         <Typography>Sign Out</Typography>
                     </MenuItem>}
             </Menu>
+            {open && <Login open={open} setOpen={setOpen} setUser={setUser} />}
         </Box>
     )
 }

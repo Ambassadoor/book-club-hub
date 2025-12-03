@@ -2,19 +2,17 @@ import { Box } from "@mui/material"
 import { useEffect, useState } from "react"
 import {jwtDecode, type JwtPayload} from "jwt-decode"
 import { postUser } from "../../services/userServices/userServices"
-import { useNavigate } from "react-router-dom"
 import { useSessionManager } from "../../hooks/useSessionManager"
 
 type SignUpButtonProps = {
     method: string;
+    handleClose: () => void
+    setUser: React.Dispatch<React.SetStateAction<number | null>>
 }
-export const SignUpButton = ({method}: SignUpButtonProps)=> {
+export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=> {
     const [googleLoaded, setGoogleLoaded] = useState(false);
     const { signIn } = useSessionManager()
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-
-    const navigate = useNavigate()
-    console.log(method)
 
     // Adds eventlistener to check that google has loaded
     useEffect(() => {
@@ -83,15 +81,14 @@ export const SignUpButton = ({method}: SignUpButtonProps)=> {
                         method: "google",
                         ...decoded,
                     }).then(() => {
-                        signIn(decoded.email)
-                    }).then((res) => {
-                        navigate("/", {state: {userId: res} })
+                        signIn(decoded.email).then(setUser).then(() => handleClose())
                     }).catch(res => {
                         console.error(res)
                     })
                     } else if (method === "signin") {
                         signIn(decoded.email).then((res) => {
-                            navigate("/", {state: {userId: res}})
+                            setUser(res)
+                            handleClose()
                         }).catch(res => {
                             console.error(res)
                         })
