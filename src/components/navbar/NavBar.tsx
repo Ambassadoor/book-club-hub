@@ -13,6 +13,7 @@ import { AccountCircle, Book } from "@mui/icons-material";
 import { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSessionManager } from "../../hooks/useSessionManager";
+import { NavMenu } from "./NavMenu";
 
 type NavBarProps = {
   user: number | null,
@@ -21,6 +22,7 @@ type NavBarProps = {
 
 export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
+  const [profileAnchorEl, setProfileAnchorEl] = useState<null | Element>(null);
   const {logout} = useSessionManager()
 
   const pages = [
@@ -52,6 +54,14 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
     setAnchorEl(null);
   };
 
+  const handleOpenProfileMenu = (event: React.MouseEvent) => {
+    setProfileAnchorEl(event.currentTarget);
+  }
+
+  const handleCloseProfileMenu = () => {
+    setProfileAnchorEl(null);
+  }
+
   return (
     <Box className="bg-primary"sx={{ flexGrow: 0 }}>
       <AppBar className="bg-inherit" position="static">
@@ -76,7 +86,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
               ))}
             </Box>
           </Box>
-          <Box className="flex md:hidden">
+          {/* <Box className="flex md:hidden">
             <IconButton
               size="large"
               edge="start"
@@ -113,22 +123,48 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
                   <Typography>{page.text}</Typography>
                 </MenuItem>
               ))}
-              {user && <MenuItem>
-                <Button className="text-black" onClick={() => {
+              {user && <MenuItem onClick={() => {
                   logout()
                   setUser(null)
                   handleCloseMenu()
                   }}>
                   <Typography>Sign Out</Typography>
-                </Button>
               </MenuItem>}
             </Menu>
           </Box>
           <Box className="hidden md:flex">
-            <IconButton size="large" color="inherit">
+            <IconButton size="large" color="inherit" onClick={handleOpenProfileMenu}>
               <AccountCircle />
             </IconButton>
-          </Box>
+            <Menu
+              className="mt-12"
+              id="profile-appbar"
+              anchorEl={profileAnchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(profileAnchorEl)}
+              onClose={handleCloseProfileMenu}
+            >
+              <MenuItem onClick={() => navigate("/profile")}>
+                <Typography>Profile</Typography>
+              </MenuItem>
+              {user ? <MenuItem onClick={() => {
+                  logout()
+                  setUser(null)
+                  handleCloseProfileMenu()
+                  }}>
+                  <Typography>Sign Out</Typography>
+              </MenuItem>: <MenuItem onClick={() => navigate("/signin")}><Typography>Sign In</Typography></MenuItem>}
+            </Menu>
+          </Box> */}
+          <NavMenu user={user} setUser={setUser} />
         </Toolbar>
       </AppBar>
     </Box>
