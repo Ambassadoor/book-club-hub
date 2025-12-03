@@ -12,11 +12,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { AccountCircle, Book } from "@mui/icons-material";
 import { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSessionManager } from "../../hooks/useSessionManager";
 
-export const NavBar = (): JSX.Element => {
+type NavBarProps = {
+  user: number | null,
+  setUser: React.Dispatch<React.SetStateAction<number | null>>
+}
+
+export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
-
-  const userId = 0;
+  const {logout} = useSessionManager()
 
   const pages = [
     {
@@ -29,7 +34,7 @@ export const NavBar = (): JSX.Element => {
     },
     {
       text: "My Library",
-      path: `library/${userId}`,
+      path: `library/${user}`,
     },
   ];
 
@@ -108,6 +113,15 @@ export const NavBar = (): JSX.Element => {
                   <Typography>{page.text}</Typography>
                 </MenuItem>
               ))}
+              {user && <MenuItem>
+                <Button className="text-black" onClick={() => {
+                  logout()
+                  setUser(null)
+                  handleCloseMenu()
+                  }}>
+                  <Typography>Sign Out</Typography>
+                </Button>
+              </MenuItem>}
             </Menu>
           </Box>
           <Box className="hidden md:flex">

@@ -9,7 +9,7 @@ import { Box } from "@mui/material";
 
 const App = () => {
   const { getCurrentUserId } = useSessionManager()
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<number | null>(null);
 
   const location = useLocation();
 
@@ -24,7 +24,7 @@ const App = () => {
         path="/"
         element={
           <Box className="flex flex-col h-dvh">
-            <NavBar />
+            <NavBar user={user} setUser={setUser}/>
             <Box className="flex flex-1 m-5 rounded-lg bg-primary flex-col justify-center" >
               <Outlet />
             </Box>

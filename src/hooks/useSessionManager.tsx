@@ -29,7 +29,7 @@ export const useSessionManager = () => {
   const logout = useCallback(() => {
     localStorage.removeItem("sessionToken");
     setActive(false);
-    navigate("/login");
+    navigate("/");
     if (timerRef.current) clearInterval(timerRef.current);
   }, [navigate]);
 
