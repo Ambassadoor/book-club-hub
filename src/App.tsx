@@ -1,17 +1,21 @@
 import "./App.css";
 import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { NavBar } from "./components/navbar/NavBar";
-import { SignUpButton } from "./components/profile/SignUpButton";
 import { useSessionManager } from "./hooks/useSessionManager";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { CreateAccountDialog } from "./components/createAccountDialog/CreateAccountDialog";
+import { Profile } from "./components/profile/Profile";
 
 const App = () => {
   const { getCurrentUserId } = useSessionManager()
   const [user, setUser] = useState<number | null>(null);
 
   const location = useLocation();
+
+  useEffect(() => {
+
+  })
 
   useEffect(() => {
     const u = getCurrentUserId()
@@ -43,7 +47,7 @@ const App = () => {
         <Route path="books" element={<CreateAccountDialog setUser={setUser}/>}>
           <Route path="bookId" element={<>Book</>} />
         </Route>
-        <Route path="profile" element={<>Profile</>} />
+        <Route path="profile" element={<Profile user={user}/>} />
       </Route>
     </Routes>
   );

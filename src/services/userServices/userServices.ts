@@ -32,7 +32,7 @@ export interface User {
     lastName: string,
     userName: string,
     email: string,
-    tagline: string | null,
+    tagline: string,
     created_at: string,
     sso_id: string | null,
     picture: string,
@@ -60,9 +60,9 @@ const transformUser = (user: GoogleUser | BchUser) => {
         return {
             firstName: googleUser.given_name,
             lastName: googleUser.family_name,
-            googleUserName: googleUser.email,
+            googleUserName: "",
             email: googleUser.email,
-            tagline: null,
+            tagline: "",
             created_at: new Date(),
             sso_id: googleUser.sub,
             picture: googleUser.picture,
@@ -102,4 +102,25 @@ export const bchSignIn = async (data:{email: string, password: string}) => {
         eError.name = "EmailError";
         throw eError
     }
+}
+
+
+export const getUser = async (userId: number) => {
+    const user = await fetch(`http://localhost:8088/users/${userId}`).then(res => res.json())
+
+    return user
+}
+
+export const updateProfile = async (userId: number, updates: User ) => {
+    
+
+    const options: RequestInit = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updates)
+    }
+    const user = await fetch(`http://localhost:8088/users/${userId}`, options).then(res => res.json())
+    return user
 }
