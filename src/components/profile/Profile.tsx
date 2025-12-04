@@ -71,6 +71,7 @@ export const Profile = ({user}: ProfileProps) => {
                 {/* Only users who create account with BCH will have password, and cannot change email since it's associated with
                 google account. May implement secondary email address in future"
                 */}
+                
                 {/* TODO: Either add new email field to database to check google account logins or add secondary email */}
                 {userInfo.method === "bch" &&
                 <>

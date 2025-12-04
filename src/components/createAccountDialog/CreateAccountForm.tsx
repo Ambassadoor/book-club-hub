@@ -64,7 +64,6 @@ export const CreateAccountForm = ({setUser, open, setOpen, setCreateAccount, set
         navigate("/profile")
     }
 
-    //TODO: Need to add account creation logic. i.e (No duplicate emails)
     const handleCreateAccount = async () => {
         const existing = await isExistingAccount(userData.email)
 
