@@ -4,6 +4,7 @@ import { BookOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { bchSignIn } from "../../services/userServices/userServices";
 import { useSessionManager } from "../../hooks/useSessionManager";
+import { CreateAccountDialog } from "../createAccountDialog/CreateAccountDialog";
 
 type LoginProps = {
     open: boolean,
@@ -20,7 +21,9 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const [googleSignIn, setGoogleSignIn] = useState(false)
+    const [googleSignIn, setGoogleSignIn] = useState(false);
+    const [bchExisting, setBchExisting] = useState(false);
+    const [createAccount, setCreateAccount] = useState(false);
     const {signIn} = useSessionManager();
 
     const handleClose = () => {
@@ -62,7 +65,12 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
         }
     }
 
+    const handleCreateAccount = () => {
+        setCreateAccount(true)
+    }
+
     return (
+        <>
         <Dialog open={open} onClose={handleClose}>
             <Box className="flex justify-center items-center flex-1 max-h-3/4">
                 <Box className="flex flex-col border border-neutral-200 rounded-lg px-5 bg-neutral-50">
@@ -70,35 +78,39 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
                         <Typography>Choose your sign in method</Typography>
                     </Box>
                     <Box className="flex flex-col justify-center mb-5">
-                            <SignUpButton method="signin" handleClose={handleClose} setUser={setUser}/>
+                        <SignUpButton method="signin" handleClose={handleClose} setUser={setUser} setGoogleSignIn={setGoogleSignIn}/>
                         <Alert className="border-primary rounded-[999px]" variant="outlined" hidden={googleSignIn ? false : true} severity="info" onClose={() => {setGoogleSignIn(false)}}>Please Sign in with Google</Alert>
                     </Box>
                     <Box className="
                         flex
                         justify-center
                         shrink-0
-                        mb-15
                     ">
-                        {/* {TODO: Need to add click logic} */}
-                        <Button
-                            className="
-                            border-[#dadce0]
-                            bg-white
-                            border
-                            text-black
-                            w-[173.51px]
-                            h-[30.667px]
-                            text-nowrap
-                            font-google-sans
-                            hover:border-[#d2e3fc]
-                            "
-                            variant="outlined"
-                            sx={{borderRadius: "999px", textTransform: "none", letterSpacing: "0.25px", textSizeAdjust: "100%"}}
-                            startIcon={<BookOutlined/>}
-                            onClick={handleClickSignInOpen}
-                            >
-                            <Typography className=" text-[14px]">Sign in with BCH</Typography>
-                        </Button>
+                    <Box className="flex flex-col justify-center mb-5">
+                        <Box className="flex justify-center mb-5">
+                            <Button
+                                className="
+                                border-[#dadce0]
+                                bg-white
+                                border
+                                text-black
+                                w-[173.51px]
+                                h-[30.667px]
+                                text-nowrap
+                                font-google-sans
+                                hover:border-[#d2e3fc]
+                                "
+                                variant="outlined"
+                                sx={{borderRadius: "999px", textTransform: "none", letterSpacing: "0.25px", textSizeAdjust: "100%"}}
+                                startIcon={<BookOutlined/>}
+                                onClick={handleClickSignInOpen}
+                                >
+                                <Typography className=" text-[14px]">Sign in with BCH</Typography>
+                            </Button>
+                        </Box>
+                        <Alert className="border-primary rounded-[999px]" variant="outlined" hidden={bchExisting ? false : true} severity="info" onClose={() => {setBchExisting(false)}}>Existing account, please sign in</Alert>
+                    </Box>
+
                         <Dialog open={signInOpen} onClose={handleSignInClose}>
                             <DialogTitle>Sign in to BCH</DialogTitle>
                             <DialogContent>
@@ -153,10 +165,12 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
                         </Dialog>
                     </Box>
                     <Box className="flex justify-center">
-                        <Button className="mb-5 text-black rounded-[999px] w-[173.51px] ">Create Account</Button>
+                        <Button className="mb-5 text-black rounded-[999px] w-[173.51px] " onClick={handleCreateAccount}>Create Account</Button>
                     </Box>
                 </Box>
             </Box>
         </Dialog>
+        {createAccount && <CreateAccountDialog setUser={setUser} createAccount={createAccount} setCreateAccount={setCreateAccount} setGoogleSignIn={setGoogleSignIn} setBchExisting={setBchExisting}/>}
+        </>
     )
 }

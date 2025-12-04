@@ -112,7 +112,7 @@ export const getUser = async (userId: number) => {
 }
 
 export const updateProfile = async (userId: number, updates: User ) => {
-    
+
 
     const options: RequestInit = {
         method: "PATCH",
@@ -123,4 +123,10 @@ export const updateProfile = async (userId: number, updates: User ) => {
     }
     const user = await fetch(`http://localhost:8088/users/${userId}`, options).then(res => res.json())
     return user
+}
+
+export const isExistingAccount = async (email : string) => {
+    const user = await fetch(`http://localhost:8088/users?email=${email}`).then(res => res.json())
+
+    return user.length > 0
 }

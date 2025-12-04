@@ -4,28 +4,31 @@ import { SignUpButton } from "../profile/SignUpButton"
 import { CreateAccountForm } from "./CreateAccountForm"
 
 type CreateAccountDialogProps = {
-    setUser: React.Dispatch<React.SetStateAction<number | null>>
+    setUser: React.Dispatch<React.SetStateAction<number | null>>,
+    createAccount: boolean,
+    setCreateAccount: React.Dispatch<React.SetStateAction<boolean>>,
+    setGoogleSignIn: React.Dispatch<React.SetStateAction<boolean>>,
+    setBchExisting: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export const CreateAccountDialog = ({setUser}: CreateAccountDialogProps) => {
-    const [openOne, setOpenOne] = useState(false)
+export const CreateAccountDialog = ({setUser, createAccount, setCreateAccount, setGoogleSignIn, setBchExisting}: CreateAccountDialogProps) => {
     const [open, setOpen] = useState(false)
 
     const handleClose = () => {
         setOpen(false)
+        setCreateAccount(false)
     }
 
     return (
         <>
-        <Button onClick={() => setOpenOne(true)}>Create Account</Button>
-        <Dialog open={openOne} onClose={() => setOpenOne(false)}>
+        <Dialog open={createAccount} onClose={() => setCreateAccount(false)}>
             <DialogTitle>Create Account</DialogTitle>
             <DialogContent>
-                <SignUpButton method="signup" handleClose={handleClose} setUser={setUser}/>
+                <SignUpButton method="signup" handleClose={handleClose} setUser={setUser} setGoogleSignIn={setGoogleSignIn}/>
                 <Button onClick={() => setOpen(true)}>Create Account with BCH</Button>
             </DialogContent>
         </Dialog>
-        <CreateAccountForm setUser={setUser} open={open} setOpen={setOpen} setOpenOne={setOpenOne}/>
+        <CreateAccountForm setUser={setUser} open={open} setOpen={setOpen} setCreateAccount={setCreateAccount} setBchExisting={setBchExisting}/>
         </>
     )
 }

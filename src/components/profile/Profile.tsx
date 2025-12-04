@@ -5,7 +5,7 @@ import { ToggleField } from "./ToggleField"
 import { Edit } from "@mui/icons-material"
 
 type ProfileProps = {
-    user: number
+    user: number | null
 }
 
 export const Profile = ({user}: ProfileProps) => {
@@ -13,6 +13,7 @@ export const Profile = ({user}: ProfileProps) => {
     const [editing, setEditing] = useState(false)
 
     useEffect(() => {
+        user && 
         getUser(user).then(res => setUserInfo(res))
     }, [user])
 
@@ -37,6 +38,7 @@ export const Profile = ({user}: ProfileProps) => {
                 key, typeof value === "string" ? value.trim() : value
             ])
         )
+        user &&
         updateProfile(user, cleanedData as User)
         setEditing(false)
     }
@@ -44,6 +46,7 @@ export const Profile = ({user}: ProfileProps) => {
 
     const handleCancel = () => {
         setEditing(false)
+        user && 
         getUser(user).then(res => setUserInfo(res))
 
     }

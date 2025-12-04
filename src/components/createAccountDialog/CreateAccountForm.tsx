@@ -2,17 +2,18 @@ import { Visibility, VisibilityOff } from "@mui/icons-material"
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, InputAdornment, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useSessionManager } from "../../hooks/useSessionManager"
-import { postUser } from "../../services/userServices/userServices"
+import { isExistingAccount, postUser } from "../../services/userServices/userServices"
 import { useNavigate } from "react-router-dom"
 
 type CreateAccountFormProps = {
     setUser: React.Dispatch<React.SetStateAction<number | null>>,
     open: boolean,
     setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-    setOpenOne: React.Dispatch<React.SetStateAction<boolean>>
+    setCreateAccount: React.Dispatch<React.SetStateAction<boolean>>,
+    setBchExisting: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export const CreateAccountForm = ({setUser, open, setOpen, setOpenOne}: CreateAccountFormProps) => {
+export const CreateAccountForm = ({setUser, open, setOpen, setCreateAccount, setBchExisting}: CreateAccountFormProps) => {
     const [userData, setUserData] = useState({
         "firstName": "",
         "lastName": "",
@@ -59,12 +60,19 @@ export const CreateAccountForm = ({setUser, open, setOpen, setOpenOne}: CreateAc
 
     const handleClose = () => {
         setOpen(false)
-        setOpenOne(false)
+        setCreateAccount(false)
         navigate("/profile")
     }
 
     //TODO: Need to add account creation logic. i.e (No duplicate emails)
-    const handleCreateAccount = () => {
+    const handleCreateAccount = async () => {
+        const existing = await isExistingAccount(userData.email)
+
+        if (existing) {
+            setBchExisting(true)
+            setCreateAccount(false)
+            return 
+        }
         const data = {...userData, method: "bch"}
         postUser(data).then(res => res.json().then(res => signIn(res.email)).then(setUser).then(handleClose)).catch(error => console.error(error))
     }

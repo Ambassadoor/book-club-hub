@@ -1,15 +1,16 @@
 import { Box } from "@mui/material"
 import { useEffect, useState } from "react"
 import {jwtDecode, type JwtPayload} from "jwt-decode"
-import { postUser } from "../../services/userServices/userServices"
+import { isExistingAccount, postUser } from "../../services/userServices/userServices"
 import { useSessionManager } from "../../hooks/useSessionManager"
 
 type SignUpButtonProps = {
     method: string;
     handleClose: () => void
-    setUser: React.Dispatch<React.SetStateAction<number | null>>
+    setUser: React.Dispatch<React.SetStateAction<number | null>>,
+    setGoogleSignIn: React.Dispatch<React.SetStateAction<boolean>>,
 }
-export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=> {
+export const SignUpButton = ({method, handleClose, setUser, setGoogleSignIn}: SignUpButtonProps)=> {
     const [googleLoaded, setGoogleLoaded] = useState(false);
     const { signIn } = useSessionManager()
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -65,8 +66,9 @@ export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=
                 context: method,
                 nonce: "",
                 auto_prompt: "false",
-                callback: (response: GoogleCredentialResponse) => {
+                callback: async (response: GoogleCredentialResponse) => {
                     const  decoded: GoogleJWT = jwtDecode(response.credential)
+                    const existing = await isExistingAccount(decoded.email)
                     if (
                       decoded.iss !== "https://accounts.google.com" ||
                     decoded.aud !== clientId ||
@@ -74,9 +76,9 @@ export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=
                     Date.now() / 1000 < decoded.nbf
                     ) {
                         throw new Error("Invalid sign up request")
-                    } else {      
-                    
-                    if (method === "signup") {
+                    }     
+
+                    if (method === "signup" && !existing) {          
                     postUser({
                         method: "google",
                         ...decoded,
@@ -85,7 +87,10 @@ export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=
                     }).catch(res => {
                         console.error(res)
                     })
-                    } else if (method === "signin") {
+                    } else if (method === "signin" || existing) {
+                        if (existing) {
+                            setGoogleLoaded(true)
+                        }
                         signIn(decoded.email).then((res) => {
                             setUser(res)
                             handleClose()
@@ -93,12 +98,12 @@ export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=
                             console.error(res)
                         })
                     }
-                }
+                
                 },
                 ux_mode: "popup",
             } as GoogleAccountsIdInitializeConfig);
             window.google.accounts.id.renderButton(
-                document.getElementById("g_id_signin"),
+                document.getElementById(`g_id_${method}`),
                 { 
                     type: "standard",
                     shape: "pill",
@@ -113,7 +118,7 @@ export const SignUpButton = ({method, handleClose, setUser}: SignUpButtonProps)=
     
     return (
         <Box className="flex justify-center my-5">
-            <div id="g_id_signin"></div>
+            <div id={`g_id_${method}`}></div>
         </Box>
     )
 }
