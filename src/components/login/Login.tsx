@@ -108,7 +108,7 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
                                 <Typography className=" text-[14px]">Sign in with BCH</Typography>
                             </Button>
                         </Box>
-                        <Alert className="border-primary rounded-[999px]" variant="outlined" hidden={bchExisting ? false : true} severity="info" onClose={() => {setBchExisting(false)}}>Existing account, please sign in</Alert>
+                        <Alert className="border-primary rounded-[999px]" variant="outlined" hidden={bchExisting ? false : true} severity="info" onClose={() => {setBchExisting(false)}}>Existing account, please sign in.</Alert>
                     </Box>
 
                         <Dialog open={signInOpen} onClose={handleSignInClose}>

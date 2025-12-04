@@ -22,7 +22,7 @@ export const CreateAccountDialog = ({setUser, createAccount, setCreateAccount, s
     return (
         <>
         <Dialog open={createAccount} onClose={() => setCreateAccount(false)}>
-            <DialogTitle>Create Account</DialogTitle>
+            <DialogTitle className="self-center">Create Account</DialogTitle>
             <DialogContent>
                 <SignUpButton method="signup" handleClose={handleClose} setUser={setUser} setGoogleSignIn={setGoogleSignIn}/>
                 <Button onClick={() => setOpen(true)}>Create Account with BCH</Button>

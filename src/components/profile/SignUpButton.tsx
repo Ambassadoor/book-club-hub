@@ -88,9 +88,6 @@ export const SignUpButton = ({method, handleClose, setUser, setGoogleSignIn}: Si
                         console.error(res)
                     })
                     } else if (method === "signin" || existing) {
-                        if (existing) {
-                            setGoogleLoaded(true)
-                        }
                         signIn(decoded.email).then((res) => {
                             setUser(res)
                             handleClose()
