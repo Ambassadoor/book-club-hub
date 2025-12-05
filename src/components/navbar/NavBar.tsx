@@ -27,11 +27,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
     {
       text: "Clubs",
       path: "clubs",
-    },
-    {
-      text: "My Library",
-      path: `library/${user}`,
-    },
+    }
   ];
 
   const navigate = useNavigate();
@@ -62,6 +58,11 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
                   {page.text}
                 </Button>
               ))}
+              {user && <Button
+                value={`library/${user}`}
+                className="text-white text-nowrap"
+                onClick={() => handleNavLinkClick(`library/${user}`)}
+              >My Library</Button>}
             </Box>
           </Box>
           <NavMenu user={user} setUser={setUser} />

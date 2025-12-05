@@ -23,11 +23,7 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
         {
         text: "Clubs",
         path: "clubs",
-        },
-        {
-        text: "My Library",
-        path: `library/${user}`,
-        },
+        }
     ];
 
   const navigate = useNavigate()
@@ -93,6 +89,11 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
                         <Typography>{page.text}</Typography>
                     </MenuItem>
                 ))} 
+                {user && <MenuItem onClick={() => {
+                    handleNavClick(`library/${user}`)
+                }}>
+                    <Typography>My Library</Typography>
+                    </MenuItem>}
                 {user && <MenuItem onClick={() => {
                     logout()
                     setUser(null)

@@ -30,5 +30,16 @@
   "clubs": [],
   "clubMembers": [],
   "clubBooks": [],
-  "userBooks": []
+  "userBooks": [
+    {
+      "id" : 1,
+      "userId" : 1,
+      "title": "The Strength of the Few",
+      "imageSmall": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "This highly anticipated sequel to The Will of the Many—one of 2023’s most lauded and bestselling fantasy novels—follows Vis as he grapples with a dangerous secret that could unravel history across alternate dimensions. Book two of the Hierarchy quartet.",
+      "addedOn": "2025-12-04T18:32:23.123Z",
+      "status": "In Progress"
+    }
+  ]
 }

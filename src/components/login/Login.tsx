@@ -16,7 +16,7 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
     const [signInOpen, setSignInOpen] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [email, setEmail] = useState<string>();
-    // For demo purposes only: NEVER STORE REAL PASSWORDS IN STATE
+    // NOTE: For demo purposes only: NEVER STORE REAL PASSWORDS IN STATE
     const [password, setPassword] = useState<string>();
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false)

@@ -6,20 +6,25 @@ import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { CreateAccountDialog } from "./components/createAccountDialog/CreateAccountDialog";
 import { Profile } from "./components/profile/Profile";
+import { Library } from "./components/library/Library";
 
 const App = () => {
-  const { getCurrentUserId } = useSessionManager()
+  const { getCurrentUserId, active } = useSessionManager()
   const [user, setUser] = useState<number | null>(null);
 
   const location = useLocation();
 
   useEffect(() => {
-
-  })
+    if (active) {
+      const userId = getCurrentUserId()
+      setUser(userId)
+    } 
+  },[active])
 
   useEffect(() => {
+    if (active) {
     const u = getCurrentUserId()
-    if (u) setUser(u)
+    if (u) setUser(u) }
   }, [location])
 
   return (
@@ -42,9 +47,9 @@ const App = () => {
           <Route path=":userId" element={<></>} />
         </Route>
         <Route path="library/:userId">
-          <Route index element={<></>} />
+          <Route index element={<Library/>} />
         </Route>
-        <Route path="books" element={<CreateAccountDialog setUser={setUser}/>}>
+        <Route path="books" element={<>Books</>}>
           <Route path="bookId" element={<>Book</>} />
         </Route>
         <Route path="profile" element={<Profile user={user}/>} />

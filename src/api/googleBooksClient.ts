@@ -1,0 +1,18 @@
+import type { SearchParams } from "../components/library/Library"
+
+export const googleBooksClient = () => {
+    const url = "https://www.googleapis.com/books/v1/volumes"
+    const key = import.meta.env.VITE_GOOGLE_BOOK_KEY
+
+    const search = async (searchParams: SearchParams, page: number) => {
+        let query = ""
+        Object.entries(searchParams).forEach(param => query += `${param[0]}:${param[1]}+`)
+        query = query.slice(0,-1)
+        query += `&startIndex=${String(page)}&key=${key}`
+        const response = await fetch(`${url}?q=${query}`).then(res => res.json())
+
+        return response
+    }
+
+    return {search}
+}

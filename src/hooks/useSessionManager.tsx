@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export const useSessionManager = () => {
   const [warning, setWarning] = useState(false);
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const timerRef = useRef<number | null>(null);
 
@@ -91,12 +91,14 @@ export const useSessionManager = () => {
 
   useEffect(() => {
     if (isSessionActive()) {
+      setActive(true)
       startSessionTimer();
     }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [isSessionActive, startSessionTimer]);
+
 
   return {
     warning,
