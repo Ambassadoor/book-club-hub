@@ -32,10 +32,12 @@ const App = () => {
       <Route
         path="/"
         element={
-          <Box className="flex flex-col h-dvh">
+          <Box className="flex flex-col h-screen">
             <NavBar user={user} setUser={setUser}/>
-            <Box className="flex flex-1 m-5 rounded-lg bg-primary flex-col justify-center" >
-              <Outlet />
+            <Box className="flex-1 m-5 rounded-lg bg-primary flex flex-col justify-center overflow-hidden h-[calc(100vh-(--spacing.10))]" >
+              <Box className="flex-1 overflow-auto h-full p-4">
+                <Outlet />
+              </Box>
             </Box>
           </Box>
         }

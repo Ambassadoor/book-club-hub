@@ -37,7 +37,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   };
 
   return (
-    <Box className="bg-primary"sx={{ flexGrow: 0 }}>
+    <Box className="bg-primary sticky top-0 z-50"sx={{ flexGrow: 0 }}>
       <AppBar className="bg-inherit" position="static">
         <Toolbar className="flex justify-between items-center">
           <Box className="flex items-center">
