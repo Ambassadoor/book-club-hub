@@ -29,3 +29,11 @@ const transformBook = (book: GoogleBook) => {
         "description": b.description || null
     }
 }
+
+export const getBook = async(googleId: string) => {
+    const response = await fetch(`http://localhost:8088/userBooks?googleId=${googleId}`).then(res => res.json())
+
+    if (response.length > 0) {
+        return response[0]
+    }
+}

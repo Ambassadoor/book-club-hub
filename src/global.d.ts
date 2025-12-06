@@ -5,6 +5,7 @@ declare global {
     interface UserBook {
         id: number,
         userId: number,
+        googleId: string,
         title: string,
         author: string,
         imageSmall: string,

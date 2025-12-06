@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { getLibrary } from "../../services/libraryServices/libraryServices"
 import { Box, Button, TextField } from "@mui/material"
 import { googleBooksClient } from "../../api/googleBooksClient"
+import { Book } from "./Book"
 
 export interface SearchParams {
     intitle?: string,
@@ -57,6 +58,7 @@ export const Library = () => {
 
     return (
         <>
+            <h2>Search</h2>
             <TextField name="intitle" value={searchParams["intitle"] || ""} onChange={handleSearch}/>
             <ul>
                 {searchResults.map(book => (
@@ -66,12 +68,14 @@ export const Library = () => {
             <Box>
                 <Button disabled={page === 0} onClick={handlePrev}>{"<"}</Button><Button disabled={!(page + searchResults.length < numResults)} onClick={handleNext}>{">"}</Button>
             </Box>
+            <h2>Library</h2>
             <ul>
                 {library.map(book => (
                     <li key={book.id} >{book.title}</li>
                 ))}
             </ul>
-
+            <h2>Preview</h2>
+            {library.length > 0 && <Book bookId={library[0].googleId}/>}
         </>
     )
 }
