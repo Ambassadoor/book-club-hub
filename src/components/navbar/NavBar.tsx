@@ -2,11 +2,12 @@ import {
   AppBar,
   Box,
   Button,
+  IconButton,
   Toolbar,
   Typography,
 } from "@mui/material";
 
-import { Book } from "@mui/icons-material";
+import { Book, DarkMode } from "@mui/icons-material";
 import { type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,10 +15,11 @@ import { NavMenu } from "./NavMenu";
 
 type NavBarProps = {
   user: number | null,
-  setUser: React.Dispatch<React.SetStateAction<number | null>>
+  setUser: React.Dispatch<React.SetStateAction<number | null>>,
+  toggleTheme: () => void
 }
 
-export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
+export const NavBar = ({user, setUser, toggleTheme}:NavBarProps): JSX.Element => {
 
   const pages = [
     {
@@ -37,8 +39,8 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   };
 
   return (
-    <Box className="bg-primary sticky top-0 z-50"sx={{ flexGrow: 0 }}>
-      <AppBar className="bg-inherit" position="static">
+    <Box className="bg-primary dark:bg-primary-dark sticky top-0 z-50"sx={{ flexGrow: 0 }}>
+      <AppBar position="static">
         <Toolbar className="flex justify-between items-center">
           <Box className="flex items-center">
             <Box className="flex" onClick={() => handleNavLinkClick("/")}>
@@ -65,6 +67,9 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
               >My Library</Button>}
             </Box>
           </Box>
+          <IconButton onClick={toggleTheme}>
+            <DarkMode/>
+          </IconButton>
           <NavMenu user={user} setUser={setUser} />
         </Toolbar>
       </AppBar>

@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import App from "./App.tsx";
+import ToggleColorMode from "./App";
 import { GlobalStyles, StyledEngineProvider } from "@mui/material";
 
 createRoot(document.getElementById("root")!).render(
@@ -10,7 +10,7 @@ createRoot(document.getElementById("root")!).render(
     <StyledEngineProvider enableCssLayer>
       <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
       <BrowserRouter>
-        <App />
+        <ToggleColorMode />
       </BrowserRouter>
     </StyledEngineProvider>
   </StrictMode>,
