@@ -83,6 +83,7 @@ export const SearchBar = ({className, fullWidth = false, expanding = false, targ
             onClose={handleClose}
             selectOnFocus
             clearOnBlur
+            filterOptions={(x) => x}
             className="self-center"
             getOptionLabel={(option: UserBook | GoogleBook | string) => {
                 if (typeof option === 'string') return option

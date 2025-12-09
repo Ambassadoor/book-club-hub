@@ -5,7 +5,7 @@ type BookSearchResultProps = {
     book: UserBook | GoogleBook
 }
 
-export const BookSearchResult = ({book} : BookSearchResultProps) => {
+export const BookSearchResult = (book : BookSearchResultProps) => {
 
 
     return (
@@ -15,8 +15,8 @@ export const BookSearchResult = ({book} : BookSearchResultProps) => {
                     <Avatar 
                         src={
                             "imageSmall" in book
-                            ? book?.imageSmall || ""
-                            : book?.volumeInfo?.imageLinks?.smallThumbnail || ""
+                            ? book?.book?.imageSmall || ""
+                            : book?.book?.volumeInfo?.imageLinks?.smallThumbnail || ""
                         }
                         variant="rounded"
                     >
@@ -27,13 +27,13 @@ export const BookSearchResult = ({book} : BookSearchResultProps) => {
                     className=""
                     primary={
                         "title" in book
-                        ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.title || ""}</span>
-                        : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.volumeInfo?.title || ""}</span>
+                        ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.book?.title || ""}</span>
+                        : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.book?.volumeInfo?.title || ""}</span>
                     }
                     secondary={
                         "author" in book
-                        ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.author || ""}</span>
-                        : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.volumeInfo.authors?.join(", ") || ""}</span>
+                        ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.book?.author || ""}</span>
+                        : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book.book?.volumeInfo?.authors?.join(", ") || ""}</span>
                     }/>
             </ListItemButton>
         </ListItem>
