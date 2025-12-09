@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 
 import { Book, DarkMode } from "@mui/icons-material";
-import { type JSX } from "react";
+import { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { NavMenu } from "./NavMenu";
+import { SearchBar } from "../shared/SearchBar";
 
 type NavBarProps = {
   user: number | null,
@@ -20,6 +21,7 @@ type NavBarProps = {
 }
 
 export const NavBar = ({user, setUser, toggleTheme}:NavBarProps): JSX.Element => {
+  const [results, setResults] = useState<UserBook[] | GoogleBook[]>([])
 
   const pages = [
     {
@@ -67,10 +69,13 @@ export const NavBar = ({user, setUser, toggleTheme}:NavBarProps): JSX.Element =>
               >My Library</Button>}
             </Box>
           </Box>
-          <IconButton onClick={toggleTheme}>
-            <DarkMode/>
-          </IconButton>
-          <NavMenu user={user} setUser={setUser} />
+          <Box className="flex flex-row flex-nowrap align-middle gap-2">
+            <SearchBar className="self-center max-[480px]:hidden" targets={['googleBooks']} results={results} setResults={setResults} expanding select/>
+            <IconButton onClick={toggleTheme}>
+              <DarkMode/>
+            </IconButton>
+            <NavMenu user={user} setUser={setUser} />
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

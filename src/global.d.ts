@@ -96,6 +96,11 @@ declare global {
             textSnippet: string
         }
     }
+    interface Options {
+        method:"GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+        headers: HeadersInit;
+        body?: BodyInit;
+    }
 }
 
 export {};

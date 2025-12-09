@@ -109,6 +109,7 @@
 
 /* Tailwind theme configuration */
 @theme {
+  --breakpoint-xs: 480px;
   /* Configure dark mode to use class strategy instead of media query */
   --color-scheme: light dark;
   

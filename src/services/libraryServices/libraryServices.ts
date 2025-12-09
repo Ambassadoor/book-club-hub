@@ -31,9 +31,10 @@ const transformBook = (book: GoogleBook) => {
 }
 
 export const getBook = async(googleId: string) => {
-    const response = await fetch(`http://localhost:8088/userBooks?googleId=${googleId}`).then(res => res.json())
-
-    if (response.length > 0) {
-        return response[0]
-    }
+    //const response = await fetch(`http://localhost:8088/userBooks?googleId=${googleId}`).then(res => res.json())
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${googleId}`).then(res => res.json())
+    return response
+//     if (response.length > 0) {
+//         return response[0]
+//     }
 }

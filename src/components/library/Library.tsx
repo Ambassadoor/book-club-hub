@@ -7,6 +7,7 @@ import { Book } from "./Book"
 import { BookSearchResult } from "./BookSearchResult"
 import { BookList } from "./BookList"
 import debounce  from "lodash.debounce"
+import { SearchBar } from "../shared/SearchBar"
 export interface SearchParams {
     intitle?: string,
     inauthor?: string,

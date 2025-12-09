@@ -7,6 +7,7 @@ import { Box, ThemeProvider, useColorScheme } from "@mui/material";
 import { Profile } from "./components/profile/Profile";
 import { Library } from "./components/library/Library";
 import {theme} from "../theme"
+import { Book } from "./components/library/Book";
 
 const App = () => {
   const {mode, setMode, systemMode} = useColorScheme();
@@ -72,8 +73,7 @@ const toggleTheme = () => {
           <Route path="library/:userId">
             <Route index element={<Library/>} />
           </Route>
-          <Route path="books" element={<>Books</>}>
-            <Route path="bookId" element={<>Book</>} />
+          <Route path="books/:source/:bookId" element={<Book />}>
           </Route>
           <Route path="profile" element={<Profile user={user}/>} />
         </Route>

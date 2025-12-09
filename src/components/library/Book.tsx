@@ -9,14 +9,16 @@ type BookParams = {
 
 //TODO: Create 3 variants: SearchResult, Card, Full
 
-export const Book = ({bookId}: BookParams) => {
+export const Book = () => {
     //TODO: Determine whether to get info from local API or Books API
     const [book, setBook] = useState<UserBook | GoogleBook>()
+    const {source, bookId} = useParams()
 
     const isMedium = useMediaQuery(`(min-width:640px)`)
     console.log(isMedium)
 
     useEffect(() => {
+        console.log(bookId)
         bookId &&
         getBook(bookId).then(res => setBook(res))
     }, [bookId])
@@ -35,8 +37,8 @@ export const Book = ({bookId}: BookParams) => {
                         : book.imageSmall
                     : 
                         isMedium
-                        ? book.volumeInfo.imageLinks.thumbnail
-                        : book.volumeInfo.imageLinks.smallThumbnail
+                        ? book.volumeInfo.imageLinks?.thumbnail
+                        : book.volumeInfo.imageLinks?.smallThumbnail
                 }
                 alt={`Book cover-art for ${
                     "title" in book
@@ -55,15 +57,20 @@ export const Book = ({bookId}: BookParams) => {
                         {
                             "author" in book
                             ? book.author
-                            : book.volumeInfo.authors.join(", ")
+                            : book.volumeInfo.authors?.join(", ")
                         }
                     </Typography>
-                    <Typography className="ml-5 overflow-y-scroll" variant="body1">
-                        {
+                    <Typography 
+                        className="ml-5 overflow-y-scroll"
+                        variant="body1"
+                        dangerouslySetInnerHTML={{
+                            __html:                            
                             "description" in book
                             ? book.description
-                            : book.volumeInfo.description
-                        }
+                            : book.volumeInfo.description                            
+                        }}
+                        >
+
                     </Typography>
 
                     
