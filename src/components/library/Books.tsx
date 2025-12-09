@@ -15,6 +15,7 @@ export const Books = ({user}: BooksProps) => {
     const [count, setCount] = useState<number>(1)
     const [total, setTotal] = useState<number>(0)
     const [page, setPage] = useState<number>(0)
+    const [open, setOpen] = useState(false)
     const { data: userBooks} = useBchApi(`?userId=${user}`)
     const [book, setBook] = useState<GoogleBook | UserBook | null>(null)
 
@@ -44,27 +45,35 @@ export const Books = ({user}: BooksProps) => {
         setPage(value-1)
     }
 
+    useEffect(() => {
+        if (results.length > 0) {
+            setOpen(true)
+        }
+    },[results])
+
+    useEffect(() => {
+        setOpen(false)
+    }, [book])
+
     return (
-        <Box>
+        <Box className="relative">
             <Box>
-                <Box>
-                    <SearchBar close targets={["googleBooks"]} results={results} setResults={user ? checkUserLibrary : setResults} page={page} setPage={setPage} setTotal={setTotal} fullWidth/>
-                </Box>
-                <Box>
-                    <List>
-                        {
-                            results.length > 0 &&
-                            <Box>
-{                                results.map(book => (
-                                    <BookSearchResult key={book.id} user={user} book={book} update={markAdded} setBook={setBook} />
-                                ))}
-\                               <Pagination count={count} page={page + 1} onChange={handlePageChange} />
-                            </Box>
-                        }
-                    </List>
-                </Box>
+                <SearchBar close targets={["googleBooks"]} results={results} setResults={user ? checkUserLibrary : setResults} page={page} setPage={setPage} setTotal={setTotal} fullWidth/>
             </Box>
-            <Box>
+            <Box hidden={!open} className="p-4 mt-3 relative z-10 bg-black rounded">
+                <List className="">
+                    {
+                        results.length > 0 &&
+                        <Box>
+    {                                results.map(book => (
+                                <BookSearchResult key={book.id} user={user} book={book} update={markAdded} setBook={setBook} />
+                            ))}
+    \                               <Pagination count={count} page={page + 1} onChange={handlePageChange} siblingCount={1} boundaryCount={0} />
+                        </Box>
+                    }
+                </List>
+            </Box>
+            <Box className="absolute top-15 left-0 w-full z-1">
                 {book && <BookFull book={book}/>}
             </Box>
         </Box>

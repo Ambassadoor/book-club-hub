@@ -12,7 +12,7 @@ export const BookFull = (book) => {
                 <Typography className="dark:text-white" variant="h5">{book.book?.volumeInfo?.title}</Typography>
                 <Typography className="dark:text-white" variant="subtitle2">{book.book?.volumeInfo?.authors?.[0]}</Typography>
                 <Typography 
-                    className="dark:text-white overflow-y-scroll no-scrollbar"
+                    className="dark:text-white overflow-y-scroll no-scrollbar max-h-75"
                     variant="body2"
                     dangerouslySetInnerHTML={{
                         __html: 
