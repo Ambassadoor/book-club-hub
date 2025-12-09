@@ -10,21 +10,23 @@ import { useNavigate } from "react-router-dom"
 type Target = "googleBooks" | "bchbooks"
 
 type SearchBarProps = {
+    close?: boolean,
     className?: string,
     fullWidth?: boolean,
     expanding?: boolean,
     select?: boolean
     targets: Target[],
-    index?: number,
+    page?: number,
+    setPage?: React.Dispatch<React.SetStateAction<number>>,
     results: UserBook[] | GoogleBook[],
-    setResults: React.Dispatch<React.SetStateAction<UserBook[] | GoogleBook[]>>
+    setResults: React.Dispatch<React.SetStateAction<T[]>> | ((res: T[]) => void),
+    setTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const SearchBar = ({className, fullWidth = false, expanding = false, targets=[], index, results=[], setResults}: SearchBarProps) => {
+export const SearchBar = ({close=false, className, fullWidth = false, expanding = false, targets=[], page=0, setPage, results=[], setResults, setTotal}:SearchBarProps) => {
     const [searchTerm, setSearchTerm] = useState("")
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
-    const [page, setPage] = useState(0);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const {search: bchSearch } = bchBooksClient()
@@ -35,6 +37,7 @@ export const SearchBar = ({className, fullWidth = false, expanding = false, targ
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {    
         const term = e.target.value
         setSearchTerm(term)
+        setPage(0)
     }
 
     const handleFocus = () => {
@@ -43,7 +46,6 @@ export const SearchBar = ({className, fullWidth = false, expanding = false, targ
 
     const handleBlur = () => {
         setFocus(false)
-        setSearchTerm("")
     }
 
     const handleOpen = () => {
@@ -55,34 +57,66 @@ export const SearchBar = ({className, fullWidth = false, expanding = false, targ
     }
 
     const debouncedSearch = useCallback(debounce((searchFunc, params) => {
-        searchFunc(params).then(res => setResults(
+        searchFunc(...params).then(res => {setResults(
             res.results
             ? res.results
             : res.items
-        ))
-    }, 300), [searchTerm, bchSearch, googleSearch])
+        )
+        setTotal(
+            "totalItems" in res
+            ? res.totalItems > 1000
+                ? 100
+                : res.totalItems
+            : res.total
+        )}
+    )
+    }, 300), [searchTerm, page, bchSearch, googleSearch])
 
     useEffect(() => {
         if (searchTerm !== "")
             {
             if (targets.includes("bchbooks"))
             {
-                debouncedSearch(bchSearch, searchTerm)}
+                debouncedSearch(bchSearch, [searchTerm, page] )}
             if (targets.includes("googleBooks")) 
             {
-                debouncedSearch(googleSearch, {"intitle": searchTerm})
+                debouncedSearch(googleSearch, [{"intitle": searchTerm}, page])
             }
+            setPage(0)
             }
     }, [searchTerm])
+
+    useEffect(() => {
+        if (searchTerm !== "")
+        {
+            if (targets.includes("bchbooks"))
+            {
+                bchSearch(searchTerm, page).then(res => {
+                    setResults(res.results)
+                    setTotal(res.total)
+                })
+            }
+            if (targets.includes("googleBooks"))
+            {
+                googleSearch({"intitle": searchTerm}, page).then(res => {
+                    setResults(res.items)
+                    setTotal(
+                        res.totalItems > 1000
+                        ? 100
+                        : res.totalItems
+                    )
+                })
+            }
+        }
+    },[page])
 
     return (
         <Autocomplete
             clearOnEscape
-            open={open}
+            open={close? false : open}
             onOpen={handleOpen}
             onClose={handleClose}
             selectOnFocus
-            clearOnBlur
             filterOptions={(x) => x}
             className="self-center"
             getOptionLabel={(option: UserBook | GoogleBook | string) => {
@@ -111,7 +145,7 @@ export const SearchBar = ({className, fullWidth = false, expanding = false, targ
                         id = value.id
                         source = "google"
                     }
-                navigate(`books/${source}/${id}`)
+                navigate(`/books/${source}/${id}`)
                 }
 
             }}

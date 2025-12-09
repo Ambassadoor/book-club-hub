@@ -25,8 +25,8 @@ export const Book = () => {
 
     const [display, setDisplay] = useState("Full")
 
-    const handleButtonClick = (e) => {
-        setDisplay(e.target.value)
+    const handleButtonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+        setDisplay(e.currentTarget.value)
     }
 
 
@@ -91,8 +91,8 @@ export const Book = () => {
             
                 </Box>
             </Card>
-            : display === "Full" ? <BookFull book={book}/>
-            : display === "Search" && <BookSearchResult book={book}/>
+            : book!== undefined && display === "Full" ? <BookFull book={book}/>
+            : book!== undefined && display === "Search" && <BookSearchResult book={book}/>
             }
         </>
     )

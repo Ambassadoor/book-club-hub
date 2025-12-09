@@ -33,6 +33,7 @@ const search = async (params: {
 
     return {
         results: paginatedResults,
+        total: numResults,
         cont: cont
     }
 }

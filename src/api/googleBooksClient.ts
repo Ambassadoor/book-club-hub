@@ -6,7 +6,7 @@ const search = async (searchParams: SearchParams, page: number=0) => {
     let query = ""
     Object.entries(searchParams).forEach(param => query += `${param[0]}:${param[1]}+`)
     query = query.slice(0,-1)
-    query += `&startIndex=${String(page)}&key=${key}`
+    query += `&startIndex=${String(page*10)}&key=${key}`
     const response = await fetch(`${url}?q=${query}`).then(res => res.json())
 
     return response

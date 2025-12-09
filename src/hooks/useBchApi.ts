@@ -5,7 +5,7 @@ export const useBchApi = (
     path: string, 
     options?: Options
     ) => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<UserBook[] | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null)
 

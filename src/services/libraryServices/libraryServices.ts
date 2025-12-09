@@ -4,14 +4,14 @@ export const getLibrary = async (userId: number) => {
     return books
 }
 
-export const addBookToLibrary = async(userId: number, book: GoogleBook) => {
+export const addBookToLibrary = async(userId: number, book: GoogleBook): Promise<UserBook> => {
 
     const transformedBook = transformBook(book)
 
     const response = fetch("http://localhost:8088/userBooks", {
         method: "POST",
         headers: {
-            "Content-Type": "application.json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({...transformedBook, userId: userId, addedOn: Date.now(), status: "Not Started"})
     }).then(res => res.json())
@@ -24,9 +24,11 @@ const transformBook = (book: GoogleBook) => {
     
     return {
         "title": b.title,
+        "author": b.authors?.join(", ") || null,
         "imageSmall": b.imageLinks.smallThumbnail || null,
         "imageLarge": b.imageLinks.thumbnail || null,
-        "description": b.description || null
+        "description": b.description || null,
+        "googleId": book.id
     }
 }
 
