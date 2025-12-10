@@ -27,10 +27,11 @@ export const PasswordField = (props: PasswordFieldProps) => {
                 endAdornment: (
                     <InputAdornment position="end">
                         <IconButton onClick={() => setShowPassword(b => !b) }>
-                            {showPassword ? <VisibilityOff/> : <Visibility/>}
+                            {showPassword ? <VisibilityOff color="secondary"/> : <Visibility color="secondary"/>}
                         </IconButton>
                     </InputAdornment>
-                )
+                ),
+                className: "text-black"
             }
         }}
         onChange={onChange}

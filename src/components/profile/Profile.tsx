@@ -58,7 +58,7 @@ export const Profile = ({user}: ProfileProps) => {
                 <Box className="flex flex-nowrap">
                     <Typography variant="h5" className="text-black text-center">{userInfo?.userName ? `${userInfo.userName}'s Profile` : "My Profile"}</Typography>
                     <IconButton size="small" onClick={handleEditClick} hidden={editing}>
-                        <Edit/>
+                        <Edit color="primary"/>
                     </IconButton>
                 </Box>
                 <Avatar className="my-5 ml-auto md-mr-auto" alt={`${userInfo.firstName} ${userInfo.lastName}`} src={userInfo.picture ? userInfo.picture : ""}>{userInfo.firstName.slice(0,1)}{userInfo.lastName.slice(0,1)}</Avatar>

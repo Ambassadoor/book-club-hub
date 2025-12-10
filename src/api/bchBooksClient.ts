@@ -21,7 +21,7 @@ const search = async (params: {
     const searchResults =
         response.filter(book =>
             fieldsToSearch.some(field =>
-                book[field[0] as (keyof UserBook)] && String(book[field[0] as (keyof UserBook)]).includes(String(field[1]))
+                book[field[0] as (keyof UserBook)] && String(book[field[0] as (keyof UserBook)]).toLowerCase().includes(String(field[1]).toLowerCase())
             )
         )
 

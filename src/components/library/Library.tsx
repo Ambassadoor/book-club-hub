@@ -8,6 +8,7 @@ import { BookSearchResult } from "./BookSearchResult"
 import { BookList } from "./BookList"
 import debounce  from "lodash.debounce"
 import { SearchBar } from "../shared/SearchBar"
+import { BookFull } from "./BookFull"
 export interface SearchParams {
     intitle?: string,
     inauthor?: string,
@@ -21,58 +22,29 @@ export interface SearchParams {
 export const Library = () => {
     const {userId} = useParams()
     const [library, setLibrary] = useState<UserBook[]>([])
-    const [searchParams, setSearchParams] = useState<SearchParams>({})
-    const [searchResults, setSearchResults] = useState<GoogleBook[]>([])
+    const [searchResults, setSearchResults] = useState<UserBook[] | []>([])
     const [numResults, setNumResults] = useState<number>(0)
     const [page, setPage] = useState<number>(0)
-    const {search} = googleBooksClient()
-
-    const debouncedSearch = useCallback(debounce((params, pageNum) => {
-        search(params, pageNum).then(
-            res => {
-                setNumResults(Number(res.totalItems))
-                setSearchResults(res.items)
-            }
-        )
-    }, 300), [search]) 
-
-    useEffect(() => {
-        if (Object.values(searchParams).length > 0) {
-            debouncedSearch(searchParams, page)
-        } else {
-            setSearchResults([])
-            setNumResults(0)
-        }
-        return () => debouncedSearch.cancel()
-    }, [searchParams, page, debouncedSearch])
+    const [book, setBook] = useState<UserBook | null>(null)
 
     useEffect(() => {
         userId && 
         getLibrary(Number(userId)).then(res => setLibrary(res))
     }, [userId])
 
-
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {  
-        setPage(0)
-        const field = e.target.name
-        const term = e.target.value
-
-        if (term==="") {
-            setSearchParams({})
-        } else {
-            setSearchParams({...searchParams, [field]: term}) 
-        }
-    }
+    useEffect(() => {
+        setSearchResults(library)
+    },[library])
 
     return (
-        <>
-            <h2>Search</h2>
-            <TextField name="intitle" value={searchParams["intitle"] || ""} onChange={handleSearch}/>
-            <Box className="flex max-w-[90%] self-center">
-                {searchResults?.length > 0 &&
-                    <BookList list={searchResults}/>
-                }
+        <Box>
+            <SearchBar close fullWidth source={library} results={searchResults} setResults={setSearchResults} setTotal={setNumResults} page={page} setPage={setPage}/>
+            <Box>
+                <BookList className="overflow-y-scroll no-scrollbar max-h-50 md:max-h-full m-5 bg-black p-5 rounded" list={searchResults} setBook={setBook} page={page} setPage={setPage} />
             </Box>
-        </>
+            <Box>
+                {book && <BookFull book={book}/>}
+            </Box>
+        </Box>
     )
 }

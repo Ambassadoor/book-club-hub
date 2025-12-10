@@ -14,8 +14,8 @@ type SearchBarProps = {
     className?: string,
     fullWidth?: boolean,
     expanding?: boolean,
-    select?: boolean
-    targets: Target[],
+    targets?: Target[],
+    source?: UserBook[],
     page?: number,
     setPage?: React.Dispatch<React.SetStateAction<number>>,
     results: UserBook[] | GoogleBook[],
@@ -23,7 +23,7 @@ type SearchBarProps = {
     setTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const SearchBar = ({close=false, className, fullWidth = false, expanding = false, targets=[], page=0, setPage, results=[], setResults, setTotal}:SearchBarProps) => {
+export const SearchBar = ({close=false, className, fullWidth = false, expanding = false, targets=[], source, page=0, setPage, results=[], setResults, setTotal}:SearchBarProps) => {
     const [searchTerm, setSearchTerm] = useState("")
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
@@ -33,12 +33,6 @@ export const SearchBar = ({close=false, className, fullWidth = false, expanding 
     const {search: googleSearch} = googleBooksClient()
 
     const navigate = useNavigate()
-
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {    
-        const term = e.target.value
-        setSearchTerm(term)
-        setPage(0)
-    }
 
     const handleFocus = () => {
         setFocus(true)
@@ -73,17 +67,30 @@ export const SearchBar = ({close=false, className, fullWidth = false, expanding 
     }, 300), [searchTerm, page, bchSearch, googleSearch])
 
     useEffect(() => {
-        if (searchTerm !== "")
-            {
             if (targets.includes("bchbooks"))
             {
-                debouncedSearch(bchSearch, [searchTerm, page] )}
+                searchTerm !== "" && debouncedSearch(bchSearch, [searchTerm, page] )}
+                setPage && setPage(0)
             if (targets.includes("googleBooks")) 
             {
-                debouncedSearch(googleSearch, [{"intitle": searchTerm}, page])
+                searchTerm !== "" && debouncedSearch(googleSearch, [{"intitle": searchTerm}, page])
+                setPage && setPage(0)
             }
-            setPage(0)
+            if (source) {
+                if (searchTerm === "") {
+                    setResults(source)
+                }
+                else {
+                    const filteredResults = source.filter(book => {
+                    return Object.values(book).some(v =>                         
+                        String(v).toLocaleLowerCase().includes(searchTerm.toLowerCase())                        
+                    )
+                })
+                setResults(filteredResults)}
+                setPage && setPage(1)
             }
+
+
     }, [searchTerm])
 
     useEffect(() => {
@@ -128,7 +135,7 @@ export const SearchBar = ({close=false, className, fullWidth = false, expanding 
             options={results}
             freeSolo
             onInputChange={(_, value) => {
-                value !== "" && setSearchTerm(value)
+                setSearchTerm(value)
             }}
             onChange={(_, value) => {
                 let id

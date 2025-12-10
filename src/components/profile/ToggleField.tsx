@@ -15,7 +15,9 @@ export const ToggleField = (props: ToggleFieldProps) => {
 
     return (
         type==="password" && editing ? <PasswordField value={value} onChange={onChange}/> :
-        editing ? <TextField name={name} type={type? type: "text"} label={label} value={value} variant="standard" onChange={onChange}></TextField> : <Typography>{`${label}: ${value}`}</Typography>
+        editing ? <TextField slotProps={{
+            input: {className: "text-black"}
+        }} name={name} type={type? type: "text"} label={label} value={value} variant="standard" onChange={onChange}></TextField> : <Typography>{`${label}: ${value}`}</Typography>
 
     )
 }
