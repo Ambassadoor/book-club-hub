@@ -28,9 +28,14 @@ export const Library = () => {
     const [book, setBook] = useState<UserBook | null>(null)
 
     useEffect(() => {
-        userId && 
+        userId &&
         getLibrary(Number(userId)).then(res => setLibrary(res))
     }, [userId])
+
+    useEffect(() => {
+        book === null &&
+        getLibrary(Number(userId)).then(res => setLibrary(res))
+    },[book])
 
     useEffect(() => {
         setSearchResults(library)
@@ -43,7 +48,7 @@ export const Library = () => {
                 <BookList className="overflow-y-scroll no-scrollbar max-h-50 md:max-h-full m-5 bg-black p-5 rounded" list={searchResults} setBook={setBook} page={page} setPage={setPage} />
             </Box>
             <Box>
-                {book && <BookFull book={book}/>}
+                {book && <BookFull book={book} setBook={setBook}/>}
             </Box>
         </Box>
     )

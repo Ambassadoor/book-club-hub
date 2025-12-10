@@ -297,18 +297,6 @@
       "id": 21
     },
     {
-      "title": "Artemis Fowl",
-      "author": "Eoin Colfer",
-      "imageSmall": "http://books.google.com/books/content?id=D9TKSKS74MwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=D9TKSKS74MwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-      "description": "Twelve-year-old Artemis is a millionaire, a genius-and above all, a criminal mastermind. But Artemis doesn't know what he's taken on when he kidnaps a fairy, Captain Holly Short of the LEPrecon Unit. These aren't the fairies of the bedtime stories-they're dangerous!",
-      "googleId": "D9TKSKS74MwC",
-      "userId": 3,
-      "addedOn": 1765333837655,
-      "status": "Not Started",
-      "id": 22
-    },
-    {
       "title": "Moriarty",
       "author": "Anthony Horowitz",
       "imageSmall": "http://books.google.com/books/content?id=L6QEBAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
@@ -321,30 +309,6 @@
       "id": 23
     },
     {
-      "title": "Young Bond: SilverFin",
-      "author": "Charlie Higson",
-      "imageSmall": "http://books.google.com/books/content?id=5dIO0QEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=5dIO0QEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "description": "The explosive first book in the bestselling Young Bond series, with a brand-new introduction by the author. Before the name became a legend. Before the boy became a man. Meet Bond. James Bond. There's something in the water at Loch Silverfin. Something that must be kept secret. Something deadly ... It's James Bond's first day at Eton, and he's already met his first enemy. This is the start of an adventure that will take him from the school playing fields to the remote shores of Loch Silverfin and a terrifying discovery that threatens to unleash a new breed of warfare.",
-      "googleId": "5dIO0QEACAAJ",
-      "userId": 3,
-      "addedOn": 1765333871575,
-      "status": "Not Started",
-      "id": 24
-    },
-    {
-      "title": "Young Bond By Royal Command",
-      "author": "Charlie Higson",
-      "imageSmall": "http://books.google.com/books/content?id=L4yMEAAAQBAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=L4yMEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "description": "Young Bond: By Royal Command is the fifth heart-stopping instalment in the phenomenal Young Bond series by Charlie Higson. Life for James Bond will never be the same again. Following a treacherous rescue mission high in the freezing Alps, James Bond is preparing for life back at Eton. But James is under surveillance; his every move is being watched. He alone holds the clue to a sinister plot that will bring bloodshed and carnage to his school - and his country. Life for James Bond will never be the same again. 'Action-packed and not for the faint-hearted' Daily Mail 'Double-oh so good' Sunday Times ***www.youngbond.com***",
-      "googleId": "L4yMEAAAQBAJ",
-      "userId": 3,
-      "addedOn": 1765333872744,
-      "status": "Not Started",
-      "id": 25
-    },
-    {
       "title": "The Young Bond Series, Book One: Silverfin (A James Bond Adventure)",
       "author": "Charlie Higson",
       "imageSmall": "http://books.google.com/books/content?id=dD_WAQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
@@ -355,6 +319,54 @@
       "addedOn": 1765333873967,
       "status": "Not Started",
       "id": 26
+    },
+    {
+      "title": "The Warrior Heir",
+      "author": "Cinda Williams Chima",
+      "imageSmall": "http://books.google.com/books/content?id=tlMBngEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=tlMBngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "After learning about his magical ancestry and his own warrior powers, sixteen-year-old Jack embarks on a training program to fight enemy wizards.",
+      "googleId": "tlMBngEACAAJ",
+      "userId": 3,
+      "addedOn": 1765337310617,
+      "status": "Not Started",
+      "id": 27
+    },
+    {
+      "title": "The Wizard Heir",
+      "author": "Cinda Williams Chima",
+      "imageSmall": "http://books.google.com/books/content?id=388CnwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=388CnwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "Seph, an orphaned and untrained wizard who is unable to control his growing powers, is sent to a secluded boys' school in Maine where the headmaster promises to train him in magic and initiate him into his mysterious order of wizards.",
+      "googleId": "388CnwEACAAJ",
+      "userId": 3,
+      "addedOn": 1765337312079,
+      "status": "Not Started",
+      "id": 28
+    },
+    {
+      "title": "The Dragon Heir",
+      "author": "Cinda Williams Chima",
+      "imageSmall": "http://books.google.com/books/content?id=R-laN94Kr0AC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=R-laN94Kr0AC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "The third thrilling installment of the Heir Chronicles series by New York Times and USA Today bestselling author Cinda Williams Chima. The covenant that was meant to keep the wizard wars at bay has been stolen, and Trinity must prepare for attack. Everyone is doing their part—Seph is monitoring the Weirwalls, Jack and Ellen are training their ghostly army, even Anaweir Will and Fitch are setting booby traps around the town's perimeter. But to Jason Haley it seems like everyone wants to keep him out of the action. He may not be the most powerful wizard in Trinity, but he's prepared to fight for his friends. Everything changes when Jason finds a powerful talisman—a huge opal called the Dragonheart—buried in a cave. The stone seems to sing to Jason's very soul, showing him that he is meant for more than anyone knew. Moral compasses spin out of control as a final battle storms through what was once a sanctuary for the gifted. With so much to lose, what will the people of Trinity be willing to fight for—and what will they sacrifice?",
+      "googleId": "R-laN94Kr0AC",
+      "userId": 3,
+      "addedOn": 1765337313379,
+      "status": "Not Started",
+      "id": 29
+    },
+    {
+      "title": "The Sorcerer Heir",
+      "author": "Cinda Williams Chima",
+      "imageSmall": "http://books.google.com/books/content?id=KRhqBAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=KRhqBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "New York Times and USA Today bestselling author Cinda Williams Chima's Heir Chronicles series reaches its stunning conclusion! The delicate peace between Wizards and the underguilds holds by the thinnest of threads, but powerful forces inside and outside the guilds threaten to sever it completely, and Emma and Jonah are at the center of it all. Brought together by their shared history, mutual attraction, and a belief in the magic of music, they may be torn apart by new wounds and old betrayals. As they struggle to rebuild their trust in one another, Emma and Jonah must also clear their names as the prime suspects in a series of vicious murders. The answers they need appear to lie buried in the tragedies of the past—but can they survive long enough to unearth them? Old friends and foes return as new threats arise in this stunning and revelatory conclusion to the beloved Heir Chronicles series.",
+      "googleId": "KRhqBAAAQBAJ",
+      "userId": 3,
+      "addedOn": 1765337314548,
+      "status": "Not Started",
+      "id": 30
     }
   ]
 }

@@ -97,8 +97,8 @@ declare global {
         }
     }
     interface Options {
-        method:"GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-        headers: HeadersInit;
+        method?:"GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+        headers?: HeadersInit;
         body?: BodyInit;
     }
 }
