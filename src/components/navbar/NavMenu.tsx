@@ -30,6 +30,7 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
 
   const handleNavClick = (path: string) => {
     navigate(path)
+    handleCloseMenu()
   }
 
   const handleOpenMenu = (event: React.MouseEvent) => {
@@ -69,7 +70,7 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
                 onClose={handleCloseMenu}
             >
                 {user ? 
-                <MenuItem onClick={() => navigate("/profile")}>
+                <MenuItem onClick={() => handleNavClick("/profile")}>
                     <Typography>Profile</Typography>
                 </MenuItem> :
                 <MenuItem onClick={() => {
