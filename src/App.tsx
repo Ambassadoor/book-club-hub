@@ -9,6 +9,7 @@ import { Library } from "./components/library/Library";
 import {theme} from "../theme"
 import { Book } from "./components/library/Book";
 import { Books } from "./components/library/Books";
+import { Club } from "./components/clubs/Club";
 
 const App = () => {
   const {mode, setMode, systemMode} = useColorScheme();
@@ -67,7 +68,7 @@ const toggleTheme = () => {
         >
           <Route index element={ <>Dashboard</>} />
           <Route path="clubs">
-            <Route index element={<></>} />
+            <Route index element={<Club user={user}/>} />
             <Route path=":clubId" element={<></>} />
             <Route path=":userId" element={<></>} />
           </Route>
