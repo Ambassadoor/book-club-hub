@@ -95,14 +95,6 @@
       "created_at": 1765494085345,
       "isActive": true,
       "id": 4
-    },
-    {
-      "userId": 1,
-      "clubId": 3,
-      "isAdmin": false,
-      "created_at": 1765494499968,
-      "isActive": true,
-      "id": 5
     }
   ],
   "clubBooks": [

@@ -2,6 +2,7 @@ import { Box, Button, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { JoinClubButton } from "./JoinClubButton"
+import { LeaveClubButton } from "./LeaveClubButton"
 
 type ClubDetailsProps = {
     user?: number
@@ -11,6 +12,9 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     const [clubInfo, setClubInfo] = useState(null)
     const [userRole, setUserRole] = useState("guest")
     const {clubId} = useParams()
+
+    //TODO: Change workflow to: Get clubMember on load, null reponse: guest, otherwise isAdmin dictates
+    // Then we can pass the clubMember data to join/leave buttons, reducing fetch calls
 
     useEffect(() => {
         if (user && clubId) {
@@ -43,7 +47,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
             ? <Button>Edit Club</Button>
             : userRole ==="guest"
             ? <JoinClubButton userId={user} clubId={clubId} handleJoin={setUserRole}/>
-            : <Button>Leave Club</Button>
+            : <LeaveClubButton userId={user} clubId={clubId} handleLeave={setUserRole}/>
             }
 
         </Box>

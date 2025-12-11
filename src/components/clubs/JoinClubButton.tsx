@@ -20,7 +20,7 @@ export const JoinClubButton = ({userId, clubId, handleJoin}: JoinClubButtonProps
                 "created_at": Date.now(),
                 isActive: true,
             })
-        }).then(res => res.json()).then(res => handleJoin("member")).catch(error => console.error(error))
+        }).then(res => res.json()).then(() => handleJoin("member")).catch(error => console.error(error))
         
     }
 
