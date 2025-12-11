@@ -2,6 +2,9 @@ import { TextField, Typography } from "@mui/material"
 import { PasswordField } from "../shared/PasswordField"
 
 type ToggleFieldProps = {
+    fullWidth?: boolean,
+    multiline?: boolean,
+    rows?: number,
     name: string,
     editing: boolean,
     value: string,
@@ -11,13 +14,13 @@ type ToggleFieldProps = {
 }
 
 export const ToggleField = (props: ToggleFieldProps) => {
-    const {name, editing, value, label, type, onChange} = props
+    const {fullWidth=false, multiline=false, rows, name, editing, value, label, type, onChange} = props
 
     return (
-        type==="password" && editing ? <PasswordField value={value} onChange={onChange}/> :
-        editing ? <TextField slotProps={{
+        type==="password" && editing ? <PasswordField fullWidth={fullWidth} value={value} onChange={onChange}/> :
+        editing ? <TextField fullWidth={fullWidth} multiline={multiline} rows={rows && rows} slotProps={{
             input: {className: "text-black"}
-        }} name={name} type={type? type: "text"} label={label} value={value} variant="standard" onChange={onChange}></TextField> : <Typography>{`${label}: ${value}`}</Typography>
+        }} name={name} type={type? type: "text"} label={label} value={value} variant="standard" onChange={onChange}></TextField> : <Typography>{`${value}`}</Typography>
 
     )
 }

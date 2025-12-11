@@ -87,10 +87,11 @@ export const Club = ({user}: ClubProps) => {
             <Box className="flex flex-col min-w-full justify-center">
                 <List>
                     {clubs && clubs.length > 0 && clubs.slice((page-1)*10, page*10).map((club) => (
-                        <ListItem 
+                        <ListItemButton 
                             divider
                             className="bg-neutral-50 rounded flex h-full" 
                             key={club.clubId}
+                            onClick={() => navigate(`/clubs/${club.clubId}`)}
                         >
                             <Box className="flex flex-col justify-between self-start h-full">
                                 <ListItemText className="flex-col self-start" primary={(
@@ -138,7 +139,7 @@ export const Club = ({user}: ClubProps) => {
                                         </Avatar>
                                     }
                             </ListItemAvatar>
-                        </ListItem>
+                        </ListItemButton>
                         ))
                     }
                 </List>

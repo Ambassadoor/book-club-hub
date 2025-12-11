@@ -3,6 +3,7 @@ import { IconButton, InputAdornment, TextField } from "@mui/material"
 import { useState } from "react"
 
 type PasswordFieldProps = {
+    fullWidth?: boolean
     value: string,
     required?: boolean,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -10,7 +11,7 @@ type PasswordFieldProps = {
 
 export const PasswordField = (props: PasswordFieldProps) => {
     const [ showPassword, setShowPassword] = useState(false)
-    const {value, required, onChange} = props
+    const {fullWidth=false, value, required, onChange} = props
 
     return (
         <TextField
@@ -20,7 +21,7 @@ export const PasswordField = (props: PasswordFieldProps) => {
         label="Password"
         value={value}
         type={showPassword ? "text" : "password"}
-        fullWidth
+        fullWidth={fullWidth}
         variant="standard"
         slotProps={{
             input: {
