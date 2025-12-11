@@ -1,6 +1,7 @@
 import { Book, Edit } from "@mui/icons-material"
-import { Avatar, Box, Button, Chip, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography, useMediaQuery } from "@mui/material"
+import { Avatar, Box, Button, Chip, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Pagination, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 
 type Club = {
@@ -34,11 +35,14 @@ interface ClubData extends ClubMember {
 }
 
 type ClubProps = {
-    user: number
+    user: number | null
 }
 
 export const Club = ({user}: ClubProps) => {
     const [clubs, setClubs] = useState<ClubData[]>([])
+    const [page, setPage] = useState(1)
+    const [count, setCount] = useState(1)
+    const navigate = useNavigate()
     const isMedium = useMediaQuery('(min-width:768px)');
 
     const formatDate = (date: Date) => {
@@ -65,16 +69,24 @@ export const Club = ({user}: ClubProps) => {
 
     },[user])
 
+    useEffect(() => {
+        setCount(Math.ceil(clubs.length/10))
+    },[clubs])
+
+    const handleNewClubClick = () => {
+        navigate("create")
+    }
+
     return (
         user &&
         <Box className="flex-col">
             <Box className="flex">
                 <Typography color="white" variant="h5">My Clubs</Typography>
-                <Button className="ml-5" variant="contained">New Club</Button>
+                <Button className="ml-5" variant="contained" onClick={handleNewClubClick}>New Club</Button>
             </Box>
-            <Box className="flex min-w-full justify-center">
+            <Box className="flex flex-col min-w-full justify-center">
                 <List>
-                    {clubs && clubs.length > 0 && clubs.map((club) => (
+                    {clubs && clubs.length > 0 && clubs.slice((page-1)*10, page*10).map((club) => (
                         <ListItem 
                             divider
                             className="bg-neutral-50 rounded flex h-full" 
@@ -101,7 +113,7 @@ export const Club = ({user}: ClubProps) => {
                                 />
                                 <ListItemText
                                     primary={(
-                                    <Typography className="ml-2 hidden xs:flex" variant="body2">{`Currently Reading: ${club.currentRead.title}`}</Typography>
+                                    club.currentRead && <Typography className="ml-2 hidden xs:flex" variant="body2">{`Currently Reading: ${club.currentRead?.title}`}</Typography>
                                     )}
                                     secondary={(
                                         <Typography className=" ml-2 hidden xs:flex" variant="body2">{`Next Meeting: Coming Soon`}</Typography>
@@ -109,15 +121,15 @@ export const Club = ({user}: ClubProps) => {
                                 />
                             </Box>
                             <ListItemAvatar className="flex justify-center px-2" >
-                                        {club.currentRead.imageSmall !== "" ?
+                                        {club.currentRead ?
                                         <Avatar 
                                             sx={{
                                                 width: "100%",
                                                 height: "100%"
                                             }}
                                             variant="rounded"
-                                            alt={`Cover art for ${club.currentRead.title}`}
-                                            src={club.currentRead.imageSmall}
+                                            alt={`Cover art for ${club.currentRead?.title}`}
+                                            src={club.currentRead?.imageSmall}
                                         /> :
                                         <Avatar
                                             variant="rounded"
@@ -130,6 +142,7 @@ export const Club = ({user}: ClubProps) => {
                         ))
                     }
                 </List>
+                <Pagination count={count} page={page} onChange={(_, value) => setPage(value)}/>
             </Box>
         </Box>
     )

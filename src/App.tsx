@@ -10,6 +10,8 @@ import {theme} from "../theme"
 import { Book } from "./components/library/Book";
 import { Books } from "./components/library/Books";
 import { Club } from "./components/clubs/Club";
+import { CreateClubForm } from "./components/clubs/CreateClubForm";
+import { ClubDetails } from "./components/clubs/ClubDetails";
 
 const App = () => {
   const {mode, setMode, systemMode} = useColorScheme();
@@ -69,8 +71,9 @@ const toggleTheme = () => {
           <Route index element={ <>Dashboard</>} />
           <Route path="clubs">
             <Route index element={<Club user={user}/>} />
-            <Route path=":clubId" element={<></>} />
-            <Route path=":userId" element={<></>} />
+            <Route path="create" element={<CreateClubForm user={user} />}/>
+            <Route path=":clubId" element={<ClubDetails />} />
+            {/* <Route path=":userId" element={<></>} /> */}
           </Route>
           <Route path="library/:userId">
             <Route index element={<Library/>} />

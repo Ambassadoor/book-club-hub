@@ -44,9 +44,16 @@
     {
       "name": "Thursday Murder Book Club",
       "description": "Join us as we read through the Thursday Murder Club series, a marvelous collection of mysteries investigated by four pensioners living in a retirement community in England. Meets on Fridays.",
-      "ownerId" : 1,
-      "created_at" : 1765301819597,
+      "ownerId": 1,
+      "created_at": 1765301819597,
       "id": 1
+    },
+    {
+      "name": "Sunday Brunch Book Club",
+      "description": "We eat, we drink, we read!",
+      "ownerId": 1,
+      "created_at": "2025-12-11T22:30:36.772Z",
+      "id": 2
     }
   ],
   "clubMembers": [
@@ -55,7 +62,7 @@
       "clubId": 1,
       "isAdmin": true,
       "created_at": 1765301819597,
-      "isActive" : true,
+      "isActive": true,
       "id:": 1
     },
     {
@@ -63,8 +70,16 @@
       "clubId": 1,
       "isAdmin": false,
       "created_at": 1765301820150,
-      "isActive" : true,
+      "isActive": true,
       "id": 2
+    },
+    {
+      "userId": 1,
+      "clubId": 2,
+      "isAdmin": true,
+      "created_at": 1765492237101,
+      "isActive": true,
+      "id": 3
     }
   ],
   "clubBooks": [
@@ -78,7 +93,7 @@
       "imageLarge": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "This highly anticipated sequel to The Will of the Many—one of 2023’s most lauded and bestselling fantasy novels—follows Vis as he grapples with a dangerous secret that could unravel history across alternate dimensions. Book two of the Hierarchy quartet.",
       "addedOn": "2025-12-04T18:32:23.123Z",
-      "isCurrent" : true
+      "isCurrent": true
     }
   ],
   "userBooks": [
