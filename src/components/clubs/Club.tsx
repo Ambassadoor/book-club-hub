@@ -1,4 +1,5 @@
-import { Box, Button, Chip, List, ListItem, Typography } from "@mui/material"
+import { Book, Edit } from "@mui/icons-material"
+import { Avatar, Box, Button, Chip, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react"
 
 
@@ -38,6 +39,11 @@ type ClubProps = {
 
 export const Club = ({user}: ClubProps) => {
     const [clubs, setClubs] = useState<ClubData[]>([])
+    const isMedium = useMediaQuery('(min-width:768px)');
+
+    const formatDate = (date: Date) => {
+        return date.toLocaleDateString("en-us", {year: "numeric", month: "short"})
+    }
     
     useEffect(() => {
         user &&
@@ -61,39 +67,68 @@ export const Club = ({user}: ClubProps) => {
 
     return (
         user &&
-        <Box>
+        <Box className="flex-col">
             <Box className="flex">
-                <Typography variant="h5">My Clubs</Typography>
-                <Button>New Club</Button>
+                <Typography color="white" variant="h5">My Clubs</Typography>
+                <Button className="ml-5" variant="contained">New Club</Button>
             </Box>
-            <Box>
+            <Box className="flex min-w-full justify-center">
                 <List>
                     {clubs && clubs.length > 0 && clubs.map((club) => (
-                        <ListItem key={club.clubId}>
-                            <Box>
-                                <Box>
-                                    <Typography>{club.club.name}</Typography>
-                                    {club.isAdmin && <Button>Edit Club</Button>}
-                                    <Box>
-                                        <Typography>{`${club.numMembers} Members`}</Typography>
-                                        <Typography>{`Member since ${new Date(club["created_at"]).toDateString()}`}</Typography>
+                        <ListItem 
+                            divider
+                            className="bg-neutral-50 rounded flex h-full" 
+                            key={club.clubId}
+                        >
+                            <Box className="flex flex-col justify-between self-start h-full">
+                                <ListItemText className="flex-col self-start" primary={(
+                                    <Typography variant="h5">{club.club.name}</Typography>
+                                )} secondary={
+                                    (
+                                    <Box className="flex gap-2" >
+                                        {club.isAdmin && <Chip className="self-center" size="small" color="secondary"label="Admin"/>}
+                                        <Chip className="self-center hidden xs:flex" size="small" color="primary" label={`${club.numMembers} members`}/>
+                                        <Chip className="self-center hidden xs:flex" size="small" color="primary" label={`Joined ${formatDate(new Date(club["created_at"]))}`}/>
                                         {/* <Typography></Typography> Stretch Goal, set and get user online statuses */}
-                                        {club.isAdmin && <Chip label="Admin"/>}
                                     </Box>
-                                </Box>
-                                <Box>
-                                    <Box>
-                                        <Typography>{`Currently Reading: ${club.currentRead.title}`}</Typography>
-                                        {club.isAdmin && <Button>Change Book</Button>}   
-                                    </Box>
-                                    <Box>
-                                        <Typography></Typography>
-                                        {club.isAdmin && <Button>Move Next Meeting</Button>}
-                                    </Box>
-                                </Box>
+                                    )
+                                }
+                                slotProps={{
+                                    secondary: {
+                                        component: "div"
+                                    }
+                                }}
+                                />
+                                <ListItemText
+                                    primary={(
+                                    <Typography className="ml-2 hidden xs:flex" variant="body2">{`Currently Reading: ${club.currentRead.title}`}</Typography>
+                                    )}
+                                    secondary={(
+                                        <Typography className=" ml-2 hidden xs:flex" variant="body2">{`Next Meeting: Coming Soon`}</Typography>
+                                    )}
+                                />
                             </Box>
+                            <ListItemAvatar className="flex justify-center px-2" >
+                                        {club.currentRead.imageSmall !== "" ?
+                                        <Avatar 
+                                            sx={{
+                                                width: "100%",
+                                                height: "100%"
+                                            }}
+                                            variant="rounded"
+                                            alt={`Cover art for ${club.currentRead.title}`}
+                                            src={club.currentRead.imageSmall}
+                                        /> :
+                                        <Avatar
+                                            variant="rounded"
+                                        >
+                                            <Book/>
+                                        </Avatar>
+                                    }
+                            </ListItemAvatar>
                         </ListItem>
-                    ))}
+                        ))
+                    }
                 </List>
             </Box>
         </Box>
