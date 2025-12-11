@@ -72,7 +72,7 @@ const toggleTheme = () => {
           <Route path="clubs">
             <Route index element={<Club user={user}/>} />
             <Route path="create" element={<CreateClubForm user={user} />}/>
-            <Route path=":clubId" element={<ClubDetails />} />
+            <Route path=":clubId" element={<ClubDetails user={user} />} />
             {/* <Route path=":userId" element={<></>} /> */}
           </Route>
           <Route path="library/:userId">
