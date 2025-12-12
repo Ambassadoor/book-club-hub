@@ -107,7 +107,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                             userRole !== "guest"
                             && userRole === "admin"
                                 ? <Chip size="small" color="secondary" label="Admin"/>
-                                : <Chip size="small" color="primary" label="Member"/>
+                                : user && <Chip size="small" color="primary" label="Member"/>
                             }
                         </Box>
                         <Box className="self-center">
@@ -115,7 +115,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                             userRole === "admin"
                             ? <Button variant="contained" size="small" hidden={editing} onClick={handleEdit}>Edit Club</Button>
                             : userRole ==="guest"
-                            ? <JoinClubButton userId={user} clubId={Number(clubId)} handleJoin={setUserRole}/>
+                            ? user &&<JoinClubButton userId={user} clubId={Number(clubId)} handleJoin={setUserRole}/>
                             : <LeaveClubButton userId={user} clubId={Number(clubId)} handleLeave={setUserRole}/>
                             }
                         </Box>

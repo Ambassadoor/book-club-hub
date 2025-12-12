@@ -1,7 +1,7 @@
 import { Book, Edit } from "@mui/icons-material"
 import { Avatar, Box, Button, Chip, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Pagination, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 
 type Club = {
@@ -34,11 +34,9 @@ interface ClubData extends ClubMember {
     numMembers: number,
 }
 
-type ClubProps = {
-    user: number | null
-}
 
-export const Club = ({user}: ClubProps) => {
+export const Club = () => {
+    const {userId} = useParams()
     const [clubs, setClubs] = useState<ClubData[]>([])
     const [page, setPage] = useState(1)
     const [count, setCount] = useState(1)
@@ -50,8 +48,8 @@ export const Club = ({user}: ClubProps) => {
     }
     
     useEffect(() => {
-        user &&
-        fetch(`http://localhost:8088/clubMembers?userId=${user}&_expand=club`).
+        userId ?
+        fetch(`http://localhost:8088/clubMembers?userId=${userId}&_expand=club`).
             then((res) => res.json()).
                 then(async (res: ClubMember[]) =>  {                      
                         return Promise.all(res.map(async (club) => {
@@ -66,8 +64,18 @@ export const Club = ({user}: ClubProps) => {
                         return {...club, currentRead: response[0]}}))
                     
                     }).then(res => setClubs(res)).catch((error) => console.log("Error", error))
-
-    },[user])
+        : fetch(`http://localhost:8088/clubs?_embed=clubBooks&_embed=clubMembers`).then((res) => res.json()).then((res) => {
+            const formattedData = res.map((c) => {
+                const {clubBooks, clubMembers, ...club } = c
+                return {
+                    club: club,
+                    currentRead: clubBooks.find(b => b.isCurrent),
+                    numMembers: clubMembers.length
+                }
+            })
+            setClubs(formattedData)
+        })
+    },[userId])
 
     useEffect(() => {
         setCount(Math.ceil(clubs.length/10))
@@ -78,24 +86,25 @@ export const Club = ({user}: ClubProps) => {
     }
 
     return (
-        user &&
+        clubs &&
         <Box className="flex-col">
             <Box className="flex">
                 <Typography color="white" variant="h5">My Clubs</Typography>
-                <Button className="ml-5" variant="contained" onClick={handleNewClubClick}>New Club</Button>
+                {userId && <Button className="ml-5" variant="contained" onClick={handleNewClubClick}>New Club</Button>}
             </Box>
             <Box className="flex flex-col min-w-full justify-center">
                 <List>
                     {clubs && clubs.length > 0 && clubs.slice((page-1)*10, page*10).map((club) => (
+                        
                         <ListItemButton 
                             divider
                             className="bg-neutral-50 rounded flex h-full" 
-                            key={club.clubId}
-                            onClick={() => navigate(`/clubs/${club.clubId}`)}
+                            key={club.club.id}
+                            onClick={() => navigate(`/clubs/${club.club.id}`)}
                         >
                             <Box className="flex flex-col justify-between self-start h-full">
                                 <ListItemText className="flex-col self-start" primary={(
-                                    <Typography variant="h5">{club.club.name}</Typography>
+                                    <Typography variant="h5">{club?.club?.name}</Typography>
                                 )} secondary={
                                     (
                                     <Box className="flex gap-2" >
