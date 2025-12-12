@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Chip, List, Typography } from "@mui/material"
+import { Box, Button, ButtonGroup, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, List, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { JoinClubButton } from "./JoinClubButton"
@@ -15,6 +15,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     const [currentBook, setCurrentBook] = useState(null)
     const [userRole, setUserRole] = useState("guest")
     const [editing, setEditing] = useState(false)
+    const [open, setOpen] = useState(false)
     const {clubId} = useParams()
     const navigate = useNavigate()
 
@@ -49,6 +50,22 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     const handleChangeBook = () => {
         navigate(`/books/${clubId}/change`)
     }
+
+    const handleDeleteClick = () => {
+        setOpen(true)
+    }
+
+    const handleCancelDelete = () => {
+        setOpen(false)
+    }
+
+    const handleDelete = async () => {
+        await fetch(`http://localhost:8088/clubs/${clubId}`, {
+            method: "DELETE"
+        })
+        navigate("/clubs")
+    }
+
     useEffect(() => {
         if (user && clubId) {
             fetch(`http://localhost:8088/clubMembers?userId=${user}&clubId=${clubId}`).
@@ -106,10 +123,15 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                 </Box>
                 <ToggleField variant="body1" fullWidth multiline name="description" editing={editing} value={clubInfo.description} label="Description" onChange={handleChange}/>
                 {editing &&
-                <ButtonGroup className="ml-auto">
-                    <Button color="warning" onClick={handleCancel}>Cancel</Button>
-                    <Button onClick={handleSubmit} variant="contained" color="primary">Confirm</Button>
-                </ButtonGroup>}
+
+                <Box className="flex">
+                    <Button variant="contained" color="warning" size="small" onClick={handleDeleteClick}>Delete Club</Button>
+                    <ButtonGroup className="ml-auto">
+                        <Button color="warning" onClick={handleCancel}>Cancel</Button>
+                        <Button onClick={handleSubmit} variant="contained" color="primary">Confirm</Button>
+                    </ButtonGroup>
+                </Box>
+                }
             </Box>
             <Box className="flex flex-row flex-wrap">
                 <Box className="flex flex-row shrink gap-5">
@@ -142,6 +164,16 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                     <Typography>Coming Soon</Typography>
                 </Box>
             </Box>
+            <Dialog open={open} onClose={() => setOpen(false)}>
+                <DialogTitle>Delete Club?</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>Are you sure you wish to delete this club? This action cannot be reversed.</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" onClick={handleCancelDelete}>Cancel</Button>
+                    <Button color="warning" onClick={handleDelete}>DELETE CLUB</Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     )
 }

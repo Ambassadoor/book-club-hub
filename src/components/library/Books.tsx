@@ -58,11 +58,6 @@ export const Books = ({user}: BooksProps) => {
         setResults([])
     }, [book])
 
-    //TODO: If there is a clubId param, update logic to
-    // Add Set Club Book Button to detail (Book Full)
-    // Change button logic to create clubBook instead of userBook
-    // Route back to club detail view on select
-
     return (
         <Box className="relative">
             <Box>

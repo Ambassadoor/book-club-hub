@@ -73,14 +73,6 @@
       "id:": 1
     },
     {
-      "userId": 3,
-      "clubId": 1,
-      "isAdmin": false,
-      "created_at": 1765301820150,
-      "isActive": true,
-      "id": 2
-    },
-    {
       "userId": 1,
       "clubId": 2,
       "isAdmin": true,
@@ -95,6 +87,14 @@
       "created_at": 1765494085345,
       "isActive": true,
       "id": 4
+    },
+    {
+      "userId": 3,
+      "clubId": 1,
+      "isAdmin": false,
+      "created_at": 1765510112180,
+      "isActive": true,
+      "id": 5
     }
   ],
   "clubBooks": [
@@ -157,6 +157,30 @@
       "addedOn": 1765509018072,
       "isCurrent": true,
       "id": 5
+    },
+    {
+      "googleId": "UwWWh1WLn9EC",
+      "clubId": 2,
+      "title": "Breakfast at Tiffany's",
+      "author": "Truman Capote",
+      "imageSmall": "http://books.google.com/books/content?id=UwWWh1WLn9EC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=UwWWh1WLn9EC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "Holly Golightly knows that nothing bad can ever happen to you at Tiffany's. In this seductive, wistful masterpiece, Capote created a woman whose name has entered the American idiom and whose style is a part of the literary landscape—her poignancy, wit, and naïveté continue to charm. This volume also includes three of Capote's best-known stories, “House of Flowers,” “A Diamond Guitar,” and “A Christmas Memory,” which the Saturday Review called “one of the most moving stories in our language.” It is a tale of two innocents—a small boy and the old woman who is his best friend—whose sweetness contains a hard, sharp kernel of truth.",
+      "addedOn": 1765510069325,
+      "isCurrent": true,
+      "id": 6
+    },
+    {
+      "googleId": "LCzY9BvXU2kC",
+      "clubId": 3,
+      "title": "The A.B.C. Murders",
+      "author": "Agatha Christie",
+      "imageSmall": "http://books.google.com/books/content?id=LCzY9BvXU2kC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=LCzY9BvXU2kC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "Alice Ascher from Andover is the first victim. Next to her corpse is a spellbinding clue. It seems that a killer is knocking off his victims one-by-one, A through Z. Alphabetically speaking, Hercule Poirot fears that it's a matter of one down, twenty-five to go.",
+      "addedOn": 1765511113351,
+      "isCurrent": true,
+      "id": 7
     }
   ],
   "userBooks": [

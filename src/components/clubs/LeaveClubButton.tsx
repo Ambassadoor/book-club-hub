@@ -11,7 +11,13 @@ export const LeaveClubButton = ({userId, clubId, handleLeave}: LeaveClubButtonPr
         const clubMember = await fetch(`http://localhost:8088/clubMembers?userId=${userId}&clubId=${clubId}`).
         then(res => res.json())
         const response = await fetch(`http://localhost:8088/clubMembers/${clubMember[0].id}`,{
-            method: "DELETE"
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                isActive: false
+            })
         }).then(res => res.json()).catch(console.error)
         console.log(response)
         handleLeave("guest")
