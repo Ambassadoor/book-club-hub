@@ -1,18 +1,24 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { bchApi } from "../../api/bchBooksClient"
+import { useNavigate } from "react-router-dom"
 
 type BookFullProps = {
     book: UserBook | GoogleBook,
-    setBook: React.Dispatch<React.SetStateAction<UserBook | null>>
+    clubId?: number | null,
+    setBook: React.Dispatch<React.SetStateAction<UserBook | GoogleBook | null>>,
+    user: number,
+    refetch?: () => void
 }
 
-export const BookFull = ({book, setBook}: BookFullProps) => {
+export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) => {
     const [open, setOpen] = useState(false)
+    const [inLibrary, setInLibrary] = useState(false)
+    const [clubBookId, setClubBookId] = useState(null)
+    const [bookId, setBookId] = useState(null)
     const {request} = bchApi
 
-
-
+    const navigate = useNavigate()
 
     let thumbnail
     let title
@@ -33,11 +39,110 @@ export const BookFull = ({book, setBook}: BookFullProps) => {
         description = book?.description || ""
     ) 
 
+    const addBookToLibrary = () => {
+        "volumeInfo" in book &&
+        request("", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: {
+                googleId: book.id,
+                userId: user,
+                title: title,
+                author: author,
+                imageSmall: book.volumeInfo.imageLinks.smallThumbnail,
+                imageLarge: thumbnail,
+                description: description,
+                addedOn: Date.now(),
+                status: "Not Started"
+            }
+        }).then((res) => 
+        {
+            setInLibrary(true)
+            setBookId(res.id)
+            refetch && refetch()
+        }
+        )
+    }
+
     const handleRemoveBook = () => {
-       request(`/${book.id}`, {method: "DELETE"})
+        const id = ("googleId" in book)
+        ? book.id
+        : bookId
+       request(`/${id}`, {method: "DELETE"})
        setOpen(false)
         setBook(null)
+        setInLibrary(false)
+        refetch && refetch()
     }
+
+    const addClubBook = async () => {
+        await fetch(`http://localhost:8088/clubBooks?clubId=${clubId}&isCurrent=true`)
+        .then(res => res.json())
+        .then(async res => {
+            await Promise.all(
+            res.map((book) =>
+                fetch(`http://localhost:8088/clubBooks/${book.id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ isCurrent: false }),
+                })
+            )
+            );
+        });
+        if (!inLibrary && "volumeInfo" in book) {
+            fetch("http://localhost:8088/clubBooks", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                googleId: book.id,
+                clubId: Number(clubId),
+                title: title,
+                author: author,
+                imageSmall: book.volumeInfo.imageLinks.smallThumbnail,
+                imageLarge: thumbnail,
+                description: description,
+                addedOn: Date.now(),
+                isCurrent: true
+            })
+        }).then(() => navigate(`/clubs/${clubId}`) )
+
+        } else {
+            fetch(`http://localhost:8088/clubBooks/${clubBookId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    isCurrent: true
+                })
+            }).then(() =>  navigate(`/clubs/${clubId}`) )
+        }
+    }
+
+    useEffect(() => {
+        !clubId
+        ? "volumeInfo" in book
+            ? request(`?googleId=${book.id}&userId=${user}`).then(res => {
+                if (res.length > 0) {
+                    setInLibrary(true)
+                    setBookId(res[0].id)
+                } else {
+                    setInLibrary(false)
+                }
+                })
+            : setInLibrary(true)
+        : fetch(`http://localhost:8088/clubBooks?clubId=${clubId}&googleId=${book.id}`).
+        then(res => res.json()).then(res => {
+            if (res.length > 0) {
+                setInLibrary(true)
+                setClubBookId(res[0].id)
+            } else {
+                setInLibrary(false)
+            }
+        })
+    },[book])
 
 
     return (
@@ -49,8 +154,11 @@ export const BookFull = ({book, setBook}: BookFullProps) => {
                 </Box>
                 <Box className="flex flex-col shrink w-[50%] max-h-auto">
                     <Box className="pb-2">
-                        {"userId" in book &&
-                            <Button onClick={() => setOpen(true)} variant="contained" size="small">Remove From Library</Button>
+                        {!clubId 
+                            ? inLibrary
+                             ?<Button onClick={() => setOpen(true)} variant="contained" size="small">Remove From Library</Button>
+                             : user && <Button onClick={addBookToLibrary} variant="contained" size="small">Add to Library</Button>
+                            : <Button onClick={addClubBook} variant="contained" size="small">Set as Current Book</Button>
                         }
                     </Box>
                     <Box>

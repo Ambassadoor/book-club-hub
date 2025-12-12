@@ -40,15 +40,15 @@ const search = async (params: {
 export const bchBooksClient = () => {
     return {search}
 }
-const request = async(path: string, options: Options) => {
+const request = async(path: string, options?: Options) => {
     const res = await fetch(`${url}${path}`, {
-        method: options.method,
+        method: options?.method || "GET",
         headers: {
             "Content-Type": "application/json",
-            ...(options.headers || {})
+            ...(options?.headers || {})
         },
         body:
-            options.body  
+            options?.body  
             ? JSON.stringify(options.body)
             : undefined
     })

@@ -5,18 +5,20 @@ import { BookSearchResult, type GoogleBookWithInLibrary } from "./BookSearchResu
 import { useBchApi } from "../../hooks/useBchApi"
 import { BookFull } from "./BookFull"
 import { NavigateBefore, NavigateNext } from "@mui/icons-material"
+import { useParams } from "react-router-dom"
 
 type BooksProps = {
     user: number
 }
 
 export const Books = ({user}: BooksProps) => {
+    const {clubId} = useParams()
     const [results, setResults] = useState<GoogleBookWithInLibrary[] | GoogleBook[]>([])
     const [count, setCount] = useState<number>(1)
     const [total, setTotal] = useState<number>(0)
     const [page, setPage] = useState<number>(0)
     const [open, setOpen] = useState(false)
-    const { data: userBooks} = useBchApi(`?userId=${user}`)
+    const { data: userBooks, refetch} = useBchApi(`?userId=${user}`)
     const [book, setBook] = useState<GoogleBook | UserBook | null>(null)
 
 
@@ -46,24 +48,30 @@ export const Books = ({user}: BooksProps) => {
     }
 
     useEffect(() => {
-        if (results.length > 0) {
+        if (results?.length > 0) {
             setOpen(true)
         }
     },[results])
 
     useEffect(() => {
         setOpen(false)
+        setResults([])
     }, [book])
+
+    //TODO: If there is a clubId param, update logic to
+    // Add Set Club Book Button to detail (Book Full)
+    // Change button logic to create clubBook instead of userBook
+    // Route back to club detail view on select
 
     return (
         <Box className="relative">
             <Box>
-                <SearchBar close targets={["googleBooks"]} results={results} setResults={user ? checkUserLibrary : setResults} page={page} setPage={setPage} setTotal={setTotal} fullWidth/>
+                <SearchBar close targets={["googleBooks"]} results={results} setResults={user && !clubId ? checkUserLibrary : setResults} page={page} setPage={setPage} setTotal={setTotal} fullWidth/>
             </Box>
             <Box hidden={!open} className="p-4 mt-3 relative z-10 bg-black rounded">
                 <List className="">
                     {
-                        results.length > 0 &&
+                        results?.length > 0 &&
                         <Box>
     {                                results.map(book => (
                                 <BookSearchResult key={book.id} user={user} book={book} update={markAdded} setBook={setBook} />
@@ -74,7 +82,7 @@ export const Books = ({user}: BooksProps) => {
                 </List>
             </Box>
             <Box className="absolute top-15 left-0 w-full z-1">
-                {book && <BookFull book={book}/>}
+                {book && <BookFull book={book} setBook={setBook} clubId={clubId} user={user} refetch={refetch}/>}
             </Box>
         </Box>
     )

@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Chip, List, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { JoinClubButton } from "./JoinClubButton"
 import { LeaveClubButton } from "./LeaveClubButton"
 import { ToggleField } from "../profile/ToggleField"
@@ -16,6 +16,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     const [userRole, setUserRole] = useState("guest")
     const [editing, setEditing] = useState(false)
     const {clubId} = useParams()
+    const navigate = useNavigate()
 
     //TODO: Change workflow to: Get clubMember on load, null reponse: guest, otherwise isAdmin dictates
     // Then we can pass the clubMember data to join/leave buttons, reducing fetch calls
@@ -43,6 +44,10 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
 
     const handleCancel = () => {
         setEditing(false)
+    }
+
+    const handleChangeBook = () => {
+        navigate(`/books/${clubId}/change`)
     }
     useEffect(() => {
         if (user && clubId) {
@@ -93,8 +98,8 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                             userRole === "admin"
                             ? <Button variant="contained" size="small" hidden={editing} onClick={handleEdit}>Edit Club</Button>
                             : userRole ==="guest"
-                            ? <JoinClubButton userId={user} clubId={clubId} handleJoin={setUserRole}/>
-                            : <LeaveClubButton userId={user} clubId={clubId} handleLeave={setUserRole}/>
+                            ? <JoinClubButton userId={user} clubId={Number(clubId)} handleJoin={setUserRole}/>
+                            : <LeaveClubButton userId={user} clubId={Number(clubId)} handleLeave={setUserRole}/>
                             }
                         </Box>
                     </Box>
@@ -107,21 +112,22 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                 </ButtonGroup>}
             </Box>
             <Box className="flex flex-row flex-wrap">
-                <Box className="flex flex-row shrink">
+                <Box className="flex flex-row shrink gap-5">
                     <Box className="flex min-w-[33%] max-w-[50%] grow w-full">
                         <img className="rounded" height="100%" width="100%" src={currentBook?.imageLarge}/>
                     </Box>
-                    <Box className="flex max-w-[50%] min-w-[33%%] shrink">
+                    <Box className="flex flex-col max-w-[50%] min-w-[33%%] shrink">
                         <Box className="flex flex-col">
                             <Typography variant="h6">{currentBook?.title}</Typography>
                             <Typography variant="body2">{currentBook?.author}</Typography>
                             <Typography variant="body1">{currentBook?.description}</Typography>
                             <Box className="ml-auto">
-                                <Button size="small"variant="contained">Change Book</Button>
+                                {userRole === "admin" && <Button size="small"variant="contained" onClick={handleChangeBook}>Change Book</Button>}
                             </Box>
                         </Box>
-                        <Box>
-                            <List>
+                        <Box className="flex justify-center flex-col rounded max-w-fit bg-accent p-2">
+                            <Typography variant="h6">Previous Reads</Typography>
+                            <List className="flex flex-col max-w-fit">
                                 {clubInfo?.clubBooks.filter((book) => 
                                     !book.isCurrent
                                 ).map(book => (

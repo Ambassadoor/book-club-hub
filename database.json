@@ -108,7 +108,55 @@
       "imageLarge": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "This highly anticipated sequel to The Will of the Many—one of 2023’s most lauded and bestselling fantasy novels—follows Vis as he grapples with a dangerous secret that could unravel history across alternate dimensions. Book two of the Hierarchy quartet.",
       "addedOn": "2025-12-04T18:32:23.123Z",
-      "isCurrent": true
+      "isCurrent": false
+    },
+    {
+      "googleId": "NvwqK-KEWbwC",
+      "clubId": 1,
+      "title": "The Hitch Hiker's Guide to the Galaxy Omnibus",
+      "author": "Douglas Adams",
+      "imageSmall": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "The Hitchhiker's Guide to the Galaxy is a science fiction comedy series (created by Douglas Adams) that debuted as a radio comedy broadcast on BBC Radio 4 in 1978. Since then it has been adapted to other formats, slowly becoming an international multi-media phenomenon over a span of several years. The title The Hitchhiker's Guide to the Galaxy is often abbreviated as \"HHG\", \"HHGG\", \"HHGTTG\", or \"H2G2\". The series is also often referred to as \"The Hitchhiker's Guide\", \"Hitchhiker's\", or simply \"[The] Guide.\" This title can refer to any of the various incarnations of the story, of which the books, having been translated into more than 30 languages by 2005. Although the various versions follow the same basic plot, they are in many places mutually contradictory, as Adams rewrote the story substantially for each new adaptation. In all versions, the series follows the adventures of Arthur Dent, a hapless Englishman who escapes the demolition of Earth by a bureaucratic alien race called the Vogons with his friend Ford Prefect, an alien from a small planet somewhere in the vicinity of Betelgeuse and researcher for the eponymous guidebook. Zaphod Beeblebrox, Ford's semi-cousin and part-time Galactic President, unknowingly saves the pair from certain death. He brings them aboard his stolen spaceship, the Heart of Gold, whose crew rounds out the main cast of characters: Marvin the Paranoid Android, a severely depressed robot, and Trillian, formerly known as Tricia McMillan, a woman Arthur once met at a party who he soon realises is the only other survivor of Earth's destruction. After this, the characters embark on a quest to find the legendary planet of Magrathea and the Question to the Ultimate Answer.",
+      "addedOn": 1765508171460,
+      "isCurrent": false,
+      "id": 2
+    },
+    {
+      "googleId": "uWYRzgEACAAJ",
+      "clubId": 1,
+      "title": "The Thursday Murder Club",
+      "author": "Richard Osman",
+      "imageSmall": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "In a peaceful retirement village, four unlikely friends meet up once a week to investigate unsolved murders. But when a brutal killing takes place on their very doorstep, the Thursday Murder Club find themselves in the middle of their first live case. Elizabeth, Joyce, Ibrahim and Ron might be pushing eighty, but they still have a few tricks up their sleeves. Can our unorthodox but brilliant gang catch the killer before it's too late?",
+      "addedOn": 1765508657387,
+      "isCurrent": false,
+      "id": 3
+    },
+    {
+      "googleId": "mo01zwEACAAJ",
+      "clubId": 1,
+      "title": "The Bullet that Missed",
+      "author": "Richard Osman",
+      "imageSmall": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "\"It is an ordinary Thursday, and things should finally be returning to normal. Except trouble is never far away where the Thursday Murder Club are concerned. A decade-old cold case--their favorite kind--leads them to a local news legend and a murder with no body and no answers.The n a new foe pays Elizabeth a visit. Her mission? Kill or be killed. Suddenly the cold case has become red hot. While Elizabeth wrestles with her conscience (and a gun), Joyce, Ron, and Ibrahim chase down the clues with help from old friends and new. But can the gang solve the mystery and save Elizabeth before the murderer strikes again?\"--",
+      "addedOn": 1765508797846,
+      "isCurrent": false,
+      "id": 4
+    },
+    {
+      "googleId": "hFT5DwAAQBAJ",
+      "clubId": 1,
+      "title": "The Thursday Murder Club",
+      "author": "Richard Osman",
+      "imageSmall": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "\"First published in hardcover in Great Britain by Viking, an imprint of Penguin Books, a division of Penguin Random House Ltd., London\"--Copyright page.",
+      "addedOn": 1765509018072,
+      "isCurrent": true,
+      "id": 5
     }
   ],
   "userBooks": [
@@ -173,18 +221,6 @@
       "id": 5
     },
     {
-      "title": "A Conspiracy of Kings",
-      "author": "Megan Whalen Turner",
-      "imageSmall": "http://books.google.com/books/content?id=gOzLzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=gOzLzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "description": "'Megan Whalen Turner is one of my all-time favorite writers . . . impossible to put down' Holly Black, New York Times bestselling author of The Cruel Prince Sophos, the unwilling prince of Sounis, has disappeared without a trace. Eugenides has never stopped wondering what happened to his friend. Nor has the queen of Eddis, who once offered Sophos her hand. As time goes by, it becomes less and less certain that they will ever see their friend again. Across the small peninsula battles are fought, bribes are offered, and conspiracies are set in motion. Darkening the horizon, the Mede Empire threatens from across the sea. And Sophos, anonymous and alone, bides his time. Drawing on his memories of Gen, Pol, the Magus and Eddis, he sets out on an adventure that will change all of their lives forever . . . Praise for Megan Whalen Turner 'The Queen's Thief books awe and inspire me' Laini Taylor, New York Times bestselling author of the Daughter of Smoke and Bone novels and Strange the Dreamer 'Megan Whalen Turner writes vivid, immersive, heartbreaking fantasy' Leigh Bardugo, New York Times bestselling author of Six of Crows and Crooked Kingdom 'Endlessly entertaining, deeply deceptive, and very, very clever' Garth Nix, New York Times bestselling and award-winning author of the Old Kingdom, Keys to the Kingdom, and Seventh Tower series 'Romance, intrigue, mystery, surprises, and sheer beautiful writing' Cassandra Clare, award-winning and New York Times bestselling author of The Mortal Instruments and Lady Midnight 'The world Turner creates is so tangible that not only do I believe in its characters, I almost believe in its gods' Kristin Cashore, award-winning and New York Times bestselling author of the Graceling Realm series",
-      "googleId": "gOzLzgEACAAJ",
-      "userId": 1,
-      "addedOn": 1765305255939,
-      "status": "Not Started",
-      "id": 6
-    },
-    {
       "title": "The Lives of Tao",
       "author": "Wesley Chu",
       "imageSmall": "http://books.google.com/books/content?id=ZFY8CgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
@@ -219,18 +255,6 @@
       "addedOn": 1765329569524,
       "status": "Not Started",
       "id": 9
-    },
-    {
-      "title": "The Will of the Many",
-      "author": "James Islington",
-      "imageSmall": "http://books.google.com/books/content?id=53u7EAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=53u7EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-      "description": "Vis, the adopted son of Magnus Quintus Ulcisor, a prominent senator within the Hierarchy, is trained to enter the famed Catenan Academy to help Ulciscor learn what the hidden agenda is of the remote island academy. Secretly, he also wants Vis to discover what happed to his brother who died at the academy. He is sure the current Principalis of the academy, Quintus Veridius Julii, a political rival, knows much more than he's revealing",
-      "googleId": "53u7EAAAQBAJ",
-      "userId": 1,
-      "addedOn": 1765329582349,
-      "status": "Not Started",
-      "id": 10
     },
     {
       "title": "Children of Time",
