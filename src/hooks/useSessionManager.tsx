@@ -39,7 +39,7 @@ export const useSessionManager = () => {
 
   //Refreshes token expiry
   const updateSessionToken = useCallback(() => {
-    if (!active) return
+    if (!isSessionActive()) return
     const token = localStorage.getItem("sessionToken");
     if (token) {
       const tokenObj = JSON.parse(token);

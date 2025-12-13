@@ -10,7 +10,7 @@ export const LoginCard = ({setUser}: LoginCardProps) => {
 
 
     return (
-            <Card className="md: max-w-200 self-center">
+            <Card className="md:max-w-200 self-center">
                 <CardHeader
                 title="Welcome to Book Club Hub!"
                 />
