@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { bchApi } from "../api/bchBooksClient";
 
+// API Hook for userBooks. 
+//TODO: Clean up with bchBooksClient, googleBooksClient, and various api calls, consolidate together
 export const useBchApi = (
     path: string, 
     options?: Options

@@ -11,6 +11,8 @@ type CreateAccountDialogProps = {
     setBchExisting: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
+//A Dialog to house the create account form. 
+//TODO: Do we keep dialog or always route to new page? Mobile Experience?
 export const CreateAccountDialog = ({setUser, createAccount, setCreateAccount, setGoogleSignIn, setBchExisting}: CreateAccountDialogProps) => {
     const [open, setOpen] = useState(false)
 

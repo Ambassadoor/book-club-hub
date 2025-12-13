@@ -13,6 +13,7 @@ type CreateAccountFormProps = {
     setBchExisting: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
+// Form for Account Creation
 export const CreateAccountForm = ({setUser, open, setOpen, setCreateAccount, setBchExisting}: CreateAccountFormProps) => {
     const [userData, setUserData] = useState({
         "firstName": "",

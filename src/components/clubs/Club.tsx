@@ -1,5 +1,5 @@
-import { Book, Edit } from "@mui/icons-material"
-import { Avatar, Box, Button, Chip, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Pagination, Typography, useMediaQuery } from "@mui/material"
+import { Book } from "@mui/icons-material"
+import { Avatar, Box, Button, Chip, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -13,8 +13,9 @@ type Club = {
     clubMembers?: ClubMember[]
 }
 
-interface ClubBook extends Omit<UserBook, "userId"> {
-    clubId: number
+export interface ClubBook extends Omit<UserBook, "userId"> {
+    clubId: number,
+    isCurrent: boolean
 }
 
 interface ClubMember {
@@ -34,14 +35,18 @@ interface ClubData extends ClubMember {
     numMembers: number,
 }
 
+interface rawClubData extends Club {
+    clubBooks: ClubBook[],
+    clubMembers: ClubMember[]
+}
 
+//Displays a list of the user's clubs. 
 export const Club = () => {
     const {userId} = useParams()
     const [clubs, setClubs] = useState<ClubData[]>([])
     const [page, setPage] = useState(1)
     const [count, setCount] = useState(1)
     const navigate = useNavigate()
-    const isMedium = useMediaQuery('(min-width:768px)');
 
     const formatDate = (date: Date) => {
         return date.toLocaleDateString("en-us", {year: "numeric", month: "short"})
@@ -65,7 +70,7 @@ export const Club = () => {
                     
                     }).then(res => setClubs(res)).catch((error) => console.log("Error", error))
         : fetch(`http://localhost:8088/clubs?_embed=clubBooks&_embed=clubMembers`).then((res) => res.json()).then((res) => {
-            const formattedData = res.map((c) => {
+            const formattedData = res.map((c: rawClubData) => {
                 const {clubBooks, clubMembers, ...club } = c
                 return {
                     club: club,

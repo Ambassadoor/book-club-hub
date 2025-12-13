@@ -15,6 +15,7 @@ type ToggleFieldProps = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
+// A custom field that switches between a TextField and a Typography. For quick edit forms. 
 export const ToggleField = (props: ToggleFieldProps) => {
     const {variant, fullWidth=false, multiline=false, className, rows, name, editing, value, label, type, onChange} = props
 

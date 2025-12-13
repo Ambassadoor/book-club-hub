@@ -2,8 +2,8 @@ import { Search } from "@mui/icons-material"
 import { Autocomplete, IconButton, InputAdornment, TextField } from "@mui/material"
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { bchBooksClient } from "../../api/bchBooksClient"
-import { googleBooksClient } from "../../api/googleBooksClient"
+import { bchBooksClient, type BchSearchResults } from "../../api/bchBooksClient"
+import { googleBooksClient, type GoogleSearchResults } from "../../api/googleBooksClient"
 import { colors } from "../../styles/colors"
 import { useNavigate } from "react-router-dom"
 
@@ -19,21 +19,25 @@ type SearchBarProps = {
     page?: number,
     setPage?: React.Dispatch<React.SetStateAction<number>>,
     results: UserBook[] | GoogleBook[],
-    setResults: React.Dispatch<React.SetStateAction<T[]>> | ((res: T[]) => void),
+    setResults: React.Dispatch<React.SetStateAction<GoogleBook[] | UserBook[]>> | ((res: GoogleBook[]) => void),
     setTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
+// Customizable Search Bar Component
+// TODO: Clean up and create better documentation
 export const SearchBar = ({close=false, className, fullWidth = false, expanding = false, targets=[], source, page=0, setPage, results=[], setResults, setTotal}:SearchBarProps) => {
     const [searchTerm, setSearchTerm] = useState("")
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // API Search Functions
     const {search: bchSearch } = bchBooksClient()
     const {search: googleSearch} = googleBooksClient()
 
     const navigate = useNavigate()
 
+    // Handlers
     const handleFocus = () => {
         setFocus(true)
     }
@@ -50,12 +54,14 @@ export const SearchBar = ({close=false, className, fullWidth = false, expanding 
         setOpen(false)
     }
 
+    // Debounce search to reduce number of api requests
     const debouncedSearch = useCallback(debounce((searchFunc, params) => {
-        searchFunc(...params).then(res => {setResults(
-            res.results
+        searchFunc(...params).then((res: BchSearchResults | GoogleSearchResults) => {setResults(
+            "results" in res
             ? res.results
             : res.items
         )
+        // Google totalItems is unreliable, set to 100 items max
         setTotal(
             "totalItems" in res
             ? res.totalItems > 1000
@@ -64,8 +70,9 @@ export const SearchBar = ({close=false, className, fullWidth = false, expanding 
             : res.total
         )}
     )
-    }, 300), [searchTerm, page, bchSearch, googleSearch])
+    }, 500), [searchTerm, page, bchSearch, googleSearch])
 
+    //Handles state management on user search
     useEffect(() => {
             if (targets.includes("bchbooks"))
             {
@@ -93,6 +100,7 @@ export const SearchBar = ({close=false, className, fullWidth = false, expanding 
 
     }, [searchTerm])
 
+    //Handles state management on pagination change
     useEffect(() => {
         if (searchTerm !== "")
         {

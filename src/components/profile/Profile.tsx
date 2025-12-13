@@ -8,6 +8,7 @@ type ProfileProps = {
     user: number | null
 }
 
+// A profile info display/edit component. 
 export const Profile = ({user}: ProfileProps) => {
     const [userInfo, setUserInfo] = useState<User>()
     const [editing, setEditing] = useState(false)

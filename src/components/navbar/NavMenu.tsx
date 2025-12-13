@@ -10,6 +10,7 @@ type NavMenuProps = {
     setUser: React.Dispatch<React.SetStateAction<number | null>>
 }
 
+// Drop Down Menu for the NavBar. Updates list items depending on screen size. 
 export const NavMenu = ({user, setUser}:NavMenuProps) => {
     const [anchorEl, setAnchorEl] = useState<null | Element>(null)
     const [open, setOpen] = useState(false)

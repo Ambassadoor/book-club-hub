@@ -1,16 +1,16 @@
-import { Box, ButtonGroup, IconButton, List, Pagination } from "@mui/material"
+import { Box, List, Pagination } from "@mui/material"
 import { SearchBar } from "../shared/SearchBar"
 import { useEffect, useState } from "react"
 import { BookSearchResult, type GoogleBookWithInLibrary } from "./BookSearchResult"
 import { useBchApi } from "../../hooks/useBchApi"
 import { BookFull } from "./BookFull"
-import { NavigateBefore, NavigateNext } from "@mui/icons-material"
 import { useParams } from "react-router-dom"
 
 type BooksProps = {
-    user: number
+    user: number | null
 }
 
+//A Book search and result display component
 export const Books = ({user}: BooksProps) => {
     const {clubId} = useParams()
     const [results, setResults] = useState<GoogleBookWithInLibrary[] | GoogleBook[]>([])
@@ -19,7 +19,7 @@ export const Books = ({user}: BooksProps) => {
     const [page, setPage] = useState<number>(0)
     const [open, setOpen] = useState(false)
     const { data: userBooks, refetch} = useBchApi(`?userId=${user}`)
-    const [book, setBook] = useState<GoogleBook | UserBook | null>(null)
+    const [book, setBook] = useState<GoogleBook | GoogleBookWithInLibrary | UserBook | null>(null)
 
 
     const checkUserLibrary = (res:GoogleBook[]) => {
@@ -43,7 +43,7 @@ export const Books = ({user}: BooksProps) => {
         setCount(Math.ceil(total/10))
     }, [total])
 
-    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (_: unknown, value: number) => {
         setPage(value-1)
     }
 
@@ -77,7 +77,7 @@ export const Books = ({user}: BooksProps) => {
                 </List>
             </Box>
             <Box className="absolute top-15 left-0 w-full z-1">
-                {book && <BookFull book={book} setBook={setBook} clubId={clubId} user={user} refetch={refetch}/>}
+                {book && <BookFull book={book} setBook={setBook} clubId={Number(clubId)} user={Number(user)} refetch={refetch}/>}
             </Box>
         </Box>
     )

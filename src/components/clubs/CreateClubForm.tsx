@@ -7,6 +7,7 @@ type CreateClubFormProps = {
     user: number | null
 }
 
+// A form for club creation
 export const CreateClubForm = ({user}: CreateClubFormProps) => {
     const [formData, setFormData] = useState({
         name: "",
@@ -40,7 +41,7 @@ export const CreateClubForm = ({user}: CreateClubFormProps) => {
                 {...formData, ownerId: user, "created_at": new Date()}
             )
         }).then(res => res.json()).catch(error => console.error(error))
-        const memberResponse = await fetch("http://localhost:8088/clubMembers", {
+        await fetch("http://localhost:8088/clubMembers", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -57,9 +58,6 @@ export const CreateClubForm = ({user}: CreateClubFormProps) => {
         }).then(res => res.json()).catch(error => console.error(error))
         navigate(`/clubs/${clubResponse.id}`)
     }
-
-
-
     return (
         user &&
         <Box className="flex flex-col gap-5 rounded bg-accent p-5">

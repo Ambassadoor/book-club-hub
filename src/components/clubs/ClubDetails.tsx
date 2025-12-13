@@ -5,17 +5,28 @@ import { JoinClubButton } from "./JoinClubButton"
 import { LeaveClubButton } from "./LeaveClubButton"
 import { ToggleField } from "../profile/ToggleField"
 import { BookSearchResult } from "../library/BookSearchResult"
+import type { ClubBook } from "./Club"
 
 type ClubDetailsProps = {
-    user?: number
+    user?: number | null
 }
 
+type ClubInfo = {
+    name: string,
+    description: string,
+    ownerId: string,
+    "created_at": string,
+    id: number,
+    clubBooks: ClubBook[]
+}
+
+// Displays a club's details
 export const ClubDetails = ({user}: ClubDetailsProps) => {
-    const [clubInfo, setClubInfo] = useState(null)
-    const [currentBook, setCurrentBook] = useState(null)
-    const [userRole, setUserRole] = useState("guest")
-    const [editing, setEditing] = useState(false)
-    const [open, setOpen] = useState(false)
+    const [clubInfo, setClubInfo] = useState<ClubInfo | null>(null)
+    const [currentBook, setCurrentBook] = useState<UserBook | null>(null)
+    const [userRole, setUserRole] = useState<string>("guest")
+    const [editing, setEditing] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false)
     const {clubId} = useParams()
     const navigate = useNavigate()
 
@@ -23,9 +34,9 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     // Then we can pass the clubMember data to join/leave buttons, reducing fetch calls
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setClubInfo(prev => ({
+        setClubInfo(prev => prev ? {
             ...prev, [e.target.name]: e.target.value
-        }))
+        }: prev)
     }
 
     const handleSubmit = async () => {
@@ -89,7 +100,8 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     }, [clubId])
 
     useEffect(() => {
-        if (clubInfo?.clubBooks.length > 0) {
+        if (!clubInfo?.clubBooks) return
+        if (clubInfo?.clubBooks?.length > 0) {
             const current = clubInfo.clubBooks.find((book) => book.isCurrent)
             if (current) setCurrentBook(current)
         }

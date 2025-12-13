@@ -10,6 +10,7 @@ type PasswordFieldProps = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
+// A reusable password input field
 export const PasswordField = (props: PasswordFieldProps) => {
     const [ showPassword, setShowPassword] = useState(false)
     const {className, fullWidth=false, value, required, onChange} = props

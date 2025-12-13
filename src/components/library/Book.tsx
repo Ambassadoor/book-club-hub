@@ -8,9 +8,9 @@ import { BookSearchResult } from "./BookSearchResult"
 type BookParams = {
     bookId: string
 }
-
-//TODO: Create 3 variants: SearchResult, Card, Full
-
+//Card component for Book Details
+//Unused currently
+//TODO: Do we keep the source idea?
 export const Book = () => {
     //TODO: Determine whether to get info from local API or Books API
     const [book, setBook] = useState<UserBook | GoogleBook>()

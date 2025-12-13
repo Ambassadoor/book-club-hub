@@ -6,17 +6,19 @@ import { useEffect, useState } from "react"
 type BookListProps = {
     className?: string,
     list: UserBook[] | GoogleBook[],
-    setBook?: React.Dispatch<React.SetStateAction<UserBook>>,
+    setBook?: React.Dispatch<React.SetStateAction<UserBook | GoogleBook | null>>,
     page?: number,
     setPage?: React.Dispatch<React.SetStateAction<number>>
 }
+
+//A Paginated list of book search results
 export const BookList = ({className, list, setBook, page, setPage}: BookListProps) => {
     const [count, setCount] = useState(0)
     const [index, setIndex] = useState(0)
 
     const handlePageChange = (_:unknown,value: number) => {
-        setPage(value)
-        setIndex((page-1)*10)
+        setPage && setPage(value)
+        page && setIndex((page-1)*10)
     }
 
     useEffect(() => {
@@ -24,7 +26,7 @@ export const BookList = ({className, list, setBook, page, setPage}: BookListProp
     },[list])
 
     useEffect(() => {
-        setIndex((page-1)*10)
+        page && setIndex((page-1)*10)
     },[page])
 
     return (

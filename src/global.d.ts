@@ -11,7 +11,7 @@ declare global {
         imageSmall: string,
         imageLarge: string,
         description: string,
-        addedOn: string,
+        addedOn: string | number,
         status: string,
     }
     interface GoogleBook {
@@ -96,10 +96,13 @@ declare global {
             textSnippet: string
         }
     }
+
+    interface RawUserBook extends Omit<id, UserBook>{}
+
     interface Options {
         method?:"GET" | "POST" | "PUT" | "PATCH" | "DELETE";
         headers?: HeadersInit;
-        body?: BodyInit;
+        body?: BodyInit | RawUserBook;
     }
 }
 

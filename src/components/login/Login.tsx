@@ -12,6 +12,7 @@ type LoginProps = {
     setUser: React.Dispatch<React.SetStateAction<number | null>>
 }
 
+// The Login Dialog
 export const Login = ({open, setOpen, setUser}:LoginProps) => {
     const [signInOpen, setSignInOpen] = useState(false)
     const [showPassword, setShowPassword] = useState(false)

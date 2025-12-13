@@ -5,6 +5,7 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  useColorScheme,
 } from "@mui/material";
 
 import { Book, DarkMode } from "@mui/icons-material";
@@ -17,11 +18,17 @@ import { SearchBar } from "../shared/SearchBar";
 type NavBarProps = {
   user: number | null,
   setUser: React.Dispatch<React.SetStateAction<number | null>>,
-  toggleTheme: () => void
 }
 
-export const NavBar = ({user, setUser, toggleTheme}:NavBarProps): JSX.Element => {
+// The NavBar for the app. 
+export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   const [results, setResults] = useState<UserBook[] | GoogleBook[]>([])
+  const {mode, setMode} = useColorScheme()
+
+  const toggleTheme = () => {
+    const newMode = mode === 'dark' ? 'light' : 'dark';
+    setMode(newMode);
+  }
 
   const pages = [
     {

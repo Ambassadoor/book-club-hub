@@ -2,13 +2,21 @@ const url = "http://localhost:8088/userBooks"
 // Scenario 1: No params -> Search all Fields
 // Scenario 2: Single Param -> Search given field
 // Scenario 3: Multiple Params -> Search each field
+
+export type BchSearchResults = {
+    results: UserBook[],
+    total: number,
+    cont: boolean
+}
+
+//Handles a search of userBooks
 const search = async (params: {
         title?: string
         author?: string
         description?: string
         isbn?: number
     } | string | number,
-    page: number = 0) => {
+    page: number = 0): Promise<BchSearchResults> => {
     const startIndex = (page * 10)
     const endIndex = startIndex + 10
     const fieldsToSearch = 
@@ -40,6 +48,8 @@ const search = async (params: {
 export const bchBooksClient = () => {
     return {search}
 }
+
+
 const request = async(path: string, options?: Options) => {
     const res = await fetch(`${url}${path}`, {
         method: options?.method || "GET",

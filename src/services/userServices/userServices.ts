@@ -1,3 +1,4 @@
+//TODO: Move interfaces to global.d.ts
 export interface GoogleUser {
     iss: string,
     azp: string,
@@ -79,6 +80,7 @@ const transformUser = (user: GoogleUser | BchUser) => {
     }
 }
 
+//Handle Sign In via BCH
 export const bchSignIn = async (data:{email: string, password: string}) => {
     const {email, password} = data
     const user = await fetch(`http://localhost:8088/users?email=${email}`).then(res => res.json())
@@ -104,16 +106,15 @@ export const bchSignIn = async (data:{email: string, password: string}) => {
     }
 }
 
-
+// Retrieve user by userId
 export const getUser = async (userId: number) => {
     const user = await fetch(`http://localhost:8088/users/${userId}`).then(res => res.json())
 
     return user
 }
 
+// Handles profile updates
 export const updateProfile = async (userId: number, updates: User ) => {
-
-
     const options: RequestInit = {
         method: "PATCH",
         headers: {
@@ -125,6 +126,7 @@ export const updateProfile = async (userId: number, updates: User ) => {
     return user
 }
 
+//Checks if email used for account creation exists already
 export const isExistingAccount = async (email : string) => {
     const user = await fetch(`http://localhost:8088/users?email=${email}`).then(res => res.json())
 

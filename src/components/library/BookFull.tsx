@@ -2,15 +2,17 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, D
 import { useEffect, useState } from "react"
 import { bchApi } from "../../api/bchBooksClient"
 import { useNavigate } from "react-router-dom"
+import type { ClubBook } from "../clubs/Club"
 
 type BookFullProps = {
     book: UserBook | GoogleBook,
     clubId?: number | null,
-    setBook: React.Dispatch<React.SetStateAction<UserBook | GoogleBook | null>>,
-    user: number,
+    setBook?: React.Dispatch<React.SetStateAction<UserBook | GoogleBook | null>>,
+    user?: number,
     refetch?: () => void
 }
 
+// Renders the full details of a component
 export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) => {
     const [open, setOpen] = useState(false)
     const [inLibrary, setInLibrary] = useState(false)
@@ -72,7 +74,7 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
         : bookId
        request(`/${id}`, {method: "DELETE"})
        setOpen(false)
-        setBook(null)
+        setBook && setBook(null)
         setInLibrary(false)
         refetch && refetch()
     }
@@ -82,7 +84,7 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
         .then(res => res.json())
         .then(async res => {
             await Promise.all(
-            res.map((book) =>
+            res.map((book: ClubBook) =>
                 fetch(`http://localhost:8088/clubBooks/${book.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },

@@ -8,8 +8,10 @@ type SignUpButtonProps = {
     method: string;
     handleClose: () => void
     setUser: React.Dispatch<React.SetStateAction<number | null>>,
-    setGoogleSignIn: React.Dispatch<React.SetStateAction<boolean>>,
+    setGoogleSignIn?: React.Dispatch<React.SetStateAction<boolean>>,
 }
+
+//Renders a google button for either sign in or sign up
 export const SignUpButton = ({method, handleClose, setUser, setGoogleSignIn}: SignUpButtonProps)=> {
     const [googleLoaded, setGoogleLoaded] = useState(false);
     const { signIn } = useSessionManager()

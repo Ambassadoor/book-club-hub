@@ -5,6 +5,8 @@ type JoinClubButtonProps = {
     clubId: number
     handleJoin: React.Dispatch<React.SetStateAction<string>>
 }
+
+// Handles logic for joining club
 export const JoinClubButton = ({userId, clubId, handleJoin}: JoinClubButtonProps) => {
 
     const handleJoinClick = async () => {

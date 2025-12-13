@@ -5,6 +5,8 @@ type LeaveClubButtonProps = {
     clubId: number,
     handleLeave: React.Dispatch<React.SetStateAction<string>>
 }
+
+// Handles logic for leaving club
 export const LeaveClubButton = ({userId, clubId, handleLeave}: LeaveClubButtonProps) => {
     
     const handleLeaveClick = async () => {

@@ -2,12 +2,14 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import { type User } from "../services/userServices/userServices";
 import { useNavigate } from "react-router-dom";
 
+// Manages the current user Session
 export const useSessionManager = () => {
   const [warning, setWarning] = useState(false);
   const [active, setActive] = useState(false);
   const navigate = useNavigate();
   const timerRef = useRef<number | null>(null);
 
+  // Get's the userId from the sessionToken, if present
   const getCurrentUserId = useCallback(() => {
     const token = localStorage.getItem("sessionToken");
     if (!token) return null;
@@ -19,6 +21,7 @@ export const useSessionManager = () => {
     }
   }, [])
 
+  // Checks if sessionToken is expired or not
   const isSessionActive = useCallback(() => {
     const token = localStorage.getItem("sessionToken");
     if (!token) return false;
@@ -26,6 +29,7 @@ export const useSessionManager = () => {
     return Date.now() < expiresAt;
   }, []);
 
+  //Handles removing sessionToken on logout
   const logout = useCallback(() => {
     localStorage.removeItem("sessionToken");
     setActive(false);
@@ -33,6 +37,7 @@ export const useSessionManager = () => {
     if (timerRef.current) clearInterval(timerRef.current);
   }, [navigate]);
 
+  //Refreshes token expiry
   const updateSessionToken = useCallback(() => {
     const token = localStorage.getItem("sessionToken");
     if (token) {
@@ -46,12 +51,14 @@ export const useSessionManager = () => {
     }
   }, []);
 
+  // Handles refresh workflow
   const refreshSession = useCallback(() => {
     updateSessionToken();
     setWarning(false);
     setActive(true);
   }, [updateSessionToken]);
 
+  // Handles creating sessionToken on signin
   const signIn = useCallback(async (email: string) => {
     const user = await fetch(`http://localhost:8088/users?email=${email}`);
     if (user.ok) {
@@ -67,6 +74,7 @@ export const useSessionManager = () => {
     }
   }, []);
 
+  // Creates a timer to auto log out on inactivity, set warnings at 15min
   const startSessionTimer = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
 
@@ -89,6 +97,7 @@ export const useSessionManager = () => {
     }, 60000);
   }, [logout]);
 
+  // Initializes session state and timer, cleans up on unmount
   useEffect(() => {
     if (isSessionActive()) {
       setActive(true)

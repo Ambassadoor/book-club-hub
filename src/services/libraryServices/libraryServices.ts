@@ -1,9 +1,11 @@
+// Retrieves a user's books
 export const getLibrary = async (userId: number) => {
     const books = fetch(`http://localhost:8088/userBooks?userId=${userId}`).then(res => res.json())
 
     return books
 }
 
+// Adds a book to a user's library
 export const addBookToLibrary = async(userId: number, book: GoogleBook): Promise<UserBook> => {
 
     const transformedBook = transformBook(book)
@@ -19,6 +21,7 @@ export const addBookToLibrary = async(userId: number, book: GoogleBook): Promise
     return response
 }
 
+// Converts googleBook to userBook
 const transformBook = (book: GoogleBook) => {
     const b = book.volumeInfo
     
@@ -32,11 +35,8 @@ const transformBook = (book: GoogleBook) => {
     }
 }
 
+//Gets book details from google API
 export const getBook = async(googleId: string) => {
-    //const response = await fetch(`http://localhost:8088/userBooks?googleId=${googleId}`).then(res => res.json())
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${googleId}`).then(res => res.json())
     return response
-//     if (response.length > 0) {
-//         return response[0]
-//     }
 }
