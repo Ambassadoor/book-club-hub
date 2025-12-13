@@ -5,9 +5,9 @@ import { useState } from "react"
 type PasswordFieldProps = {
     className?: string
     fullWidth?: boolean
-    value: string,
+    value?: string,
     required?: boolean,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 // A reusable password input field
@@ -25,7 +25,7 @@ export const PasswordField = (props: PasswordFieldProps) => {
         value={value}
         type={showPassword ? "text" : "password"}
         fullWidth={fullWidth}
-        variant="standard"
+        variant="outlined"
         slotProps={{
             input: {
                 endAdornment: (

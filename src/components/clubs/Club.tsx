@@ -87,7 +87,7 @@ export const Club = () => {
     },[clubs])
 
     const handleNewClubClick = () => {
-        navigate("create")
+        navigate("/clubs/create")
     }
 
     return (

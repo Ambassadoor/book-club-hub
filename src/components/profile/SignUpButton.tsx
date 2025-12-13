@@ -6,7 +6,7 @@ import { useSessionManager } from "../../hooks/useSessionManager"
 
 type SignUpButtonProps = {
     method: string;
-    handleClose: () => void
+    handleClose?: () => void
     setUser: React.Dispatch<React.SetStateAction<number | null>>,
     setGoogleSignIn?: React.Dispatch<React.SetStateAction<boolean>>,
 }
@@ -85,14 +85,16 @@ export const SignUpButton = ({method, handleClose, setUser, setGoogleSignIn}: Si
                         method: "google",
                         ...decoded,
                     }).then(() => {
-                        signIn(decoded.email).then(setUser).then(() => handleClose())
+                        signIn(decoded.email).then(setUser).then(() => {
+                        handleClose && handleClose()
+                        })
                     }).catch(res => {
                         console.error(res)
                     })
                     } else if (method === "signin" || existing) {
                         signIn(decoded.email).then((res) => {
                             setUser(res)
-                            handleClose()
+                            handleClose && handleClose()
                         }).catch(res => {
                             console.error(res)
                         })

@@ -31,7 +31,7 @@
       "lastName": "Pittman",
       "userName": "RedReadington",
       "email": "calebpttmn@gmail.com",
-      "tagline": "Books Books Books",
+      "tagline": "Books Books Books & Books!",
       "created_at": "2025-12-10T02:18:41.592Z",
       "sso_id": null,
       "picture": "",
@@ -43,10 +43,72 @@
   "clubs": [
     {
       "name": "Thursday Murder Book Club",
-      "description": "Join us as we read through the Thursday Murder Club series, a marvelous collection of mysteries investigated by four pensioners living in a retirement community in England. Meets on Fridays, lol.",
+      "description": "Join us as we read through the Thursday Murder Club series, a marvelous collection of mysteries investigated by four pensioners living in a retirement community in England.",
       "ownerId": 1,
       "created_at": 1765301819597,
-      "id": 1
+      "id": 1,
+      "clubBooks": [
+        {
+          "id": 1,
+          "googleId": "jvRQEQAAQBAJ",
+          "clubId": 1,
+          "title": "The Strength of the Few",
+          "author": "James Islington",
+          "imageSmall": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "description": "This highly anticipated sequel to The Will of the Many—one of 2023’s most lauded and bestselling fantasy novels—follows Vis as he grapples with a dangerous secret that could unravel history across alternate dimensions. Book two of the Hierarchy quartet.",
+          "addedOn": "2025-12-04T18:32:23.123Z",
+          "isCurrent": false
+        },
+        {
+          "googleId": "NvwqK-KEWbwC",
+          "clubId": 1,
+          "title": "The Hitch Hiker's Guide to the Galaxy Omnibus",
+          "author": "Douglas Adams",
+          "imageSmall": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "description": "The Hitchhiker's Guide to the Galaxy is a science fiction comedy series (created by Douglas Adams) that debuted as a radio comedy broadcast on BBC Radio 4 in 1978. Since then it has been adapted to other formats, slowly becoming an international multi-media phenomenon over a span of several years. The title The Hitchhiker's Guide to the Galaxy is often abbreviated as \"HHG\", \"HHGG\", \"HHGTTG\", or \"H2G2\". The series is also often referred to as \"The Hitchhiker's Guide\", \"Hitchhiker's\", or simply \"[The] Guide.\" This title can refer to any of the various incarnations of the story, of which the books, having been translated into more than 30 languages by 2005. Although the various versions follow the same basic plot, they are in many places mutually contradictory, as Adams rewrote the story substantially for each new adaptation. In all versions, the series follows the adventures of Arthur Dent, a hapless Englishman who escapes the demolition of Earth by a bureaucratic alien race called the Vogons with his friend Ford Prefect, an alien from a small planet somewhere in the vicinity of Betelgeuse and researcher for the eponymous guidebook. Zaphod Beeblebrox, Ford's semi-cousin and part-time Galactic President, unknowingly saves the pair from certain death. He brings them aboard his stolen spaceship, the Heart of Gold, whose crew rounds out the main cast of characters: Marvin the Paranoid Android, a severely depressed robot, and Trillian, formerly known as Tricia McMillan, a woman Arthur once met at a party who he soon realises is the only other survivor of Earth's destruction. After this, the characters embark on a quest to find the legendary planet of Magrathea and the Question to the Ultimate Answer.",
+          "addedOn": 1765508171460,
+          "isCurrent": false,
+          "id": 2
+        },
+        {
+          "googleId": "uWYRzgEACAAJ",
+          "clubId": 1,
+          "title": "The Thursday Murder Club",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "description": "In a peaceful retirement village, four unlikely friends meet up once a week to investigate unsolved murders. But when a brutal killing takes place on their very doorstep, the Thursday Murder Club find themselves in the middle of their first live case. Elizabeth, Joyce, Ibrahim and Ron might be pushing eighty, but they still have a few tricks up their sleeves. Can our unorthodox but brilliant gang catch the killer before it's too late?",
+          "addedOn": 1765508657387,
+          "isCurrent": false,
+          "id": 3
+        },
+        {
+          "googleId": "mo01zwEACAAJ",
+          "clubId": 1,
+          "title": "The Bullet that Missed",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "description": "\"It is an ordinary Thursday, and things should finally be returning to normal. Except trouble is never far away where the Thursday Murder Club are concerned. A decade-old cold case--their favorite kind--leads them to a local news legend and a murder with no body and no answers.The n a new foe pays Elizabeth a visit. Her mission? Kill or be killed. Suddenly the cold case has become red hot. While Elizabeth wrestles with her conscience (and a gun), Joyce, Ron, and Ibrahim chase down the clues with help from old friends and new. But can the gang solve the mystery and save Elizabeth before the murderer strikes again?\"--",
+          "addedOn": 1765508797846,
+          "isCurrent": false,
+          "id": 4
+        },
+        {
+          "googleId": "hFT5DwAAQBAJ",
+          "clubId": 1,
+          "title": "The Thursday Murder Club",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "description": "\"First published in hardcover in Great Britain by Viking, an imprint of Penguin Books, a division of Penguin Random House Ltd., London\"--Copyright page.",
+          "addedOn": 1765509018072,
+          "isCurrent": true,
+          "id": 5
+        }
+      ]
     },
     {
       "name": "Sunday Brunch Book Club",
@@ -155,7 +217,7 @@
       "imageLarge": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "\"First published in hardcover in Great Britain by Viking, an imprint of Penguin Books, a division of Penguin Random House Ltd., London\"--Copyright page.",
       "addedOn": 1765509018072,
-      "isCurrent": true,
+      "isCurrent": false,
       "id": 5
     },
     {
@@ -181,6 +243,18 @@
       "addedOn": 1765511113351,
       "isCurrent": true,
       "id": 7
+    },
+    {
+      "googleId": "VU1PEQAAQBAJ",
+      "clubId": 1,
+      "title": "The Impossible Fortune",
+      "author": "Richard Osman",
+      "imageSmall": "http://books.google.com/books/content?id=VU1PEQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=VU1PEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "Elizabeth, Joyce, Ibrahim and Ron return in the brilliant new book by #1 bestseller Richard Osman in his record-breaking series The Thursday Murder Club",
+      "addedOn": 1765641812440,
+      "isCurrent": true,
+      "id": 8
     }
   ],
   "userBooks": [
@@ -305,18 +379,6 @@
       "id": 12
     },
     {
-      "title": "Children of Ruin",
-      "author": "Adrian Tchaikovsky",
-      "imageSmall": "http://books.google.com/books/content?id=ENR6DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=ENR6DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-      "description": "'Asimov or Clarke might have written this' – Stephen Baxter, co-author of The Long Earth A scout ship discovers a human outpost lying derelict in space – and a planet better left unexplored. Set in the same universe as Children of Time, this is a thrilling narrative from the award-winning Adrian Tchaikovsky. It has been waiting through the ages. Now it's time . . . Thousands of years ago, Earth’s terraforming program took to the stars. On the world they called Nod, scientists discovered alien life – but it was their mission to overwrite it with the memory of Earth. Then humanity’s great empire fell, and the program’s decisions were lost to time. Aeons later, humanity and its new spider allies detected fragmentary radio signals between the stars. They dispatched an exploration vessel, hoping to find cousins from old Earth. But those ancient terraformers awoke something on Nod. Something better left undisturbed. And it has been waiting for them. 'Books like this are why we read science fiction' - Ian McDonald, author of the Luna series Children of Ruin follows Adrian Tchaikovsky's extraordinary Children of Time, winner of the Arthur C. Clarke award. It is set in the same universe, with new characters and an original narrative.",
-      "googleId": "ENR6DwAAQBAJ",
-      "userId": 1,
-      "addedOn": 1765329605513,
-      "status": "Not Started",
-      "id": 13
-    },
-    {
       "title": "The Raven Tower",
       "author": "Ann Leckie",
       "imageSmall": "http://books.google.com/books/content?id=u0hfDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
@@ -423,18 +485,6 @@
       "addedOn": 1765333866183,
       "status": "Not Started",
       "id": 23
-    },
-    {
-      "title": "The Young Bond Series, Book One: Silverfin (A James Bond Adventure)",
-      "author": "Charlie Higson",
-      "imageSmall": "http://books.google.com/books/content?id=dD_WAQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=dD_WAQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "description": "This thrilling prequel to the James Bond dynasty shows young James at boarding school at Eton in the 1930's, where he spent his formative years. Acclaimed British writer Charlie Higson, with the Ian Fleming Estate, writes an edge-of-your seat thriller that brilliantly plants the seeds to show how young James learns the skills that will eventually make him history's most formidable and suave super spy.",
-      "googleId": "dD_WAQAACAAJ",
-      "userId": 3,
-      "addedOn": 1765333873967,
-      "status": "Not Started",
-      "id": 26
     },
     {
       "title": "The Warrior Heir",

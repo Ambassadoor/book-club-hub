@@ -20,7 +20,6 @@ export const DarkModeManager: React.FC<Props> = ({children}) => {
     useEffect(() => {
         const isDark = mode === "dark";
         document.documentElement.classList.toggle('dark', isDark)
-        console.log("Dark mode changed:", mode)
     }, [mode])
 
     return <>{children}</>
