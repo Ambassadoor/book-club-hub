@@ -14,6 +14,7 @@ type BookSearchResultProps = {
 //The List Item for a book search result
 export const BookSearchResult = ({user, book, update, setBook}: BookSearchResultProps) => {
     const isMedium = useMediaQuery(`(min-width:640px)`)
+    const navigate = useNavigate()
     // TODO: Add a navigate flag to determine if button click will navigate to detail page or not
     // const navigate = useNavigate()
 
@@ -27,7 +28,7 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
 
     const handleSelectBook = () => {
         setBook && book && setBook(book)
-        // navigate(`/books/google/${book.id}`)
+        !setBook && navigate(`/books/google/${book.googleId}`)
     }
 
     const secondaryAction = (
@@ -49,7 +50,7 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
     return (
         book &&
             <ListItem secondaryAction={secondaryAction}
-                key={book.id} className="my-1 bg-primary rounded max-w-full p-0" alignItems="flex-start" disableGutters>
+                key={book.id} className="my-1 bg-primary rounded-lg max-w-full h-fit p-0" alignItems="flex-start" disableGutters>
                 <ListItemButton className="h-16 px-2 py-0" onClick={handleSelectBook}>
                     <ListItemAvatar>
                         <Avatar
@@ -67,8 +68,8 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
                         className=""
                         primary={
                             "title" in book
-                            ? <span className="block max-w-[80%] overflow-hidden text-ellipsis whitespace-nowrap">{book?.title || ""}</span>
-                            : <span className="block max-w-[80%] overflow-hidden text-ellipsis whitespace-nowrap">{book?.volumeInfo?.title || ""}</span>
+                            ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.title || ""}</span>
+                            : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.volumeInfo?.title || ""}</span>
                         }
                         secondary={
                             "author" in book

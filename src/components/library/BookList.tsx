@@ -30,9 +30,9 @@ export const BookList = ({className, list, setBook, page, setPage}: BookListProp
     },[page])
 
     return (
-        <Box>
-            <Box className={className}>
-                <List className="flex flex-col max-w-full md:max-w-[30%]" dense>
+        <Box className="relative">
+            <Box className={`${className}`}>
+                <List className="flex flex-col max-w-full" dense>
                     {
                         list.length > 0 && list.slice(index,index+10).map(book => (
                             <BookSearchResult key={book.id} book={book} setBook={setBook} />
@@ -40,7 +40,7 @@ export const BookList = ({className, list, setBook, page, setPage}: BookListProp
                     }
                 </List>
             </Box>
-            <Pagination count={count} onChange={handlePageChange} page={page}/>
+            <Pagination className="sticky bottom-0 bg-black pt-5" count={count} onChange={handlePageChange} page={page}/>
         </Box>
     )
 }

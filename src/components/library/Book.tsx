@@ -33,13 +33,13 @@ export const Book = () => {
 
     return (
         <>
-        <Box>
+        {/* <Box>
             <ButtonGroup>
                 <Button color="secondary" variant="contained" value="Full" onClick={handleButtonClick}>Full</Button>
                 <Button color="secondary" variant="contained" value="Card" onClick={handleButtonClick}>Card</Button>
                 <Button color="secondary" variant="contained" value="Search" onClick={handleButtonClick}>Search Result</Button>
             </ButtonGroup>
-        </Box>
+        </Box> */}
             {book !== undefined &&
             display === "Card" ?
             <Card className="flex flex-row max-w-[80%] max-h-[33%] md:max-w-[50%] self-center">

@@ -74,7 +74,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
         await fetch(`http://localhost:8088/clubs/${clubId}`, {
             method: "DELETE"
         })
-        navigate("/clubs")
+        navigate(`/clubs/myClubs/${user}`)
     }
 
     useEffect(() => {
@@ -85,7 +85,8 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                 if (res.length > 0) {
                     res[0].isAdmin
                     ? setUserRole("admin")
-                    : setUserRole("member")
+                    : res[0].isActive ? setUserRole("member")
+                    : setUserRole("guest")
                 } else {
                     setUserRole("guest")
                 }
@@ -109,7 +110,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
 
     return (
         clubInfo &&
-        <Box className="flex flex-col gap-7 bg-neutral-50 rounded p-5">
+        <Box className="flex flex-col gap-7 bg-neutral-50 rounded-lg p-5 h-fit mt-5">
             <Box className="flex flex-col">
                 <Box className="flex">
                     <ToggleField className="self-center" variant="h5" fullWidth name="name" editing={editing} value={clubInfo.name} label="Club Name" onChange={handleChange}/>
@@ -147,8 +148,8 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
             </Box>
             <Box className="flex flex-row flex-wrap">
                 <Box className="flex flex-row shrink gap-5">
-                    <Box className="flex min-w-[33%] max-w-[50%] grow w-full">
-                        <img className="rounded" height="100%" width="100%" src={currentBook?.imageLarge}/>
+                    <Box className="h-163">
+                        <img className="w-full h-full object-contain rounded-lg" src={currentBook?.imageLarge}/>
                     </Box>
                     <Box className="flex flex-col max-w-[50%] min-w-[33%%] shrink">
                         <Box className="flex flex-col">
@@ -159,7 +160,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                                 {userRole === "admin" && <Button size="small"variant="contained" onClick={handleChangeBook}>Change Book</Button>}
                             </Box>
                         </Box>
-                        <Box className="flex justify-center flex-col rounded max-w-fit bg-accent p-2">
+                        <Box className="flex justify-center flex-col rounded-lg max-w-fit bg-accent p-2">
                             <Typography variant="h6">Previous Reads</Typography>
                             <List className="flex flex-col max-w-fit">
                                 {clubInfo?.clubBooks.filter((book) => 

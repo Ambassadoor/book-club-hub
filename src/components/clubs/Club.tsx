@@ -41,8 +41,8 @@ interface rawClubData extends Club {
 }
 
 //Displays a list of the user's clubs. 
-export const Club = () => {
-    const {userId} = useParams()
+export const Club = ({user=null}) => {
+    let {userId} = useParams()
     const [clubs, setClubs] = useState<ClubData[]>([])
     const [page, setPage] = useState(1)
     const [count, setCount] = useState(1)
@@ -53,34 +53,46 @@ export const Club = () => {
     }
     
     useEffect(() => {
-        userId ?
-        fetch(`http://localhost:8088/clubMembers?userId=${userId}&_expand=club`).
-            then((res) => res.json()).
-                then(async (res: ClubMember[]) =>  {                      
-                        return Promise.all(res.map(async (club) => {
-                            const response: Club = await fetch(`http://localhost:8088/clubs/${club.clubId}?_embed=clubMembers`).
-                                then(res => res.json())
-                            return {...club, numMembers: response.clubMembers ? response.clubMembers.length : 0}}
-                ))}).
-                then(async (res) => {
+        if (!userId && user) {
+            userId = user
+        }
+    }, [user])
+    
+    useEffect(() => {
+        setClubs([])
+        if (userId) {
+            fetch(`http://localhost:8088/clubMembers?userId=${userId}&_expand=club`)
+                .then((res) => res.json())
+                .then(async (res: ClubMember[]) => {
+                    // Filter out inactive club memberships
+                    const activeClubs = res.filter((club) => club.isActive)
+                    return Promise.all(activeClubs.map(async (club) => {
+                        const response: Club = await fetch(`http://localhost:8088/clubs/${club.clubId}?_embed=clubMembers`).then(res => res.json())
+                        return { ...club, numMembers: response.clubMembers ? response.clubMembers.length : 0 }
+                    }))
+                })
+                .then(async (res) => {
                     return Promise.all(res.map(async (club) => {
-                        const response: ClubBook[] = await fetch(`http://localhost:8088/clubBooks?clubId=${club.clubId}&isCurrent=true`).
-                            then(res => res.json())
-                        return {...club, currentRead: response[0]}}))
-                    
-                    }).then(res => setClubs(res)).catch((error) => console.log("Error", error))
-        : fetch(`http://localhost:8088/clubs?_embed=clubBooks&_embed=clubMembers`).then((res) => res.json()).then((res) => {
-            const formattedData = res.map((c: rawClubData) => {
-                const {clubBooks, clubMembers, ...club } = c
-                return {
-                    club: club,
-                    currentRead: clubBooks.find(b => b.isCurrent),
-                    numMembers: clubMembers.length
-                }
+                        const response: ClubBook[] = await fetch(`http://localhost:8088/clubBooks?clubId=${club.clubId}&isCurrent=true`).then(res => res.json())
+                        return { ...club, currentRead: response[0] }
+                    }))
+                })
+                .then(res => setClubs(res))
+                .catch((error) => console.log("Error", error))
+        } else {
+            fetch(`http://localhost:8088/clubs?_embed=clubBooks&_embed=clubMembers`).then((res) => res.json()).then((res) => {
+                const formattedData = res.map((c: rawClubData) => {
+                    const { clubBooks, clubMembers, ...club } = c
+                    return {
+                        club: club,
+                        currentRead: clubBooks.find(b => b.isCurrent),
+                        numMembers: clubMembers.length
+                    }
+                })
+                setClubs(formattedData)
             })
-            setClubs(formattedData)
-        })
-    },[userId])
+        }
+    }, [userId])
 
     useEffect(() => {
         setCount(Math.ceil(clubs.length/10))
@@ -94,7 +106,7 @@ export const Club = () => {
         clubs &&
         <Box className="flex-col">
             <Box className="flex">
-                <Typography color="white" variant="h5">My Clubs</Typography>
+                <Typography color="white" variant="h5">{userId ? "My Clubs" : "Clubs"}</Typography>
                 {userId && <Button className="ml-5" variant="contained" onClick={handleNewClubClick}>New Club</Button>}
             </Box>
             <Box className="flex flex-col min-w-full justify-center">

@@ -3,24 +3,32 @@ import { IconButton, InputAdornment, TextField } from "@mui/material"
 import { useState } from "react"
 
 type PasswordFieldProps = {
+    name?: string,
     className?: string
     fullWidth?: boolean
     value?: string,
     required?: boolean,
+    error?: boolean,
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 // A reusable password input field
 export const PasswordField = (props: PasswordFieldProps) => {
     const [ showPassword, setShowPassword] = useState(false)
-    const {className, fullWidth=false, value, required, onChange} = props
+    const {name="password", className, fullWidth=false, value, required, error=false, onChange} = props
 
     return (
         <TextField
+        error={error}
+        helperText={
+            error
+            ? "Incorrect Password"
+            : " "
+        }
         className={className}
         required={required || false}
         margin="dense"
-        name="password"
+        name={name}
         label="Password"
         value={value}
         type={showPassword ? "text" : "password"}
@@ -35,7 +43,7 @@ export const PasswordField = (props: PasswordFieldProps) => {
                         </IconButton>
                     </InputAdornment>
                 ),
-                className: "text-black"
+                className: "text-inherit"
             }
         }}
         onChange={onChange}

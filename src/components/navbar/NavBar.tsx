@@ -22,7 +22,7 @@ type NavBarProps = {
 
 // The NavBar for the app. 
 export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
-  const [results, setResults] = useState<UserBook[] | GoogleBook[]>([])
+  const [results, setResults] = useState<GoogleBook[]>([])
   const {mode, setMode} = useColorScheme()
 
   const toggleTheme = () => {
@@ -36,8 +36,12 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
       path: "books",
     },
     {
-      text: !user ? "Clubs" : "My Clubs",
-      path: !user ? "clubs" : `clubs/myClubs/${user}`,
+      text: "Clubs",
+      path: "clubs"
+    },
+    {
+      text: user && "My Clubs",
+      path: user && `clubs/myClubs/${user}`,
     }
   ];
 
@@ -77,7 +81,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
             </Box>
           </Box>
           <Box className="flex flex-row flex-nowrap align-middle gap-2">
-            <SearchBar className="self-center max-[480px]:hidden" targets={['googleBooks']} results={results} setResults={setResults} expanding select/>
+            <SearchBar<GoogleBook,false, false, true> className="self-center max-[480px]:hidden" targets={['googleBooks']} searchResults={results} setResults={setResults} expanding/>
             <IconButton onClick={toggleTheme}>
               <DarkMode/>
             </IconButton>

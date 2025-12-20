@@ -11,8 +11,10 @@ import { Books } from "./components/library/Books";
 import { Club } from "./components/clubs/Club";
 import { CreateClubForm } from "./components/clubs/CreateClubForm";
 import { ClubDetails } from "./components/clubs/ClubDetails";
-import { Login } from "./components/login/Login";
 import { LoginCard } from "./components/login/LoginCard";
+import { Dashboard } from "./components/dashboard/Dashboard";
+import { CreateAccountForm } from "./components/createAccountDialog/CreateAccountForm";
+import { CreateAccount } from "./components/createAccountDialog/CreateAccount";
 
 const App = () => {
   const [user, setUser] = useState<number | null>(null);  
@@ -42,14 +44,14 @@ const App = () => {
             <Box className="flex flex-col h-screen">
               <NavBar user={user} setUser={setUser} />
               <Box className="flex-1 m-5 rounded-lg bg-primary dark:bg-primary-dark flex flex-col justify-center overflow-hidden h-[calc(100vh-(--spacing.10))]" >
-                <Box className="flex-1 overflow-auto h-full p-4 no-scrollbar">
+                <Box className="flex flex-1 overflow-auto h-full p-4 no-scrollbar justify-center">
                   <Outlet />
                 </Box>
               </Box>
             </Box>
           }
         >
-          <Route index element={ user ? <>Dashboard</> : <LoginCard setUser={setUser}/>} />
+          <Route index element={ user ? <Dashboard user={user} /> : <LoginCard setUser={setUser}/>} />
           <Route path="clubs">
             <Route index element={<Club/>} />
             <Route path="myClubs/:userId" element={<Club />}/>
@@ -66,6 +68,8 @@ const App = () => {
             <Route path="/books/:clubId/change" element={<Books user={user}/>}/>
           </Route>
           <Route path="profile" element={<Profile user={user}/>} />
+          <Route path="createAccount" element={<CreateAccount setUser={setUser}/>}/>
+          <Route path="*" element={<Box className="text-white">Not Found</Box>} />
         </Route>
       </Routes>
   );

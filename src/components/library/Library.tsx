@@ -38,12 +38,16 @@ export const Library = () => {
     },[library])
 
     return (
-        <Box>
-            <SearchBar close fullWidth source={library} results={searchResults} setResults={setSearchResults} setTotal={setNumResults} page={page} setPage={setPage}/>
-            <Box>
-                <BookList className="overflow-y-scroll no-scrollbar max-h-50 md:max-h-full m-5 bg-black p-5 rounded" list={searchResults} setBook={setBook} page={page} setPage={setPage} />
+        <Box className="flex flex-col md:flex-row bg-primary p-5 h-fit rounded-lg m-5 md:min-w-[1400px]">
+            <Box className="flex flex-col h-fit bg-black rounded-lg p-5">
+                <Box>
+                    <SearchBar className="self-center pt-5" close fullWidth source={library} results={searchResults} setResults={setSearchResults} setTotal={setNumResults} page={page} setPage={setPage}/>
+                </Box>
+                <Box className="h-150 overflow-y-scroll no-scrollbar">
+                    <BookList className="relative overflow-y-scroll no-scrollbar mt-0 m pt-0 p-5 rounded h-[530px]" list={searchResults} setBook={setBook} page={page} setPage={setPage} />
+                </Box>
             </Box>
-            <Box>
+            <Box className="flex">
                 {book && <BookFull user={Number(userId)} book={book} setBook={setBook}/>}
             </Box>
         </Box>

@@ -144,5 +144,17 @@ export const theme = createTheme({
         },
       },
     },
-  },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          "&:-webkit-autofill": {
+            WebkitBoxShadow: "none !important",
+            WebkitTextFillColor: "none !important",
+            fontFamily: "inherit !important",
+            transition: "background-color 5000s ease-in-out 0s !important",
+          },
+        },
+      },
+    },
+  }
 });

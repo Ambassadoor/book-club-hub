@@ -54,7 +54,7 @@ export const Profile = ({user}: ProfileProps) => {
 
     return (
         userInfo?.id && 
-        <Box className="flex flex-col justify-center bg-neutral-50 mx-10 rounded-md p-10 m-5">
+        <Box className="flex flex-col justify-center bg-neutral-50 mx-10 rounded-md p-10 m-5 h-fit">
             <Box className="flex flex-row items-center">
                 <Box className="flex flex-nowrap">
                     <Typography variant="h5" className="text-black text-center">{userInfo?.userName ? `${userInfo.userName}'s Profile` : "My Profile"}</Typography>

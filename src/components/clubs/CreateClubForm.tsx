@@ -28,7 +28,7 @@ export const CreateClubForm = ({user}: CreateClubFormProps) => {
         setFormData(prev => ({
             ...prev, name: "", description: ""
         }))
-        navigate("/clubs")
+        navigate(`/clubs/myClubs/${user}`)
     }
 
     const handleSubmit = async () => {
@@ -60,7 +60,7 @@ export const CreateClubForm = ({user}: CreateClubFormProps) => {
     }
     return (
         user &&
-        <Box className="flex flex-col gap-5 rounded bg-accent p-5">
+        <Box className="flex flex-col gap-5 rounded bg-accent p-5 h-fit">
             <Box className="flex justify-center">
                 <Typography variant="h4" color="white">Create a new Club</Typography>
             </Box>
@@ -101,7 +101,7 @@ export const CreateClubForm = ({user}: CreateClubFormProps) => {
             </Box>
             <Box className="flex">
                 <ButtonGroup className="ml-auto">
-                    <Button color="secondary" onClick={handleCancel}>Cancel</Button>
+                    <Button color="black" onClick={handleCancel}>Cancel</Button>
                     <Button disabled={!(formData.name.trim().length > 0)} color="primary" variant="contained" onClick={handleSubmit}>Submit</Button>
                 </ButtonGroup>
             </Box>

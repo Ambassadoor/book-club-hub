@@ -5,6 +5,7 @@ import { BookSearchResult, type GoogleBookWithInLibrary } from "./BookSearchResu
 import { useBchApi } from "../../hooks/useBchApi"
 import { BookFull } from "./BookFull"
 import { useParams } from "react-router-dom"
+import { BookList } from "./BookList"
 
 type BooksProps = {
     user: number | null
@@ -55,30 +56,40 @@ export const Books = ({user}: BooksProps) => {
 
     useEffect(() => {
         setOpen(false)
-        setResults([])
     }, [book])
 
     return (
-        <Box className="relative">
-            <Box>
-                <SearchBar close targets={["googleBooks"]} results={results} setResults={user && !clubId ? checkUserLibrary : setResults} page={page} setPage={setPage} setTotal={setTotal} fullWidth/>
+        <Box className="flex flex-col md:flex-row bg-primary p-5 h-fit rounded-lg m-5 md:min-w-[1400px]">
+            <Box className="flex flex-col h-fit bg-black rounded-lg p-5">
+                <Box>
+                    <SearchBar className="self-center pt-5" close fullWidth targets={["googleBooks"]} results={results} setResults={user && !clubId ? checkUserLibrary : setResults} setTotal={setTotal} page={page} setPage={setPage}/>
+                </Box>
+                <Box className="h-150 overflow-y-scroll no-scrollbar">
+                    <BookList className="relative overflow-y-scroll no-scrollbar mt-0 m pt-0 p-5 rounded h-[530px]" list={results} setBook={setBook} page={page} setPage={setPage} />
+                </Box>
             </Box>
-            <Box hidden={!open} className="p-4 mt-3 relative z-10 bg-black rounded">
-                <List className="">
-                    {
-                        results?.length > 0 &&
-                        <Box>
-    {                                results.map(book => (
-                                <BookSearchResult key={book.id} user={user} book={book} update={markAdded} setBook={setBook} />
-                            ))}
-    \                               <Pagination count={count} page={page + 1} onChange={handlePageChange} siblingCount={1} boundaryCount={0} />
-                        </Box>
-                    }
-                </List>
-            </Box>
-            <Box className="absolute top-15 left-0 w-full z-1">
-                {book && <BookFull book={book} setBook={setBook} clubId={Number(clubId)} user={Number(user)} refetch={refetch}/>}
+            <Box className="flex">
+                {book && <BookFull user={Number(user)} book={book} clubId={Number(clubId)} setBook={setBook} refetch={refetch}/>}
             </Box>
         </Box>
+        // <Box className="relative max-w-full flex flex-col">
+        //     <Box>
+        //         <SearchBar close targets={["googleBooks"]} results={results} setResults={user && !clubId ? checkUserLibrary : setResults} page={page} setPage={setPage} setTotal={setTotal} fullWidth/>
+        //     </Box>
+        //     <Box hidden={!open} className="p-4 mt-3 relative z-10 bg-black rounded">
+        //         <List className="">
+        //             {
+        //             results?.length > 0 &&
+        //                 results.map(book => (
+        //                         <BookSearchResult key={book.id} user={user} book={book} update={markAdded} setBook={setBook} />
+        //                     ))}
+
+        //         </List>
+        //         <Pagination count={count} page={page + 1} onChange={handlePageChange} siblingCount={1} boundaryCount={0} />
+        //     </Box>
+        //     <Box className="absolute top-15 left-0 w-full z-1">
+        //         {book && <BookFull book={book} setBook={setBook} clubId={Number(clubId)} user={Number(user)} refetch={refetch}/>}
+        //     </Box>
+        // </Box>
     )
 }

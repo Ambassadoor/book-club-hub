@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { bchApi } from "../../api/bchBooksClient"
 import { useNavigate } from "react-router-dom"
 import type { ClubBook } from "../clubs/Club"
+import { Book } from "@mui/icons-material"
 
 type BookFullProps = {
     book: UserBook | GoogleBook,
@@ -31,7 +32,7 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
     ?( 
         thumbnail = book.volumeInfo.imageLinks?.thumbnail || "", 
         title = book.volumeInfo?.title || "",
-        author = book.volumeInfo?.authors.join(", ") || "",
+        author = book.volumeInfo?.authors?.join(", ") || "",
         description = book.volumeInfo?.description || ""
     )
     : (
@@ -149,25 +150,29 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
 
     return (
         book &&
-        <Box>
-            <Box className="flex md:flex-row m-5 max-h-[60%]">
-                <Box className="grow w-[50%] mr-5">
-                    <img className="w-full h-full object-contain" src={thumbnail}/>
+        <Box className="flex w-fit" >
+            <Box className="flex flex-col md:flex-row m-5">
+                <Box className="h-163 mr-5">
+                    { thumbnail !== "" ?
+                        <img className="w-full h-full object-contain rounded-lg" src={thumbnail}/>
+                        : <></>
+                        }
                 </Box>
                 <Box className="flex flex-col shrink w-[50%] max-h-auto">
                     <Box className="pb-2">
                         {!clubId 
                             ? inLibrary
-                             ?<Button onClick={() => setOpen(true)} variant="contained" size="small">Remove From Library</Button>
-                             : user && <Button onClick={addBookToLibrary} variant="contained" size="small">Add to Library</Button>
+                             ?<Button onClick={() => setOpen(true)} variant="contained" color="warning" size="small">Remove From Library</Button>
+                             : user ? <Button onClick={addBookToLibrary} variant="contained" size="small">Add to Library</Button>
+                                    : <></>
                             : <Button onClick={addClubBook} variant="contained" size="small">Set as Current Book</Button>
                         }
                     </Box>
-                    <Box>
+                    <Box className="flex flex-col bg-black rounded-lg p-5 max-w-150">
                         <Typography className="dark:text-white" variant="h5">{title}</Typography>
                         <Typography className="dark:text-white" variant="subtitle2">{author}</Typography>
                         <Typography
-                            className="dark:text-white overflow-y-scroll no-scrollbar max-h-75"
+                            className="dark:text-white overflow-y-scroll no-scrollbar max-h-130"
                             variant="body2"
                             dangerouslySetInnerHTML={{
                                 __html: description

@@ -5,10 +5,10 @@ import { CreateAccountForm } from "./CreateAccountForm"
 
 type CreateAccountDialogProps = {
     setUser: React.Dispatch<React.SetStateAction<number | null>>,
-    createAccount: boolean,
-    setCreateAccount: React.Dispatch<React.SetStateAction<boolean>>,
-    setGoogleSignIn: React.Dispatch<React.SetStateAction<boolean>>,
-    setBchExisting: React.Dispatch<React.SetStateAction<boolean>>,
+    createAccount?: boolean,
+    setCreateAccount?: React.Dispatch<React.SetStateAction<boolean>>,
+    setGoogleSignIn?: React.Dispatch<React.SetStateAction<boolean>>,
+    setBchExisting?: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 //A Dialog to house the create account form. 

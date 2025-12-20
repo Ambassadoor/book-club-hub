@@ -38,6 +38,32 @@
       "method": "bch",
       "password": "ReadingSince1999",
       "id": 3
+    },
+    {
+      "firstName": "Test",
+      "lastName": "McTesty",
+      "userName": "ThisIsATest",
+      "email": "calebpttmn@test.com",
+      "tagline": "Test Tagline",
+      "created_at": "2025-12-20T17:25:50.892Z",
+      "sso_id": null,
+      "picture": "",
+      "method": "bch",
+      "password": "TestingTest",
+      "id": 4
+    },
+    {
+      "firstName": "CalebTwo",
+      "lastName": "Pittman",
+      "userName": "ThisIsATest",
+      "email": "calebpttmn@test2.com",
+      "tagline": "This is my tagline.",
+      "created_at": "2025-12-20T19:11:03.298Z",
+      "sso_id": null,
+      "picture": "",
+      "method": "bch",
+      "password": "TestPassword",
+      "id": 5
     }
   ],
   "clubs": [
@@ -116,13 +142,6 @@
       "ownerId": 1,
       "created_at": "2025-12-11T22:30:36.772Z",
       "id": 2
-    },
-    {
-      "name": "Sleuth's Anonymous",
-      "description": "We have an addiction.....to the truth!",
-      "ownerId": 3,
-      "created_at": "2025-12-11T23:01:25.022Z",
-      "id": 3
     }
   ],
   "clubMembers": [
@@ -144,19 +163,27 @@
     },
     {
       "userId": 3,
-      "clubId": 3,
-      "isAdmin": true,
-      "created_at": 1765494085345,
-      "isActive": true,
-      "id": 4
-    },
-    {
-      "userId": 3,
       "clubId": 1,
       "isAdmin": false,
       "created_at": 1765510112180,
       "isActive": true,
       "id": 5
+    },
+    {
+      "userId": 4,
+      "clubId": 1,
+      "isAdmin": false,
+      "created_at": 1766251864446,
+      "isActive": false,
+      "id": 6
+    },
+    {
+      "userId": 5,
+      "clubId": 1,
+      "isAdmin": false,
+      "created_at": 1766257885057,
+      "isActive": false,
+      "id": 8
     }
   ],
   "clubBooks": [
@@ -229,20 +256,8 @@
       "imageLarge": "http://books.google.com/books/content?id=UwWWh1WLn9EC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "Holly Golightly knows that nothing bad can ever happen to you at Tiffany's. In this seductive, wistful masterpiece, Capote created a woman whose name has entered the American idiom and whose style is a part of the literary landscape—her poignancy, wit, and naïveté continue to charm. This volume also includes three of Capote's best-known stories, “House of Flowers,” “A Diamond Guitar,” and “A Christmas Memory,” which the Saturday Review called “one of the most moving stories in our language.” It is a tale of two innocents—a small boy and the old woman who is his best friend—whose sweetness contains a hard, sharp kernel of truth.",
       "addedOn": 1765510069325,
-      "isCurrent": true,
+      "isCurrent": false,
       "id": 6
-    },
-    {
-      "googleId": "LCzY9BvXU2kC",
-      "clubId": 3,
-      "title": "The A.B.C. Murders",
-      "author": "Agatha Christie",
-      "imageSmall": "http://books.google.com/books/content?id=LCzY9BvXU2kC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=LCzY9BvXU2kC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "description": "Alice Ascher from Andover is the first victim. Next to her corpse is a spellbinding clue. It seems that a killer is knocking off his victims one-by-one, A through Z. Alphabetically speaking, Hercule Poirot fears that it's a matter of one down, twenty-five to go.",
-      "addedOn": 1765511113351,
-      "isCurrent": true,
-      "id": 7
     },
     {
       "googleId": "VU1PEQAAQBAJ",
@@ -255,6 +270,18 @@
       "addedOn": 1765641812440,
       "isCurrent": true,
       "id": 8
+    },
+    {
+      "googleId": "-TEhWYITfkYC",
+      "clubId": 2,
+      "title": "The Princess Bride",
+      "author": "William Goldman",
+      "imageSmall": "http://books.google.com/books/content?id=-TEhWYITfkYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=-TEhWYITfkYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "A writer's views on life and art are revealed in his effort to edit the children's classic that shaped his literary ambitions.",
+      "addedOn": 1766246101664,
+      "isCurrent": true,
+      "id": 9
     }
   ],
   "userBooks": [
@@ -451,18 +478,6 @@
       "id": 19
     },
     {
-      "title": "The Hitchhiker's Guide to the Galaxy",
-      "author": "Douglas Adams",
-      "imageSmall": "http://books.google.com/books/content?id=SQkU8EnJUtAC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=SQkU8EnJUtAC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-      "description": "Originally published: New York: Harmony Books, 1980.",
-      "googleId": "SQkU8EnJUtAC",
-      "userId": 3,
-      "addedOn": 1765333760642,
-      "status": "Not Started",
-      "id": 20
-    },
-    {
       "title": "Montmorency",
       "author": "Eleanor Updale",
       "imageSmall": "http://books.google.com/books/content?id=QvkE8kCRpeoC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
@@ -523,16 +538,16 @@
       "id": 29
     },
     {
-      "title": "The Sorcerer Heir",
-      "author": "Cinda Williams Chima",
-      "imageSmall": "http://books.google.com/books/content?id=KRhqBAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=KRhqBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-      "description": "New York Times and USA Today bestselling author Cinda Williams Chima's Heir Chronicles series reaches its stunning conclusion! The delicate peace between Wizards and the underguilds holds by the thinnest of threads, but powerful forces inside and outside the guilds threaten to sever it completely, and Emma and Jonah are at the center of it all. Brought together by their shared history, mutual attraction, and a belief in the magic of music, they may be torn apart by new wounds and old betrayals. As they struggle to rebuild their trust in one another, Emma and Jonah must also clear their names as the prime suspects in a series of vicious murders. The answers they need appear to lie buried in the tragedies of the past—but can they survive long enough to unearth them? Old friends and foes return as new threats arise in this stunning and revelatory conclusion to the beloved Heir Chronicles series.",
-      "googleId": "KRhqBAAAQBAJ",
-      "userId": 3,
-      "addedOn": 1765337314548,
+      "title": "My Side of the Mountain",
+      "author": "Jean Craighead George",
+      "imageSmall": "http://books.google.com/books/content?id=zwRcEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=zwRcEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "A NEWBERY HONOR BOOK • OVER 4 MILLION COPIES SOLD • The defining childhood classic about a boy finding his own way in the wilderness—a nostalgic book for readers young and old who have ever wanted to run away from home. “Should appeal to all rugged individualists who dream of escape to the forest.”—The New York Times Book Review “An extraordinary book… It will be read year after year.”—The Horn Book Twelve-year-old Sam Gribley is terribly unhappy living in his family’s crowded New York City apartment. One day—armed with just a penknife, a ball of red cord, forty dollars, some flint and steel, and the clothes on his back—he decides to run away to his grandfather’s abandoned farm in the Catskill Mountains, to live in the woods all by himself. There, Sam must rely on his own ingenuity and the resources of the great outdoors to survive, as he discovers a side of himself he never knew existed. Teeming with hope, adventure, and a deep search for identity, My Side of the Mountain is a timeless classic for readers of all ages who have ever wondered what it would be like to live off the land. American Library Association Notable Book • Hans Christian Andersen Award Honor Book • Lewis Carroll Shelf Award",
+      "googleId": "zwRcEAAAQBAJ",
+      "userId": 1,
+      "addedOn": 1765935618898,
       "status": "Not Started",
-      "id": 30
+      "id": 31
     }
   ]
 }
