@@ -2,7 +2,7 @@ import { Avatar, Box, Button, IconButton, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUser, updateProfile, type User } from "../../services/userServices/userServices"
 import { ToggleField } from "./ToggleField"
-import { Edit } from "@mui/icons-material"
+import { Edit, EditOff } from "@mui/icons-material"
 
 type ProfileProps = {
     user: number | null
@@ -54,17 +54,38 @@ export const Profile = ({user}: ProfileProps) => {
 
     return (
         userInfo?.id && 
-        <Box className="flex flex-col justify-center bg-neutral-50 mx-10 rounded-md p-10 m-5 h-fit">
-            <Box className="flex flex-row items-center">
-                <Box className="flex flex-nowrap">
-                    <Typography variant="h5" className="text-black text-center">{userInfo?.userName ? `${userInfo.userName}'s Profile` : "My Profile"}</Typography>
-                    <IconButton size="small" onClick={handleEditClick} hidden={editing}>
-                        <Edit color="primary"/>
+        <Box 
+            sx={{
+                display: 'flex',
+                height: "fit-content",
+                flexDirection: 'column',
+                bgcolor: 'background.paper',
+                border: 1,
+                borderColor: 'divider',
+                borderRadius: 2,
+                p: 4,
+                m: 3,
+                mx: { xs: 2, md: 10 },
+            }}
+        >
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="h5" color="text.primary">
+                        {userInfo?.userName ? `${userInfo.userName}'s Profile` : "My Profile"}
+                    </Typography>
+                    <IconButton size="small" onClick={handleEditClick}>
+                        {!editing ? <Edit color="primary"/> : <EditOff color="secondary"/>}
                     </IconButton>
                 </Box>
-                <Avatar className="my-5 ml-auto md-mr-auto" alt={`${userInfo.firstName} ${userInfo.lastName}`} src={userInfo.picture ? userInfo.picture : ""}>{userInfo.firstName.slice(0,1)}{userInfo.lastName.slice(0,1)}</Avatar>
+                <Avatar 
+                    sx={{ ml: 'auto', width: 56, height: 56 }} 
+                    alt={`${userInfo.firstName} ${userInfo.lastName}`} 
+                    src={userInfo.picture ? userInfo.picture : ""}
+                >
+                    {userInfo.firstName.slice(0,1)}{userInfo.lastName.slice(0,1)}
+                </Avatar>
             </Box>
-            <Box className={`flex flex-col ${editing && "mb-5"}`}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: editing ? 3 : 0 }}>
                 <ToggleField name="firstName" editing={editing} label="First Name" value={userInfo.firstName} onChange={handleEditField}/>
                 <ToggleField name="lastName" editing={editing} label="Last Name" value={userInfo.lastName} onChange={handleEditField}/>
                 <ToggleField name="tagline" editing={editing} label="Tagline" value={userInfo.tagline} onChange={handleEditField}/>
@@ -82,9 +103,9 @@ export const Profile = ({user}: ProfileProps) => {
                 }
             </Box>
             {editing && 
-                <Box className="flex ml-auto">
-                    <Button className="text-accent mr-3" size="small" onClick={handleCancel}>Cancel</Button>
-                    <Button className="bg-primary" variant="contained" size="small" onClick={handleSave}>Save</Button>
+                <Box sx={{ display: 'flex', ml: 'auto', gap: 1 }}>
+                    <Button color="secondary" size="small" onClick={handleCancel}>Cancel</Button>
+                    <Button variant="contained" color="primary" size="small" onClick={handleSave}>Save</Button>
                 </Box>}
         </Box>
         

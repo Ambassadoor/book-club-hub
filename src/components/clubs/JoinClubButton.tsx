@@ -43,8 +43,8 @@ export const JoinClubButton = ({userId, clubId, handleJoin}: JoinClubButtonProps
     }
 
     return (
-        <Button variant="contained" onClick={handleJoinClick}>
-            Join
+        <Button variant="contained" color="primary" size="small" onClick={handleJoinClick}>
+            Join Club
         </Button>
     )
 }

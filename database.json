@@ -142,6 +142,13 @@
       "ownerId": 1,
       "created_at": "2025-12-11T22:30:36.772Z",
       "id": 2
+    },
+    {
+      "name": "Here's a new club",
+      "description": "Here we read stuff. ",
+      "ownerId": 3,
+      "created_at": "2025-12-20T21:46:23.568Z",
+      "id": 3
     }
   ],
   "clubMembers": [
@@ -184,6 +191,22 @@
       "created_at": 1766257885057,
       "isActive": false,
       "id": 8
+    },
+    {
+      "userId": 3,
+      "clubId": 2,
+      "isAdmin": false,
+      "created_at": 1766264344544,
+      "isActive": true,
+      "id": 9
+    },
+    {
+      "userId": 3,
+      "clubId": 3,
+      "isAdmin": true,
+      "created_at": 1766267183576,
+      "isActive": true,
+      "id": 10
     }
   ],
   "clubBooks": [
@@ -282,6 +305,18 @@
       "addedOn": 1766246101664,
       "isCurrent": true,
       "id": 9
+    },
+    {
+      "googleId": "CXKcJC76tgcC",
+      "clubId": 3,
+      "title": "Stuff Christians Like",
+      "author": "Jonathan Acuff",
+      "imageSmall": "http://books.google.com/books/content?id=CXKcJC76tgcC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=CXKcJC76tgcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "Sometimes, we fall in love on mission trips even though we know we’ll break up when we get back. Sometimes, you have to shot block a friend’s prayer because she’s asking God to bless an obviously bad dating relationship. Sometimes, you think, “I wish I had a t-shirt that said ‘I direct deposit my tithe’ so people wouldn’t judge me.” Sometimes, the stuff that comes with faith is funny. This is that stuff. Jonathan Acuff’s Stuff Christians Like Ebook is your field guide to all things Christian. You’ll learn the culinary magic of the crock-pot. Think you’ve got a Metro worship leader—use Acuff’s checklist. Want to avoid a prayer handholding faux pas? Acuff has you covered. Like a satirical grenade, Acuff brings us the humor and honesty that galvanized more than a million online readers from more than 200 countries in a new portable version. Welcome to the funny side of faith.",
+      "addedOn": 1766267203180,
+      "isCurrent": true,
+      "id": 10
     }
   ],
   "userBooks": [

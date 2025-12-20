@@ -129,6 +129,46 @@ export const theme = createTheme({
     borderRadius: parseFloat(radius.md) * 16, // Convert rem to px (assuming 1rem = 16px)
   },
   spacing: 8,
+  typography: {
+    fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
+    h1: {
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontWeight: 900,
+    },
+    h2: {
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontWeight: 700,
+    },
+    h4: {
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontWeight: 700,
+    },
+    h5: {
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontWeight: 700,
+    },
+    h6: {
+      fontFamily: "'Merriweather', Georgia, serif",
+      fontWeight: 700,
+    },
+    body1: {
+      fontFamily: "'Inter', sans-serif",
+      lineHeight: 1.6,
+    },
+    body2: {
+      fontFamily: "'Inter', sans-serif",
+      lineHeight: 1.6,
+    },
+    button: {
+      fontFamily: "'Inter', sans-serif",
+      fontWeight: 600,
+      letterSpacing: '0.02em',
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {

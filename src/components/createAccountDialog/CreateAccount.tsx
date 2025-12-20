@@ -187,8 +187,8 @@ export const CreateAccount = ({setUser}) => {
                     />
             </CardContent>
             <CardActions className="ml-auto">
-                <Button onClick={handleClose} className="text-accent">Cancel</Button>
-                <Button variant="contained" onClick={handleCreateAccount} className="bg-primary" disabled={disabled}>Create Account</Button>
+                <Button onClick={handleClose} color="secondary">Cancel</Button>
+                <Button variant="contained" onClick={handleCreateAccount} color="primary" disabled={disabled}>Create Account</Button>
             </CardActions>
         </Card>
     )

@@ -189,8 +189,8 @@ export const CreateAccountForm = ({setUser, open, setOpen, setCreateAccount, set
                 </Box>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} className="text-accent">Cancel</Button>
-                <Button variant="contained" onClick={handleCreateAccount} className="bg-primary" disabled={disabled}>Create Account</Button>
+                <Button onClick={handleClose} color="secondary">Cancel</Button>
+                <Button variant="contained" onClick={handleCreateAccount} color="primary" disabled={disabled}>Create Account</Button>
             </DialogActions>
         </Dialog>
     )

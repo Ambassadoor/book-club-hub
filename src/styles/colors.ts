@@ -1,99 +1,100 @@
 // Centralized color palette - single source of truth for both Tailwind and MUI
+// Modern, sophisticated palette perfect for a book club application
 export const colors = {
-  // Primary Colors
+  // Primary Colors - Rich teal evokes knowledge, trust, and reading
   primary: {
-    main: "#606c38",
-    dark: "#283618",
-    light: "#7f8c52",
+    main: "#2d6a6a",
+    dark: "#1e4848",
+    light: "#3d8a8a",
   },
   
-  // Accent Colors
+  // Accent Colors - Warm coral for highlights and CTAs
   accent: {
-    main: "#dda15e",
-    dark: "#bc6c25",
-    light: "#e8b67d",
+    main: "#e07856",
+    dark: "#c85a3a",
+    light: "#ff9777",
   },
   
-  // Surface & Background
+  // Surface & Background - Clean, neutral backgrounds
   surface: {
-    main: "#fafae0",
-    paper: "#fafae0",
+    main: "#f8f9fa",
+    paper: "#ffffff",
   },
   
-  // Text Colors
+  // Text Colors - High contrast for readability
   text: {
-    primary: "#283618",
-    secondary: "#606c38",
-    onPrimary: "#fafae0",
-    onAccent: "#283618",
-    onSurface: "#283618",
+    primary: "#1a2332",
+    secondary: "#4a5568",
+    onPrimary: "#ffffff",
+    onAccent: "#ffffff",
+    onSurface: "#1a2332",
   },
   
   // Status Colors
   success: {
-    main: "#606c38",
-    border: "#283618",
-    light: "#7f8c52",
+    main: "#10b981",
+    border: "#059669",
+    light: "#34d399",
   },
   
   info: {
-    main: "#4a7c9e",
-    border: "#2d5573",
-    light: "#6b9dbd",
+    main: "#3b82f6",
+    border: "#2563eb",
+    light: "#60a5fa",
   },
   
   warning: {
-    main: "#dda15e",
-    border: "#bc6c25",
-    light: "#e8b67d",
+    main: "#f59e0b",
+    border: "#d97706",
+    light: "#fbbf24",
   },
   
   error: {
-    main: "#a04b4b",
-    border: "#7a2e2e",
-    light: "#c26565",
+    main: "#ef4444",
+    border: "#dc2626",
+    light: "#f87171",
   },
   
   danger: {
-    main: "#a04b4b",
-    border: "#7a2e2e",
+    main: "#ef4444",
+    border: "#dc2626",
   },
   
-  // Neutral/Gray Scale
+  // Neutral/Gray Scale - Modern, sophisticated grays
   neutral: {
-    50: "#fafae0",
-    100: "#f0f0d8",
-    200: "#e0e0c0",
-    300: "#c8c8a8",
-    400: "#a0a088",
-    500: "#606c38",
-    600: "#4e5a2e",
-    700: "#3c4823",
-    800: "#283618",
-    900: "#1a2410",
+    50: "#f9fafb",
+    100: "#f3f4f6",
+    200: "#e5e7eb",
+    300: "#d1d5db",
+    400: "#9ca3af",
+    500: "#6b7280",
+    600: "#4b5563",
+    700: "#374151",
+    800: "#1f2937",
+    900: "#111827",
   },
   
   // UI Elements
   card: {
-    main: "#606c38",
-    border: "#283618",
+    main: "#2d6a6a",
+    border: "#1e4848",
   },
   
   button: {
-    positive: "#dda15e",
-    positiveBorder: "#bc6c25",
-    positiveHover: "#bc6c25",
+    positive: "#e07856",
+    positiveBorder: "#c85a3a",
+    positiveHover: "#c85a3a",
   },
   
   input: {
-    main: "#fafae0",
-    border: "#606c38",
+    main: "#ffffff",
+    border: "#d1d5db",
   },
   
   // Disabled States
   disabled: {
-    main: "#c8c8a8",
-    text: "#a0a088",
+    main: "#e5e7eb",
+    text: "#9ca3af",
   },
 };
 

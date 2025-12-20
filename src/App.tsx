@@ -3,7 +3,7 @@ import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { NavBar } from "./components/navbar/NavBar";
 import { useSessionManager } from "./hooks/useSessionManager";
 import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { Profile } from "./components/profile/Profile";
 import { Library } from "./components/library/Library";
 import { Book } from "./components/library/Book";
@@ -13,13 +13,13 @@ import { CreateClubForm } from "./components/clubs/CreateClubForm";
 import { ClubDetails } from "./components/clubs/ClubDetails";
 import { LoginCard } from "./components/login/LoginCard";
 import { Dashboard } from "./components/dashboard/Dashboard";
-import { CreateAccountForm } from "./components/createAccountDialog/CreateAccountForm";
 import { CreateAccount } from "./components/createAccountDialog/CreateAccount";
 
 const App = () => {
   const [user, setUser] = useState<number | null>(null);  
   const { getCurrentUserId, active, refreshSession } = useSessionManager()
   const location = useLocation(); 
+  const isMedium = useMediaQuery(`(min-width:640px)`)
 
   // Checks if userSession is active, and if so, set's user
   useEffect(() => {
@@ -41,10 +41,28 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Box className="flex flex-col h-screen">
+            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
               <NavBar user={user} setUser={setUser} />
-              <Box className="flex-1 m-5 rounded-lg bg-primary dark:bg-primary-dark flex flex-col justify-center overflow-hidden h-[calc(100vh-(--spacing.10))]" >
-                <Box className="flex flex-1 overflow-auto h-full p-4 no-scrollbar justify-center">
+              <Box 
+                sx={{ 
+                  flex: 1, 
+                  m: isMedium ? 2 : 0,
+                  borderRadius: isMedium ? 2 : 0,
+                  bgcolor: 'background.default',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  overflow: 'hidden',
+                }}
+              >
+                <Box 
+                  sx={{ 
+                    flex: 1, 
+                    overflow: 'auto',
+                    p: 2,
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}
+                >
                   <Outlet />
                 </Box>
               </Box>
@@ -57,7 +75,6 @@ const App = () => {
             <Route path="myClubs/:userId" element={<Club />}/>
             <Route path="create" element={<CreateClubForm user={user} />}/>
             <Route path=":clubId" element={<ClubDetails user={user} />} />
-            {/* <Route path=":userId" element={<></>} /> */}
           </Route>
           <Route path="library/:userId">
             <Route index element={<Library/>} />
@@ -69,7 +86,7 @@ const App = () => {
           </Route>
           <Route path="profile" element={<Profile user={user}/>} />
           <Route path="createAccount" element={<CreateAccount setUser={setUser}/>}/>
-          <Route path="*" element={<Box className="text-white">Not Found</Box>} />
+          <Route path="*" element={<Box sx={{ color: 'text.primary', textAlign: 'center', p: 4 }}>Page Not Found</Box>} />
         </Route>
       </Routes>
   );

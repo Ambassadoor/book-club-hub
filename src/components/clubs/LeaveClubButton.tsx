@@ -26,6 +26,6 @@ export const LeaveClubButton = ({userId, clubId, handleLeave}: LeaveClubButtonPr
     }
 
     return (
-        <Button variant="contained" color="warning" onClick={handleLeaveClick}>Leave Club</Button>
+        <Button variant="contained" color="warning" size="small" onClick={handleLeaveClick}>Leave Club</Button>
     )
 }

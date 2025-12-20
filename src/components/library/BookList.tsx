@@ -1,10 +1,9 @@
-import { Box, List, Pagination } from "@mui/material"
+import { Box, List, Pagination, Typography } from "@mui/material"
 import { BookSearchResult } from "./BookSearchResult"
 import { useEffect, useState } from "react"
 
 
 type BookListProps = {
-    className?: string,
     list: UserBook[] | GoogleBook[],
     setBook?: React.Dispatch<React.SetStateAction<UserBook | GoogleBook | null>>,
     page?: number,
@@ -12,7 +11,7 @@ type BookListProps = {
 }
 
 //A Paginated list of book search results
-export const BookList = ({className, list, setBook, page, setPage}: BookListProps) => {
+export const BookList = ({list, setBook, page, setPage}: BookListProps) => {
     const [count, setCount] = useState(0)
     const [index, setIndex] = useState(0)
 
@@ -30,17 +29,47 @@ export const BookList = ({className, list, setBook, page, setPage}: BookListProp
     },[page])
 
     return (
-        <Box className="relative">
-            <Box className={`${className}`}>
-                <List className="flex flex-col max-w-full" dense>
+        <div className="relative flex flex-col h-full w-full overflow-x-hidden">
+            <div className="flex-1 overflow-auto w-full">
+                <List className="flex flex-col w-full" dense sx={{ width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
                     {
-                        list.length > 0 && list.slice(index,index+10).map(book => (
+                        list.length > 0 ? list.slice(index,index+10).map(book => (
                             <BookSearchResult key={book.id} book={book} setBook={setBook} />
-                        ))
+                        )) : (
+                            <Typography 
+                                variant="body2" 
+                                color="text.secondary" 
+                                align="center" 
+                                sx={{ py: 4 }}
+                            >
+                                No books found. Try a different search.
+                            </Typography>
+                        )
                     }
                 </List>
-            </Box>
-            <Pagination className="sticky bottom-0 bg-black pt-5" count={count} onChange={handlePageChange} page={page}/>
-        </Box>
+            </div>
+            {count > 1 && (
+                <div className="sticky bottom-0 flex justify-center pt-2 pb-1">
+                    <Box 
+                        sx={{ 
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            bgcolor: 'background.paper',
+                            borderTop: 1,
+                            borderColor: 'divider',
+                        }}
+                    >
+                        <Pagination 
+                            count={count} 
+                            onChange={handlePageChange} 
+                            page={page}
+                            color="primary"
+                            size="small"
+                        />
+                    </Box>
+                </div>
+            )}
+        </div>
     )
 }

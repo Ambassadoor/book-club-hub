@@ -74,7 +74,17 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
         <>
         <Dialog open={open} onClose={handleClose}>
             <Box className="flex justify-center items-center flex-1 max-h-3/4">
-                <Box className="flex flex-col border border-neutral-200 rounded-lg px-5 bg-neutral-50">
+                <Box 
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        bgcolor: 'background.paper',
+                        border: 1,
+                        borderColor: 'divider',
+                        borderRadius: 2,
+                        p: 3,
+                    }}
+                >
                     <Box className="pt-5 flex justify-center">
                         <Typography>Choose your sign in method</Typography>
                     </Box>
@@ -158,15 +168,25 @@ export const Login = ({open, setOpen, setUser}:LoginProps) => {
                                 </Box>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleSignInClose} className="text-accent">Cancel</Button>
-                                <Button variant="contained" onClick={handleSignIn}className="bg-primary" disabled={!email || !password ? true : false}>
+                                <Button onClick={handleSignInClose} color="secondary">Cancel</Button>
+                                <Button variant="contained" onClick={handleSignIn} color="primary" disabled={!email || !password ? true : false}>
                                     Sign In
                                 </Button>
                             </DialogActions>
                         </Dialog>
                     </Box>
-                    <Box className="flex justify-center">
-                        <Button className="mb-5 text-black rounded-[999px] w-[173.51px] " onClick={handleCreateAccount}>Create Account</Button>
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button 
+                            variant="outlined" 
+                            onClick={handleCreateAccount}
+                            sx={{ 
+                                mb: 2,
+                                borderRadius: '999px',
+                                minWidth: 173,
+                            }}
+                        >
+                            Create Account
+                        </Button>
                     </Box>
                 </Box>
             </Box>

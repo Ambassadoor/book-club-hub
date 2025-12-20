@@ -20,10 +20,31 @@ export const ToggleField = (props: ToggleFieldProps) => {
     const {variant, fullWidth=false, multiline=false, className, rows, name, editing, value, label, type, onChange} = props
 
     return (
-        type==="password" && editing ? <PasswordField className={className} fullWidth={fullWidth} value={value} onChange={onChange}/> :
-        editing ? <TextField className={className} fullWidth={fullWidth} multiline={multiline} rows={rows && rows} slotProps={{
-            input: {className: "text-black"}
-        }} name={name} type={type? type: "text"} label={label} value={value} variant="standard" onChange={onChange}></TextField> : <Typography variant={variant} className={className}>{`${value}`}</Typography>
-
+        type==="password" && editing ? (
+            <PasswordField 
+                className={className} 
+                fullWidth={fullWidth} 
+                name={name}
+                value={value} 
+                onChange={onChange}
+            />
+        ) : editing ? (
+            <TextField 
+                className={className} 
+                fullWidth={fullWidth} 
+                multiline={multiline} 
+                rows={rows && rows} 
+                name={name} 
+                type={type ? type : "text"} 
+                label={label} 
+                value={value} 
+                variant="standard" 
+                onChange={onChange}
+            />
+        ) : (
+            <Typography variant={variant} className={className} color="text.primary">
+                {`${label}: ${value}`}
+            </Typography>
+        )
     )
 }

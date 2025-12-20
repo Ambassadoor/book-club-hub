@@ -4,6 +4,7 @@ import { useState } from "react"
 
 type PasswordFieldProps = {
     name?: string,
+    label?: string,
     className?: string
     fullWidth?: boolean
     value?: string,
@@ -15,7 +16,7 @@ type PasswordFieldProps = {
 // A reusable password input field
 export const PasswordField = (props: PasswordFieldProps) => {
     const [ showPassword, setShowPassword] = useState(false)
-    const {name="password", className, fullWidth=false, value, required, error=false, onChange} = props
+    const {name="password", label="Password", className, fullWidth=false, value, required, error=false, onChange} = props
 
     return (
         <TextField
@@ -29,21 +30,20 @@ export const PasswordField = (props: PasswordFieldProps) => {
         required={required || false}
         margin="dense"
         name={name}
-        label="Password"
+        label={label}
         value={value}
         type={showPassword ? "text" : "password"}
         fullWidth={fullWidth}
-        variant="outlined"
+        variant="standard"
         slotProps={{
             input: {
                 endAdornment: (
                     <InputAdornment position="end">
                         <IconButton onClick={() => setShowPassword(b => !b) }>
-                            {showPassword ? <VisibilityOff color="secondary"/> : <Visibility color="secondary"/>}
+                            {showPassword ? <VisibilityOff/> : <Visibility/>}
                         </IconButton>
                     </InputAdornment>
                 ),
-                className: "text-inherit"
             }
         }}
         onChange={onChange}

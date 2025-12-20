@@ -1,5 +1,5 @@
 import { Book } from "@mui/icons-material"
-import { Avatar, Box, Button, Chip, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, Typography, useMediaQuery } from "@mui/material"
+import { Avatar, Box, Button, Chip, List, ListItemButton, ListItemText, Pagination, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -104,73 +104,95 @@ export const Club = ({user=null}) => {
 
     return (
         clubs &&
-        <Box className="flex-col">
-            <Box className="flex">
-                <Typography color="white" variant="h5">{userId ? "My Clubs" : "Clubs"}</Typography>
-                {userId && <Button className="ml-5" variant="contained" onClick={handleNewClubClick}>New Club</Button>}
-            </Box>
-            <Box className="flex flex-col min-w-full justify-center">
-                <List>
-                    {clubs && clubs.length > 0 && clubs.slice((page-1)*10, page*10).map((club) => (
-                        
+        <div className="flex flex-col gap-2">
+            <div className="flex items-center mb-2">
+                <Typography variant="h5" color="text.primary">{userId ? "My Clubs" : "Clubs"}</Typography>
+                {userId && <Button sx={{ ml: 2 }} variant="contained" color="primary" onClick={handleNewClubClick}>New Club</Button>}
+            </div>
+            <div className="flex flex-col w-full">
+                <List sx={{ width: '100%', gap: 1, display: 'flex', flexDirection: 'column' }}>
+                    {clubs && clubs.length > 0 ? clubs.slice((page-1)*10, page*10).map((club) => (
                         <ListItemButton 
-                            divider
-                            className="bg-neutral-50 rounded flex h-full" 
                             key={club.club.id}
                             onClick={() => navigate(`/clubs/${club.club.id}`)}
+                            sx={{
+                                bgcolor: 'background.paper',
+                                border: 1,
+                                borderColor: 'divider',
+                                borderRadius: 2,
+                                p: 2,
+                                minHeight: '140px',
+                                '&:hover': {
+                                    bgcolor: 'action.hover',
+                                    borderColor: 'primary.main',
+                                },
+                            }}
                         >
-                            <Box className="flex flex-col justify-between self-start h-full">
-                                <ListItemText className="flex-col self-start" primary={(
-                                    <Typography variant="h5">{club?.club?.name}</Typography>
-                                )} secondary={
-                                    (
-                                    <Box className="flex gap-2" >
-                                        {club.isAdmin && <Chip className="self-center" size="small" color="secondary"label="Admin"/>}
-                                        <Chip className="self-center hidden xs:flex" size="small" color="primary" label={`${club.numMembers} members`}/>
-                                        <Chip className="self-center hidden xs:flex" size="small" color="primary" label={`Joined ${formatDate(new Date(club["created_at"]))}`}/>
-                                        {/* <Typography></Typography> Stretch Goal, set and get user online statuses */}
-                                    </Box>
-                                    )
-                                }
-                                slotProps={{
-                                    secondary: {
-                                        component: "div"
-                                    }
-                                }}
-                                />
-                                <ListItemText
-                                    primary={(
-                                    club.currentRead && <Typography className="ml-2 hidden xs:flex" variant="body2">{`Currently Reading: ${club.currentRead?.title}`}</Typography>
-                                    )}
+                            <div className="flex flex-col justify-between flex-1 min-w-0">
+                                <ListItemText 
+                                    primary={
+                                        <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>{club?.club?.name}</Typography>
+                                    } 
                                     secondary={(
-                                        <Typography className=" ml-2 hidden xs:flex" variant="body2">{`Next Meeting: Coming Soon`}</Typography>
+                                        <div className="flex gap-1 flex-wrap mt-1">
+                                            {club.isAdmin && <Chip size="small" color="secondary" label="Admin"/>}
+                                            <Chip sx={{ display: { xs: 'none', sm: 'inline-flex' } }} size="small" color="primary" label={`${club.numMembers} members`}/>
+                                            <Chip sx={{ display: { xs: 'none', sm: 'inline-flex' } }} size="small" color="primary" label={`Joined ${formatDate(new Date(club["created_at"]))}`}/>
+                                        </div>
                                     )}
+                                    slotProps={{
+                                        secondary: {
+                                            component: "div"
+                                        }
+                                    }}
                                 />
-                            </Box>
-                            <ListItemAvatar className="flex justify-center px-2" >
-                                        {club.currentRead ?
-                                        <Avatar 
-                                            sx={{
-                                                width: "100%",
-                                                height: "100%"
-                                            }}
-                                            variant="rounded"
-                                            alt={`Cover art for ${club.currentRead?.title}`}
-                                            src={club.currentRead?.imageSmall}
-                                        /> :
-                                        <Avatar
-                                            variant="rounded"
-                                        >
-                                            <Book/>
-                                        </Avatar>
-                                    }
-                            </ListItemAvatar>
+                                <div className="mt-2">
+                                    {club.currentRead && (
+                                        <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                            Currently Reading: <strong>{club.currentRead?.title}</strong>
+                                        </Typography>
+                                    )}
+                                    <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
+                                        Next Meeting: Coming Soon
+                                    </Typography>
+                                </div>
+                            </div>
+                            <div className="flex justify-center items-center ml-2">
+                                {club.currentRead ?
+                                    <Avatar 
+                                        sx={{
+                                            width: 80,
+                                            height: 120,
+                                        }}
+                                        variant="rounded"
+                                        alt={`Cover art for ${club.currentRead?.title}`}
+                                        src={club.currentRead?.imageSmall}
+                                    /> :
+                                    <Avatar
+                                        sx={{
+                                            width: 80,
+                                            height: 120,
+                                            bgcolor: 'action.selected',
+                                        }}
+                                        variant="rounded"
+                                    >
+                                        <Book sx={{ fontSize: 40 }} />
+                                    </Avatar>
+                                }
+                            </div>
                         </ListItemButton>
-                        ))
-                    }
+                    )) : (
+                        <Typography variant="body1" color="text.secondary" align="center" sx={{ py: 4 }}>
+                            {userId ? "You haven't joined any clubs yet." : "No clubs available."}
+                        </Typography>
+                    )}
                 </List>
-                <Pagination count={count} page={page} onChange={(_, value) => setPage(value)}/>
-            </Box>
-        </Box>
+                {count > 1 && (
+                    <div className="flex justify-center mt-2">
+                        <Pagination count={count} page={page} onChange={(_, value) => setPage(value)} color="primary" />
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }

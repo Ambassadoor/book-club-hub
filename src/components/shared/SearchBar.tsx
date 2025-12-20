@@ -233,7 +233,6 @@ export const SearchBar =
                 input: {
                     ...params.InputProps,
                     endAdornment: (
-                        <>
                         <InputAdornment position="end">
                             <IconButton 
                                 disableRipple
@@ -243,32 +242,30 @@ export const SearchBar =
                                     inputRef.current?.focus()
                                     !open && handleOpen()                                
                                 }}
-                                >
-                                <Search sx={{
-                                    color: colors.input.main,
-                                }} />
+                            >
+                                <Search />
                             </IconButton>
                         </InputAdornment>
-                        </>
                     ),
-                    className: `rounded-full p-0`,
+                    className: `rounded-full`,
                 },
                 
             }}
             sx={{
                 "& .MuiOutlinedInput-root": {
-                borderRadius: "999px",
-                "& fieldset": {
-                    borderColor: "white",
-                },
-                "&:hover fieldset": {
-                    borderColor: "gray", // hover color
-                },
-                "&.Mui-focused fieldset": {
-                    borderColor: "white", // focused color
-                },
-
-            }
+                    borderRadius: "999px",
+                    bgcolor: 'background.paper',
+                    "& fieldset": {
+                        borderColor: "divider",
+                    },
+                    "&:hover fieldset": {
+                        borderColor: "primary.main",
+                    },
+                    "&.Mui-focused fieldset": {
+                        borderColor: "primary.main",
+                        borderWidth: 2,
+                    },
+                }
             }}
             size="small"
             onFocus={handleFocus}

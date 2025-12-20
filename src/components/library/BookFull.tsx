@@ -1,9 +1,10 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material"
+import { Box, Button, Collapse, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material"
 import { useEffect, useState } from "react"
 import { bchApi } from "../../api/bchBooksClient"
 import { useNavigate } from "react-router-dom"
 import type { ClubBook } from "../clubs/Club"
 import { Book } from "@mui/icons-material"
+import { TextCollapse } from "../shared/TextCollapse"
 
 type BookFullProps = {
     book: UserBook | GoogleBook,
@@ -20,6 +21,7 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
     const [clubBookId, setClubBookId] = useState(null)
     const [bookId, setBookId] = useState(null)
     const {request} = bchApi
+    const [expanded, setExpanded] = useState(false)
 
     const navigate = useNavigate()
 
@@ -150,37 +152,95 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
 
     return (
         book &&
-        <Box className="flex w-fit" >
-            <Box className="flex flex-col md:flex-row m-5">
-                <Box className="h-163 mr-5">
+        <div className="flex flex-col w-full h-full overflow-y-auto p-4">
+            <div className="flex flex-col lg:flex-row gap-6">
+                <div className="shrink-0 flex justify-center lg:justify-start">
                     { thumbnail !== "" ?
-                        <img className="w-full h-full object-contain rounded-lg" src={thumbnail}/>
-                        : <></>
-                        }
-                </Box>
-                <Box className="flex flex-col shrink w-[50%] max-h-auto">
-                    <Box className="pb-2">
+                        <img 
+                            className="rounded-lg shadow-md" 
+                            src={thumbnail}
+                            alt={title}
+                            style={{
+                                width: '280px',
+                                height: '420px',
+                                objectFit: 'cover',
+                            }}
+                        />
+                        : <Box 
+                            sx={{ 
+                                width: '280px', 
+                                height: '420px', 
+                                bgcolor: 'background.default',
+                                borderRadius: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <Book sx={{ fontSize: 64, color: 'text.secondary' }} />
+                        </Box>
+                    }
+                </div>
+                <div className="flex flex-col flex-1 min-w-0 overflow-y-scroll">
+                    <div className="mb-3 shrink-0">
                         {!clubId 
                             ? inLibrary
-                             ?<Button onClick={() => setOpen(true)} variant="contained" color="warning" size="small">Remove From Library</Button>
-                             : user ? <Button onClick={addBookToLibrary} variant="contained" size="small">Add to Library</Button>
-                                    : <></>
-                            : <Button onClick={addClubBook} variant="contained" size="small">Set as Current Book</Button>
+                             ? <Button onClick={() => setOpen(true)} variant="contained" color="warning">Remove From Library</Button>
+                             : user ? <Button onClick={addBookToLibrary} variant="contained" color="primary">Add to Library</Button>
+                                    : null
+                            : <Button onClick={addClubBook} variant="contained" color="primary">Set as Current Book</Button>
                         }
+                    </div>
+                    <Box 
+                        sx={{ 
+                            bgcolor: 'background.default',
+                            borderRadius: 2,
+                            p: 3,
+                            border: 1,
+                            borderColor: 'divider',
+                        }}
+                    >
+                        <div className="mb-3">
+                            <Typography 
+                                variant="h4" 
+                                sx={{ 
+                                    mb: 1, 
+                                    fontWeight: 700,
+                                }}
+                            >
+                                {title}
+                            </Typography>
+                            <Typography 
+                                variant="subtitle1" 
+                                color="text.secondary" 
+                                sx={{ 
+                                    fontStyle: 'italic',
+                                }}
+                            >
+                                {author}
+                            </Typography>
+                        </div>
+                        <TextCollapse >
+                            <Box
+                                className="reading-text"
+                                sx={{
+                                    pr: 1,
+                                    '& p': { mb: 2 },
+                                }}
+                            >
+                                <Typography
+                                    component="div"
+                                    variant="body1"
+                                    color="text.primary"
+                                    dangerouslySetInnerHTML={{
+                                        __html: description
+                                    }}
+                                />
+                            </Box>
+                        </TextCollapse>
                     </Box>
-                    <Box className="flex flex-col bg-black rounded-lg p-5 max-w-150">
-                        <Typography className="dark:text-white" variant="h5">{title}</Typography>
-                        <Typography className="dark:text-white" variant="subtitle2">{author}</Typography>
-                        <Typography
-                            className="dark:text-white overflow-y-scroll no-scrollbar max-h-130"
-                            variant="body2"
-                            dangerouslySetInnerHTML={{
-                                __html: description
-                            }}
-                            />
-                    </Box>
-                </Box>
-            </Box>
+                </div>
+            </div>
             <Dialog open={open} onClose={() => setOpen(false)}>
                 <DialogTitle>
                             Remove book from your Library?
@@ -195,6 +255,6 @@ export const BookFull = ({book, clubId, setBook, user, refetch}: BookFullProps) 
                     <Button onClick={handleRemoveBook}>Remove</Button>
                 </DialogActions>
             </Dialog>
-        </Box>
+        </div>
     )
 }

@@ -32,68 +32,81 @@ export const Book = () => {
 
 
     return (
-        <>
-        {/* <Box>
-            <ButtonGroup>
-                <Button color="secondary" variant="contained" value="Full" onClick={handleButtonClick}>Full</Button>
-                <Button color="secondary" variant="contained" value="Card" onClick={handleButtonClick}>Card</Button>
-                <Button color="secondary" variant="contained" value="Search" onClick={handleButtonClick}>Search Result</Button>
-            </ButtonGroup>
-        </Box> */}
-            {book !== undefined &&
-            display === "Card" ?
-            <Card className="flex flex-row max-w-[80%] max-h-[33%] md:max-w-[50%] self-center">
-                <CardMedia
-                    className="book-cover md:object-contain mx-5"
-                    component="img"
-                    image={
-                        "imageLarge" in book
-                        ?
-                            isMedium
-                            ? book.imageLarge
-                            : book.imageSmall
-                        :
-                            isMedium
-                            ? book.volumeInfo.imageLinks?.thumbnail
-                            : book.volumeInfo.imageLinks?.smallThumbnail
-                    }
-                    alt={`Book cover-art for ${
-                        "title" in book
-                        ? book.title
-                        : book.volumeInfo.title}`}
+        <Box 
+            sx={{ 
+                maxWidth: 1200, 
+                mx: 'auto', 
+                p: 4,
+            }}
+        >
+            {/* Development tool - uncomment to test different display modes */}
+            {/* <Box sx={{ mb: 2 }}>
+                <ButtonGroup>
+                    <Button color="secondary" variant="contained" value="Full" onClick={handleButtonClick}>Full</Button>
+                    <Button color="secondary" variant="contained" value="Card" onClick={handleButtonClick}>Card</Button>
+                    <Button color="secondary" variant="contained" value="Search" onClick={handleButtonClick}>Search Result</Button>
+                </ButtonGroup>
+            </Box> */}
             
-                />
-                <Box className="flex flex-col p-5 max-h-auto">
-                        <Typography variant="h5">{
-                            "title" in book
-                            ? book.title
-                            : book.volumeInfo.title
-                            }
+            {book !== undefined && display === "Card" ? (
+                <Card 
+                    sx={{ 
+                        display: 'flex', 
+                        flexDirection: { xs: 'column', md: 'row' },
+                        maxWidth: { xs: '100%', md: '80%' },
+                        mx: 'auto',
+                        border: 1,
+                        borderColor: 'divider',
+                    }}
+                >
+                    <CardMedia
+                        component="img"
+                        image={
+                            "imageLarge" in book
+                            ? isMedium ? book.imageLarge : book.imageSmall
+                            : isMedium 
+                                ? book.volumeInfo.imageLinks?.thumbnail 
+                                : book.volumeInfo.imageLinks?.smallThumbnail
+                        }
+                        alt={`Book cover for ${
+                            "title" in book ? book.title : book.volumeInfo.title
+                        }`}
+                        sx={{
+                            width: { xs: '100%', md: 250 },
+                            height: { xs: 300, md: 'auto' },
+                            objectFit: 'contain',
+                            p: 2,
+                        }}
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', p: 3, flex: 1, overflow: 'hidden' }}>
+                        <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
+                            {"title" in book ? book.title : book.volumeInfo.title}
                         </Typography>
-                        <Typography className="ml-5 mb-2" variant="subtitle1">
-                            {
-                                "author" in book
-                                ? book.author
-                                : book.volumeInfo.authors?.join(", ")
-                            }
+                        <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 2, fontStyle: 'italic' }}>
+                            {"author" in book ? book.author : book.volumeInfo.authors?.join(", ")}
                         </Typography>
                         <Typography
-                            className="ml-5 overflow-y-scroll"
+                            className="reading-text"
                             variant="body1"
-                            dangerouslySetInnerHTML={{
-                                __html:
-                                "description" in book
-                                ? book.description
-                                : book.volumeInfo.description
+                            color="text.primary"
+                            component="div"
+                            sx={{ 
+                                overflow: 'auto',
+                                flex: 1,
                             }}
-                            >
-                        </Typography>
-            
-                </Box>
-            </Card>
-            : book!== undefined && display === "Full" ? <BookFull book={book}/>
-            : book!== undefined && display === "Search" && <BookSearchResult book={book}/>
-            }
-        </>
+                            dangerouslySetInnerHTML={{
+                                __html: "description" in book 
+                                    ? book.description 
+                                    : book.volumeInfo.description
+                            }}
+                        />
+                    </Box>
+                </Card>
+            ) : book !== undefined && display === "Full" ? (
+                <BookFull book={book}/>
+            ) : book !== undefined && display === "Search" ? (
+                <BookSearchResult book={book}/>
+            ) : null}
+        </Box>
     )
 }

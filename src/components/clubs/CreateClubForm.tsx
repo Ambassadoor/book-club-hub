@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, TextField, Typography } from "@mui/material"
+import { Box, Button, TextField, Typography } from "@mui/material"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -60,52 +60,54 @@ export const CreateClubForm = ({user}: CreateClubFormProps) => {
     }
     return (
         user &&
-        <Box className="flex flex-col gap-5 rounded bg-accent p-5 h-fit">
-            <Box className="flex justify-center">
-                <Typography variant="h4" color="white">Create a new Club</Typography>
-            </Box>
-            <Box className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3 max-w-[600px] mx-auto mt-4 p-4 rounded-lg">
+            <Box 
+                sx={{
+                    bgcolor: 'background.paper',
+                    border: 1,
+                    borderColor: 'divider',
+                    borderRadius: 2,
+                    p: 4,
+                }}
+            >
+                <div className="flex justify-center mb-3">
+                    <Typography variant="h4" color="text.primary">Create a New Club</Typography>
+                </div>
+                <div className="flex flex-col gap-3">
                 <TextField 
-                name="name"
-                value={formData.name}
-                slotProps={
-                    {
-                        input: {
-                            className: "bg-neutral-50 text-black"
-                        }
-                    }
-                } 
-                fullWidth
-                label="Club Name"
-                variant="outlined"
-                required
-                onChange={handleChange}
+                    name="name"
+                    value={formData.name}
+                    fullWidth
+                    label="Club Name"
+                    variant="outlined"
+                    required
+                    onChange={handleChange}
+                    placeholder="Enter your club name"
                 />
                 <TextField 
-                name="description"
-                value={formData.description}
-                slotProps={
-                    {
-                        input: {
-                            className: "bg-neutral-50 text-black"
-                        }
-                    }
-                } 
-                multiline 
-                minRows={3} 
-                fullWidth 
-                label="Club Description" 
-                variant="outlined"
-                onChange={handleChange}
+                    name="description"
+                    value={formData.description}
+                    multiline 
+                    minRows={4} 
+                    fullWidth 
+                    label="Club Description" 
+                    variant="outlined"
+                    onChange={handleChange}
+                    placeholder="Describe your club's purpose and what you'll be reading..."
                 />
+                <div className="flex justify-end gap-1">
+                    <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
+                    <Button 
+                        disabled={!(formData.name.trim().length > 0)} 
+                        color="primary" 
+                        variant="contained" 
+                        onClick={handleSubmit}
+                    >
+                        Create Club
+                    </Button>
+                </div>
+            </div>
             </Box>
-            <Box className="flex">
-                <ButtonGroup className="ml-auto">
-                    <Button color="black" onClick={handleCancel}>Cancel</Button>
-                    <Button disabled={!(formData.name.trim().length > 0)} color="primary" variant="contained" onClick={handleSubmit}>Submit</Button>
-                </ButtonGroup>
-            </Box>
-
-        </Box>
+        </div>
     )
 }

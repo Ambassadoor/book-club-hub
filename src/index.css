@@ -1,76 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
-
-/* Configure dark mode to use class strategy */
-@variant dark (.dark &);
 
 /* Base layer for CSS variables - supports light and dark modes */
 @layer base {
   :root {
     /* Primary Colors */
-    --color-primary: #606c38;
-    --color-primary-dark: #283618;
-    --color-primary-light: #7f8c52;
+    --color-primary: #2d6a6a;
+    --color-primary-dark: #1e4848;
+    --color-primary-light: #3d8a8a;
     
     /* Accent Colors */
-    --color-accent: #dda15e;
-    --color-accent-dark: #bc6c25;
-    --color-accent-light: #e8b67d;
+    --color-accent: #e07856;
+    --color-accent-dark: #c85a3a;
+    --color-accent-light: #ff9777;
     
     /* Surface & Background */
-    --color-surface: #fafae0;
-    --color-background: #fafae0;
+    --color-surface: #f8f9fa;
+    --color-background: #f8f9fa;
     
     /* Text Colors */
-    --color-text-primary: #283618;
-    --color-text-secondary: #606c38;
-    --color-text-on-primary: #fafae0;
-    --color-text-on-accent: #283618;
-    --color-text-on-surface: #283618;
+    --color-text-primary: #1a2332;
+    --color-text-secondary: #4a5568;
+    --color-text-on-primary: #ffffff;
+    --color-text-on-accent: #ffffff;
+    --color-text-on-surface: #1a2332;
     
     /* Status & Feedback Colors */
-    --color-success: #606c38;
-    --color-success-border: #283618;
-    --color-success-light: #7f8c52;
+    --color-success: #10b981;
+    --color-success-border: #059669;
+    --color-success-light: #34d399;
     
-    --color-info: #4a7c9e;
-    --color-info-border: #2d5573;
-    --color-info-light: #6b9dbd;
+    --color-info: #3b82f6;
+    --color-info-border: #2563eb;
+    --color-info-light: #60a5fa;
     
-    --color-warning: #dda15e;
-    --color-warning-border: #bc6c25;
-    --color-warning-light: #e8b67d;
+    --color-warning: #f59e0b;
+    --color-warning-border: #d97706;
+    --color-warning-light: #fbbf24;
     
-    --color-error: #a04b4b;
-    --color-error-border: #7a2e2e;
-    --color-error-light: #c26565;
+    --color-error: #ef4444;
+    --color-error-border: #dc2626;
+    --color-error-light: #f87171;
     
-    --color-danger: #a04b4b;
-    --color-danger-border: #7a2e2e;
+    --color-danger: #ef4444;
+    --color-danger-border: #dc2626;
     
     /* Neutral/Gray Scale */
-    --color-neutral-50: #fafae0;
-    --color-neutral-100: #f0f0d8;
-    --color-neutral-200: #e0e0c0;
-    --color-neutral-300: #c8c8a8;
-    --color-neutral-400: #a0a088;
-    --color-neutral-500: #606c38;
-    --color-neutral-600: #4e5a2e;
-    --color-neutral-700: #3c4823;
-    --color-neutral-800: #283618;
-    --color-neutral-900: #1a2410;
+    --color-neutral-50: #f9fafb;
+    --color-neutral-100: #f3f4f6;
+    --color-neutral-200: #e5e7eb;
+    --color-neutral-300: #d1d5db;
+    --color-neutral-400: #9ca3af;
+    --color-neutral-500: #6b7280;
+    --color-neutral-600: #4b5563;
+    --color-neutral-700: #374151;
+    --color-neutral-800: #1f2937;
+    --color-neutral-900: #111827;
     
     /* UI Elements */
-    --color-card: #606c38;
-    --color-card-border: #283618;
-    --color-button-positive: #dda15e;
-    --color-button-positive-border: #bc6c25;
-    --color-button-positive-hover: #bc6c25;
-    --color-input: #fafae0;
-    --color-input-border: #606c38;
+    --color-card: #2d6a6a;
+    --color-card-border: #1e4848;
+    --color-button-positive: #e07856;
+    --color-button-positive-border: #c85a3a;
+    --color-button-positive-hover: #c85a3a;
+    --color-input: #ffffff;
+    --color-input-border: #d1d5db;
     
     /* Disabled States */
-    --color-disabled: #c8c8a8;
-    --color-disabled-text: #a0a088;
+    --color-disabled: #e5e7eb;
+    --color-disabled-text: #9ca3af;
     
     /* Spacing Scale */
     --spacing-xs: 0.5rem;
@@ -93,17 +91,17 @@
 
   /* Dark mode color overrides */
   .dark {
-    --color-primary: #7f8c52;
-    --color-primary-dark: #283618;
-    --color-primary-light: #606c38;
-    --color-background: #1a2410;
-    --color-surface: #283618;
-    --color-text-primary: #fafae0;
-    --color-text-secondary: #c8c8a8;
-    --color-card: #3c4823;
-    --color-card-border: #4e5a2e;
-    --color-input: #283618;
-    --color-input-border: #606c38;
+    --color-primary: #3d8a8a;
+    --color-primary-dark: #1e4848;
+    --color-primary-light: #5aacac;
+    --color-background: #111827;
+    --color-surface: #1f2937;
+    --color-text-primary: #f9fafb;
+    --color-text-secondary: #d1d5db;
+    --color-card: #374151;
+    --color-card-border: #4b5563;
+    --color-input: #1f2937;
+    --color-input-border: #4b5563;
   }
 }
 
@@ -115,27 +113,29 @@
   
   /* These create utility classes like bg-primary, text-primary, etc. */
   /* The actual color values come from CSS variables in @layer base */
-  --color-primary: #606c38;
-  --color-primary-dark: #283618;
-  --color-primary-light: #7f8c52;
-  --color-accent: #dda15e;
-  --color-accent-dark: #bc6c25;
-  --color-accent-light: #e8b67d;
-  --color-surface: #fafae0;
-  --color-background: #fafae0;
-  --color-text-primary: #283618;
-  --color-text-secondary: #606c38;
-  --color-neutral-50: #fafae0;
-  --color-neutral-100: #f0f0d8;
-  --color-neutral-200: #e0e0c0;
-  --color-neutral-300: #c8c8a8;
-  --color-neutral-400: #a0a088;
-  --color-neutral-500: #606c38;
-  --color-neutral-600: #4e5a2e;
-  --color-neutral-700: #3c4823;
-  --color-neutral-800: #283618;
-  --color-neutral-900: #1a2410;
+  --color-primary: #2d6a6a;
+  --color-primary-dark: #1e4848;
+  --color-primary-light: #3d8a8a;
+  --color-accent: #e07856;
+  --color-accent-dark: #c85a3a;
+  --color-accent-light: #ff9777;
+  --color-surface: #f8f9fa;
+  --color-background: #f8f9fa;
+  --color-text-primary: #1a2332;
+  --color-text-secondary: #4a5568;
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
 }
+
+@variant dark (.dark &);
 
 @utility no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -143,4 +143,222 @@
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
   }
-}   
+}
+
+/* Global Styles */
+@layer base {
+  /* Smooth scrolling for the entire app */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Base body styles */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Typography hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+  }
+
+  /* Body text */
+  p {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    margin-bottom: 1em;
+  }
+
+  /* Emphasis on readability for longer text (like book descriptions) */
+  .reading-text {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  /* Fix autofill styles for all inputs - Light mode */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 100px var(--color-input) inset !important;
+    -webkit-text-fill-color: var(--color-text-primary) !important;
+    caret-color: var(--color-text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+
+  /* Fix autofill styles for all inputs - Dark mode */
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover,
+  .dark input:-webkit-autofill:focus,
+  .dark input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 100px var(--color-input) inset !important;
+    -webkit-text-fill-color: var(--color-text-primary) !important;
+    caret-color: var(--color-text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+  }
+
+  /* Custom scrollbar styling - Desktop only */
+  @media (hover: hover) and (pointer: fine) {
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-neutral-100);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: var(--radius-md);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary-dark);
+    }
+
+    .dark ::-webkit-scrollbar-track {
+      background: var(--color-neutral-800);
+    }
+
+    .dark ::-webkit-scrollbar-thumb {
+      background: var(--color-primary-light);
+    }
+
+    .dark ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  }
+
+  /* Hide scrollbars on mobile/touch devices */
+  @media (hover: none) or (pointer: coarse) {
+    * {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    *::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  }
+
+  /* Better focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .dark *:focus-visible {
+    outline-color: var(--color-primary-light);
+  }
+
+  /* Remove default button styles */
+  button {
+    font-family: inherit;
+  }
+
+  /* Ensure images are responsive by default */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Remove default list styles when using as navigation/UI */
+  ul[role='list'],
+  ol[role='list'] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Better text selection color */
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-accent-light);
+    color: var(--color-neutral-900);
+  }
+
+  /* Prevent text overflow in all elements */
+  * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Link styles */
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  .dark a {
+    color: var(--color-primary-light);
+  }
+
+  .dark a:hover {
+    color: var(--color-primary);
+  }
+
+  /* Consistent transitions for interactive elements */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Better placeholder styling */
+  ::placeholder {
+    color: var(--color-neutral-400);
+    opacity: 1;
+  }
+
+  .dark ::placeholder {
+    color: var(--color-neutral-500);
+  }
+}

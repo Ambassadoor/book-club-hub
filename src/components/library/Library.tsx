@@ -38,16 +38,60 @@ export const Library = () => {
     },[library])
 
     return (
-        <Box className="flex flex-col md:flex-row bg-primary p-5 h-fit rounded-lg m-5 md:min-w-[1400px]">
-            <Box className="flex flex-col h-fit bg-black rounded-lg p-5">
-                <Box>
-                    <SearchBar className="self-center pt-5" close fullWidth source={library} results={searchResults} setResults={setSearchResults} setTotal={setNumResults} page={page} setPage={setPage}/>
+        <Box 
+            className="flex flex-col lg:flex-row gap-6 p-6 mx-auto max-w-[1600px]"
+            sx={{
+                minHeight: '600px',
+            }}
+        >
+            <Box 
+                className="flex flex-col rounded-lg shadow-lg"
+                sx={{
+                    flex: '0 0 auto',
+                    width: { xs: '100%', lg: '480px' },
+                    bgcolor: 'background.paper',
+                    border: 1,
+                    borderColor: 'divider',
+                }}
+            >
+                <Box sx={{ p: 3, borderBottom: 1, borderColor: 'divider' }}>
+                    <SearchBar 
+                        className="w-full" 
+                        close 
+                        fullWidth 
+                        source={library} 
+                        results={searchResults} 
+                        setResults={setSearchResults} 
+                        setTotal={setNumResults} 
+                        page={page} 
+                        setPage={setPage}
+                    />
                 </Box>
-                <Box className="h-150 overflow-y-scroll no-scrollbar">
-                    <BookList className="relative overflow-y-scroll no-scrollbar mt-0 m pt-0 p-5 rounded h-[530px]" list={searchResults} setBook={setBook} page={page} setPage={setPage} />
+                <Box 
+                    className="overflow-y-auto" 
+                    sx={{ 
+                        height: '600px',
+                        p: 2,
+                    }}
+                >
+                    <BookList 
+                        list={searchResults} 
+                        setBook={setBook} 
+                        page={page} 
+                        setPage={setPage} 
+                    />
                 </Box>
             </Box>
-            <Box className="flex">
+            <Box 
+                className="flex-1 rounded-lg shadow-lg"
+                sx={{
+                    minHeight: '600px',
+                    bgcolor: 'background.paper',
+                    border: 1,
+                    borderColor: 'divider',
+                    display: book ? 'flex' : 'none',
+                }}
+            >
                 {book && <BookFull user={Number(userId)} book={book} setBook={setBook}/>}
             </Box>
         </Box>

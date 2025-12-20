@@ -22,8 +22,12 @@ export const NavMenu = ({user, setUser}:NavMenuProps) => {
         path: "books",
         },
         {
-        text: !user ? "Clubs" : "My Clubs",
-        path: !user ? "clubs" : `clubs/myClubs/${user}`,
+        text: "Clubs",
+        path: "clubs"
+        },
+        {
+        text: user && "My Clubs",
+        path: user && `clubs/myClubs/${user}`,
         }
     ];
 

@@ -1,5 +1,5 @@
 import { Book, LibraryAdd, LibraryAddCheck} from "@mui/icons-material"
-import { Avatar, Box, Button, Chip, IconButton, ListItem, ListItemAvatar, ListItemButton, ListItemText, useMediaQuery } from "@mui/material"
+import { Avatar, Box, Button, Chip, IconButton, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography, useMediaQuery } from "@mui/material"
 import { addBookToLibrary } from "../../services/libraryServices/libraryServices"
 import { useNavigate } from "react-router-dom"
 
@@ -33,7 +33,7 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
 
     const secondaryAction = (
         book && "inLibrary" in book &&
-        <Box className="flex align-middle justify-center mr-7">
+        <div className="flex items-center justify-center mr-7">
 {            isMedium
             ? book.inLibrary
               ? <Chip label="In Library"/>
@@ -44,15 +44,37 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
               : <IconButton onClick={handleAddBook}>
                     <LibraryAdd/>
                 </IconButton>}
-        </Box>
+        </div>
     )   
 
     return (
         book &&
-            <ListItem secondaryAction={secondaryAction}
-                key={book.id} className="my-1 bg-primary rounded-lg max-w-full h-fit p-0" alignItems="flex-start" disableGutters>
-                <ListItemButton className="h-16 px-2 py-0" onClick={handleSelectBook}>
-                    <ListItemAvatar>
+            <ListItem 
+                secondaryAction={secondaryAction}
+                key={book.id} 
+                alignItems="flex-start" 
+                disableGutters
+                sx={{
+                    my: 0.5,
+                    bgcolor: 'action.hover',
+                    borderRadius: 1,
+                    width: '100%',
+                    maxWidth: '100%',
+                    '&:hover': {
+                        bgcolor: 'action.selected',
+                    }
+                }}
+            >
+                <ListItemButton 
+                    sx={{ 
+                        px: 2, 
+                        py: 1,
+                        width: '100%',
+                        minWidth: 0,
+                    }} 
+                    onClick={handleSelectBook}
+                >
+                    <ListItemAvatar sx={{ minWidth: 56, flexShrink: 0 }}>
                         <Avatar
                             src={
                                 "imageSmall" in book
@@ -65,17 +87,39 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
                         </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        className=""
+                        sx={{
+                            flex: 1,
+                            minWidth: 0,
+                            pr: 2,
+                        }}
                         primary={
-                            "title" in book
-                            ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.title || ""}</span>
-                            : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.volumeInfo?.title || ""}</span>
+                            <Typography 
+                                variant="body2" 
+                                sx={{ 
+                                    overflow: 'hidden', 
+                                    textOverflow: 'ellipsis', 
+                                    whiteSpace: 'nowrap',
+                                    width: '100%',
+                                }}
+                            >
+                                {"title" in book ? book?.title || "" : book?.volumeInfo?.title || ""}
+                            </Typography>
                         }
                         secondary={
-                            "author" in book
-                            ? <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.author || ""}</span>
-                            : <span className="block overflow-hidden text-ellipsis whitespace-nowrap">{book?.volumeInfo?.authors?.join(", ") || ""}</span>
-                        }/>
+                            <Typography 
+                                variant="caption" 
+                                color="text.secondary"
+                                sx={{ 
+                                    overflow: 'hidden', 
+                                    textOverflow: 'ellipsis', 
+                                    whiteSpace: 'nowrap',
+                                    width: '100%',
+                                }}
+                            >
+                                {"author" in book ? book?.author || "" : book?.volumeInfo?.authors?.join(", ") || ""}
+                            </Typography>
+                        }
+                    />
                 </ListItemButton>
             </ListItem>
     )

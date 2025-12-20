@@ -6,6 +6,7 @@ import {
   Toolbar,
   Typography,
   useColorScheme,
+  useMediaQuery,
 } from "@mui/material";
 
 import { Book, DarkMode } from "@mui/icons-material";
@@ -24,6 +25,8 @@ type NavBarProps = {
 export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   const [results, setResults] = useState<GoogleBook[]>([])
   const {mode, setMode} = useColorScheme()
+
+  const isMedium = useMediaQuery(`(min-width:640px)`)
 
   const toggleTheme = () => {
     const newMode = mode === 'dark' ? 'light' : 'dark';
@@ -52,22 +55,25 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   };
 
   return (
-    <Box className="bg-primary dark:bg-primary-dark sticky top-0 z-50"sx={{ flexGrow: 0 }}>
+    <Box sx={{ position: 'sticky', top: 0, zIndex: 50 }}>
       <AppBar position="static">
-        <Toolbar className="flex justify-between items-center">
-          <Box className="flex items-center">
-            <Box className="flex" onClick={() => handleNavLinkClick("/")}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box 
+              sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} 
+              onClick={() => handleNavLinkClick("/")}
+            >
               <Book />
-              <Typography className="mx-2 text-nowrap">
-                Book Club Hub
+              <Typography sx={{ mx: 1, whiteSpace: 'nowrap' }}>
+                {isMedium ? "Book Club Hub" : "BCH"}
               </Typography>
             </Box>
-            <Box className="hidden md:flex md:ml-10 gap-10">
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 5, gap: 3 }}>
               {pages.map((page) => (
                 <Button
                   key={page.text}
                   value={page.path}
-                  className="text-white text-nowrap"
+                  sx={{ color: 'primary.contrastText', whiteSpace: 'nowrap' }}
                   onClick={() => handleNavLinkClick(page.path)}
                 >
                   {page.text}
@@ -75,14 +81,20 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
               ))}
               {user && <Button
                 value={`library/${user}`}
-                className="text-white text-nowrap"
+                sx={{ color: 'primary.contrastText', whiteSpace: 'nowrap' }}
                 onClick={() => handleNavLinkClick(`library/${user}`)}
               >My Library</Button>}
             </Box>
           </Box>
-          <Box className="flex flex-row flex-nowrap align-middle gap-2">
-            <SearchBar<GoogleBook,false, false, true> className="self-center max-[480px]:hidden" targets={['googleBooks']} searchResults={results} setResults={setResults} expanding/>
-            <IconButton onClick={toggleTheme}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <SearchBar<GoogleBook,false, false, true> 
+              className="self-center max-[480px]:hidden" 
+              targets={['googleBooks']} 
+              searchResults={results} 
+              setResults={setResults} 
+              expanding
+            />
+            <IconButton onClick={toggleTheme} color="inherit">
               <DarkMode/>
             </IconButton>
             <NavMenu user={user} setUser={setUser} />
