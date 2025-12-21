@@ -196,5 +196,10 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      defaultProps: {
+        color: "text.primary", // Ensure all Typography components use theme text color by default
+      },
+    },
   }
 });
