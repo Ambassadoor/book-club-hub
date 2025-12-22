@@ -14,7 +14,8 @@ import { ClubDetails } from "./components/clubs/ClubDetails";
 import { LoginCard } from "./components/login/LoginCard";
 import { Dashboard } from "./components/dashboard/Dashboard";
 import { CreateAccount } from "./components/createAccountDialog/CreateAccount";
-
+import { Test } from "../test"
+import { Results } from "./components/shared/Results";
 const App = () => {
   const [user, setUser] = useState<number | null>(null);  
   const { getCurrentUserId, active, refreshSession } = useSessionManager()
@@ -86,6 +87,8 @@ const App = () => {
           </Route>
           <Route path="profile" element={<Profile user={user}/>} />
           <Route path="createAccount" element={<CreateAccount setUser={setUser}/>}/>
+          <Route path="test" element={<Test />}/>
+          <Route path="results" element={<Results />}/>
           <Route path="*" element={<Box sx={{ color: 'text.primary', textAlign: 'center', p: 4 }}>Page Not Found</Box>} />
         </Route>
       </Routes>

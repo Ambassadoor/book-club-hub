@@ -21,7 +21,6 @@ export const LeaveClubButton = ({userId, clubId, handleLeave}: LeaveClubButtonPr
                 isActive: false
             })
         }).then(res => res.json()).catch(console.error)
-        console.log(response)
         handleLeave("guest")
     }
 

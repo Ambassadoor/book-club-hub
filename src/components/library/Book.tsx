@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Card, CardMedia, Typography, useMediaQuery } from "@mui/material"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import { getBook } from "../../services/libraryServices/libraryServices"
 import { BookFull } from "./BookFull"
 import { BookSearchResult } from "./BookSearchResult"
@@ -16,12 +16,16 @@ export const Book = () => {
     const [book, setBook] = useState<UserBook | GoogleBook>()
     const {source, bookId} = useParams()
 
+    const location = useLocation();
+
     const isMedium = useMediaQuery(`(min-width:640px)`)
 
     useEffect(() => {
-        bookId &&
-        getBook(bookId).then(res => setBook(res))
-    }, [bookId])
+        if (location.state.id) setBook(location.state)
+        else if (bookId) {
+            getBook(bookId).then(res => setBook(res))
+        }
+    }, [bookId, location])
 
     const [display, setDisplay] = useState("Full")
 

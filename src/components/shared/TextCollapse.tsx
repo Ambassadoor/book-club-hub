@@ -22,7 +22,7 @@ export const TextCollapse = ({children, collapsedSize = 72}: TextCollapseProps) 
         observer.observe(contentRef.current);
         return () => observer.disconnect();
 
-    }, [children, collapsedSize])
+    }, [collapsedSize])
 
     return (
         <Box>

@@ -72,69 +72,7 @@
       "description": "Join us as we read through the Thursday Murder Club series, a marvelous collection of mysteries investigated by four pensioners living in a retirement community in England.",
       "ownerId": 1,
       "created_at": 1765301819597,
-      "id": 1,
-      "clubBooks": [
-        {
-          "id": 1,
-          "googleId": "jvRQEQAAQBAJ",
-          "clubId": 1,
-          "title": "The Strength of the Few",
-          "author": "James Islington",
-          "imageSmall": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-          "imageLarge": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-          "description": "This highly anticipated sequel to The Will of the Many—one of 2023’s most lauded and bestselling fantasy novels—follows Vis as he grapples with a dangerous secret that could unravel history across alternate dimensions. Book two of the Hierarchy quartet.",
-          "addedOn": "2025-12-04T18:32:23.123Z",
-          "isCurrent": false
-        },
-        {
-          "googleId": "NvwqK-KEWbwC",
-          "clubId": 1,
-          "title": "The Hitch Hiker's Guide to the Galaxy Omnibus",
-          "author": "Douglas Adams",
-          "imageSmall": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-          "imageLarge": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-          "description": "The Hitchhiker's Guide to the Galaxy is a science fiction comedy series (created by Douglas Adams) that debuted as a radio comedy broadcast on BBC Radio 4 in 1978. Since then it has been adapted to other formats, slowly becoming an international multi-media phenomenon over a span of several years. The title The Hitchhiker's Guide to the Galaxy is often abbreviated as \"HHG\", \"HHGG\", \"HHGTTG\", or \"H2G2\". The series is also often referred to as \"The Hitchhiker's Guide\", \"Hitchhiker's\", or simply \"[The] Guide.\" This title can refer to any of the various incarnations of the story, of which the books, having been translated into more than 30 languages by 2005. Although the various versions follow the same basic plot, they are in many places mutually contradictory, as Adams rewrote the story substantially for each new adaptation. In all versions, the series follows the adventures of Arthur Dent, a hapless Englishman who escapes the demolition of Earth by a bureaucratic alien race called the Vogons with his friend Ford Prefect, an alien from a small planet somewhere in the vicinity of Betelgeuse and researcher for the eponymous guidebook. Zaphod Beeblebrox, Ford's semi-cousin and part-time Galactic President, unknowingly saves the pair from certain death. He brings them aboard his stolen spaceship, the Heart of Gold, whose crew rounds out the main cast of characters: Marvin the Paranoid Android, a severely depressed robot, and Trillian, formerly known as Tricia McMillan, a woman Arthur once met at a party who he soon realises is the only other survivor of Earth's destruction. After this, the characters embark on a quest to find the legendary planet of Magrathea and the Question to the Ultimate Answer.",
-          "addedOn": 1765508171460,
-          "isCurrent": false,
-          "id": 2
-        },
-        {
-          "googleId": "uWYRzgEACAAJ",
-          "clubId": 1,
-          "title": "The Thursday Murder Club",
-          "author": "Richard Osman",
-          "imageSmall": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-          "imageLarge": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-          "description": "In a peaceful retirement village, four unlikely friends meet up once a week to investigate unsolved murders. But when a brutal killing takes place on their very doorstep, the Thursday Murder Club find themselves in the middle of their first live case. Elizabeth, Joyce, Ibrahim and Ron might be pushing eighty, but they still have a few tricks up their sleeves. Can our unorthodox but brilliant gang catch the killer before it's too late?",
-          "addedOn": 1765508657387,
-          "isCurrent": false,
-          "id": 3
-        },
-        {
-          "googleId": "mo01zwEACAAJ",
-          "clubId": 1,
-          "title": "The Bullet that Missed",
-          "author": "Richard Osman",
-          "imageSmall": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-          "imageLarge": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-          "description": "\"It is an ordinary Thursday, and things should finally be returning to normal. Except trouble is never far away where the Thursday Murder Club are concerned. A decade-old cold case--their favorite kind--leads them to a local news legend and a murder with no body and no answers.The n a new foe pays Elizabeth a visit. Her mission? Kill or be killed. Suddenly the cold case has become red hot. While Elizabeth wrestles with her conscience (and a gun), Joyce, Ron, and Ibrahim chase down the clues with help from old friends and new. But can the gang solve the mystery and save Elizabeth before the murderer strikes again?\"--",
-          "addedOn": 1765508797846,
-          "isCurrent": false,
-          "id": 4
-        },
-        {
-          "googleId": "hFT5DwAAQBAJ",
-          "clubId": 1,
-          "title": "The Thursday Murder Club",
-          "author": "Richard Osman",
-          "imageSmall": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-          "imageLarge": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-          "description": "\"First published in hardcover in Great Britain by Viking, an imprint of Penguin Books, a division of Penguin Random House Ltd., London\"--Copyright page.",
-          "addedOn": 1765509018072,
-          "isCurrent": true,
-          "id": 5
-        }
-      ]
+      "id": 1
     },
     {
       "name": "Sunday Brunch Book Club",
@@ -303,7 +241,7 @@
       "imageLarge": "http://books.google.com/books/content?id=-TEhWYITfkYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "A writer's views on life and art are revealed in his effort to edit the children's classic that shaped his literary ambitions.",
       "addedOn": 1766246101664,
-      "isCurrent": true,
+      "isCurrent": false,
       "id": 9
     },
     {
@@ -317,6 +255,18 @@
       "addedOn": 1766267203180,
       "isCurrent": true,
       "id": 10
+    },
+    {
+      "googleId": "KKZ2DwAAQBAJ",
+      "clubId": 2,
+      "title": "Murder On The Orient Express",
+      "author": "Agatha Christie",
+      "imageSmall": "http://books.google.com/books/content?id=KKZ2DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=KKZ2DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "An international cast of suspects, all passengers on the crowded train, are speeding through the snowy European landscape when a bizarre and terrible murder brings them to an abrupt halt. One of their glittering number lies dead in his cabin, stabbed a mysterious twelve times. There is no lack of clues for Poirot - but which clue is real and which is a clever plant? Poirot realises that this time he is dealing with a murderer of enormous cunning and that in a case frought with fear and inconstencies only one thing is certain - the murderer is still aboard the train waiting to strike again.",
+      "addedOn": 1766368807725,
+      "isCurrent": true,
+      "id": 11
     }
   ],
   "userBooks": [
@@ -583,6 +533,18 @@
       "addedOn": 1765935618898,
       "status": "Not Started",
       "id": 31
+    },
+    {
+      "googleId": "-TEhWYITfkYC",
+      "userId": 1,
+      "title": "The Princess Bride",
+      "author": "William Goldman",
+      "imageSmall": "http://books.google.com/books/content?id=-TEhWYITfkYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=-TEhWYITfkYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "A writer's views on life and art are revealed in his effort to edit the children's classic that shaped his literary ambitions.",
+      "addedOn": 1766341918387,
+      "status": "Not Started",
+      "id": 32
     }
   ]
 }
