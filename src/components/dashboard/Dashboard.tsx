@@ -16,8 +16,8 @@ export const Dashboard = ({user}) => {
 
     return (
         user && bookList &&
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 max-w-[1600px] mx-auto">
-            <div className="flex flex-col min-h-[600px] p-3 rounded-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 max-w-[1600px] mx-auto md:h-fit">
+            <div className="flex flex-col min-h-[600px] p-3 rounded-lg md:h-fit">
                 <Box 
                     sx={{
                         bgcolor: 'background.paper',

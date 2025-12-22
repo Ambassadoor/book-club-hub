@@ -64,7 +64,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
               onClick={() => handleNavLinkClick("/")}
             >
               <Book />
-              <Typography sx={{ mx: 1, whiteSpace: 'nowrap' }}>
+              <Typography variant="h6" sx={{ mx: 1, whiteSpace: 'nowrap' }}>
                 {isMedium ? "Book Club Hub" : "BCH"}
               </Typography>
             </Box>
@@ -73,7 +73,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
                 <Button
                   key={page.text}
                   value={page.path}
-                  sx={{ color: 'primary.contrastText', whiteSpace: 'nowrap' }}
+                  sx={{ color: 'text.primary', whiteSpace: 'nowrap' }}
                   onClick={() => handleNavLinkClick(page.path)}
                 >
                   {page.text}
@@ -81,7 +81,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
               ))}
               {user && <Button
                 value={`library/${user}`}
-                sx={{ color: 'primary.contrastText', whiteSpace: 'nowrap' }}
+                sx={{ color: 'text.primary', whiteSpace: 'nowrap' }}
                 onClick={() => handleNavLinkClick(`library/${user}`)}
               >My Library</Button>}
             </Box>

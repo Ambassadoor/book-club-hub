@@ -17,7 +17,9 @@ const search = async (searchParams: SearchParams, page: number=0): Promise<Googl
     query += `&startIndex=${String(page*10)}`
     const response = await fetch(`${url}?q=${query}`).then(res => res.json())
 
-    return response
+    return {
+        ...response, items: response.items || []
+    }
 }
 
 export const googleBooksClient = () => {

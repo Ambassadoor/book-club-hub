@@ -177,7 +177,7 @@ export const SearchBar =
                     }
                 return ""
             }}
-            options={searchResults}
+            options={searchResults || []}
             onInputChange={(_, value) => {
                 setSearchTerm(value)
             }}
