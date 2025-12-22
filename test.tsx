@@ -16,6 +16,8 @@ export const Test = () => {
             adapters={[googleAdapter(search, navigate), clubAdapter(clubSearch, navigate)]}
             iconPosition="start"
             collapse
+            viewMore
+            limit={5}
         />
         </>
     )

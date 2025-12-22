@@ -109,7 +109,7 @@ export const SearchBar1 =<T extends {type: string}>({
 
         if (`isViewMore` in option) {
             const allForType = options.filter(o => o.type === option.type)
-            navigate(`/results`, { state: {type: option.type, options: allForType}})
+            navigate(`/results/${encodeURIComponent(option.type)}/${encodeURIComponent(searchTerm)}`, { state: allForType})
         } else {
             adapterMap.get(option.type)?.select(option)
         }

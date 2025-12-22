@@ -88,7 +88,7 @@ const App = () => {
           <Route path="profile" element={<Profile user={user}/>} />
           <Route path="createAccount" element={<CreateAccount setUser={setUser}/>}/>
           <Route path="test" element={<Test />}/>
-          <Route path="results" element={<Results />}/>
+          <Route path="results/:source/:query" element={<Results />}/>
           <Route path="*" element={<Box sx={{ color: 'text.primary', textAlign: 'center', p: 4 }}>Page Not Found</Box>} />
         </Route>
       </Routes>
