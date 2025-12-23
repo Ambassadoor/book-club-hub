@@ -19,6 +19,9 @@ type SearchBar1Props<T> = {
     collapse?: boolean,
     limit? : number,
     viewMore? : boolean,
+    initialQuery?: string,
+    initialResults?: T[],
+    onSearchResults?: (query: string, results: T[]) => void
 }
 
 type ViewMoreOption = {
@@ -32,10 +35,13 @@ export const SearchBar1 =<T extends {type: string}>({
     hideOptions=false,
     collapse,
     limit,
-    viewMore=false
+    viewMore=false,
+    initialQuery,
+    initialResults,
+    onSearchResults
 } : SearchBar1Props<T>) => {
-    const [options, setOptions] = useState<T[]>([])
-    const [searchTerm, setSearchTerm] = useState("")
+    const [options, setOptions] = useState<T[]>(initialResults || [])
+    const [searchTerm, setSearchTerm] = useState(initialQuery || "")
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null);
@@ -124,6 +130,12 @@ export const SearchBar1 =<T extends {type: string}>({
     useEffect(() => {
         handleSearch(searchTerm)
     }, [searchTerm, handleSearch])
+
+    useEffect(() => {
+        if (searchTerm !== initialQuery) {
+        onSearchResults?.(searchTerm, options)
+        }
+    }, [options, searchTerm])
 
     return (
 

@@ -27,8 +27,9 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
     }
 
     const handleSelectBook = () => {
+        const id = "googleId" in book ? book.googleId : book.id
         setBook && book && setBook(book)
-        !setBook && navigate(`/books/google/${book.googleId}`)
+        !setBook && navigate(`/books/google/${id}`)
     }
 
     const secondaryAction = (

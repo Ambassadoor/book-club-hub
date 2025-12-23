@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useBooksSearch } from "../../hooks/useBooksSearch"
-import { BookList } from "../library/BookList"
-import { Club } from "../clubs/Club"
+import { PaginatedList } from "./PaginatedList"
+import { BookSearchResult } from "../library/BookSearchResult"
+import { SearchBar1 } from "./ReconfigSearchBar"
+import { googleAdapter } from "../../services/searchAdapters/googleAdapter"
+import { Box } from "@mui/material"
 
 export const Results = () => {
     const {source, query} = useParams()
@@ -11,6 +14,7 @@ export const Results = () => {
     const location = useLocation()
     const routerResults = location.state;
     const [results, setResults] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (routerResults) {
@@ -27,12 +31,9 @@ export const Results = () => {
     }, [routerResults, source, query])
 
     return (
-        <>
-            {
-            source === "Google Books"
-            ? <BookList list={results}/>
-            : <Club />
-            }
-        </>
+        <Box className="flex flex-col">
+            <SearchBar1 adapters={[googleAdapter(bookSearch, navigate)]} hideOptions onSearchResults={(q,r) => setResults(r)} initialQuery={query} initialResults={results}/>
+            <PaginatedList results={results} Child={BookSearchResult}/>
+        </Box>
     )
 }

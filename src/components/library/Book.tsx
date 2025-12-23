@@ -21,7 +21,7 @@ export const Book = () => {
     const isMedium = useMediaQuery(`(min-width:640px)`)
 
     useEffect(() => {
-        if (location.state.id) setBook(location.state)
+        if (location?.state?.id) setBook(location.state)
         else if (bookId) {
             getBook(bookId).then(res => setBook(res))
         }
