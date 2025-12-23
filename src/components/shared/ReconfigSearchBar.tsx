@@ -96,22 +96,30 @@ export const SearchBar1 =<T extends {type: string}>({
         return result
     }, [options, limit, viewMore])
 
-    const getLabel = (option: T | ViewMoreOption) => {
+    const getLabel = (option: T | ViewMoreOption | string): string => {
+        if (typeof option === "string") {
+            return option;
+        }
+        
         if (`isViewMore` in option) {
             return `View more results...`
         }
-        return adapterMap.get(option.type)?.getLabel(option)
+        return adapterMap.get(option.type)?.getLabel(option) ?? ""
     }
 
-    const getKey = (option: T | ViewMoreOption) => {
+    const getKey = (option: string | T | ViewMoreOption) => {
+        if (typeof option === "string") return option        
+        
         if (`isViewMore` in option) {
             return `view-more-${option.type}`
         }
+
         return adapterMap.get(option.type)?.getKey(option) || ""
     }
 
-    const handleSelect = (option: T | ViewMoreOption | null) => {
-        if (!option) return
+    const handleSelect = (option: string | T | ViewMoreOption | null) => {
+        if (!option || typeof option === "string") return
+
 
         if (`isViewMore` in option) {
             const allForType = options.filter(o => o.type === option.type)
