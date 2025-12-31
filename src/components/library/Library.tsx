@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getLibrary } from "../../services/libraryServices/libraryServices"
 import { Box } from "@mui/material"
-import { BookList } from "./BookList"
-import { SearchBar } from "../shared/SearchBar"
 import { BookFull } from "./BookFull"
+import { PaginatedList } from "../shared/PaginatedList"
+import { BookSearchResult } from "./BookSearchResult"
+import { SearchBar1 } from "../shared/ReconfigSearchBar"
+import debounce from "lodash.debounce"
+
 export interface SearchParams {
     intitle?: string,
     inauthor?: string,
@@ -19,9 +22,8 @@ export const Library = () => {
     const {userId} = useParams()
     const [library, setLibrary] = useState<UserBook[]>([])
     const [searchResults, setSearchResults] = useState<UserBook[] | GoogleBook[]>([])
-    const [numResults, setNumResults] = useState<number>(0)
-    const [page, setPage] = useState<number>(0)
     const [book, setBook] = useState<UserBook | GoogleBook | null>(null)
+    const [term, setTerm] = useState("")
 
     useEffect(() => {
         userId &&
@@ -36,6 +38,25 @@ export const Library = () => {
     useEffect(() => {
         setSearchResults(library)
     },[library])
+
+    const search = useCallback((term, items) => {
+        return items.filter(item => {
+            return Object.values(item).some(v => 
+                String(v).toLowerCase().includes(term.toLowerCase())
+            )
+        })
+    }, [])
+
+    const updateSearchResults = useMemo(() => 
+        debounce((term, items) => {
+            setSearchResults(search(term, items))
+        }, 300), 
+    [search])
+
+    useEffect(() => {
+        updateSearchResults(term, library)
+        return () => updateSearchResults.cancel()
+    }, [term, library, updateSearchResults])
 
     return (
         <Box 
@@ -55,16 +76,10 @@ export const Library = () => {
                 }}
             >
                 <Box sx={{ p: 3, borderBottom: 1, borderColor: 'divider' }}>
-                    <SearchBar 
-                        className="w-full" 
-                        close 
-                        fullWidth 
-                        source={library} 
-                        results={searchResults} 
-                        setResults={setSearchResults} 
-                        setTotal={setNumResults} 
-                        page={page} 
-                        setPage={setPage}
+                    <SearchBar1
+                        adapters={[]}
+                        hideOptions
+                        getSearchTerm={(term) => setTerm(term)}
                     />
                 </Box>
                 <Box 
@@ -74,12 +89,11 @@ export const Library = () => {
                         p: 2,
                     }}
                 >
-                    <BookList 
-                        list={searchResults} 
-                        setBook={setBook} 
-                        page={page} 
-                        setPage={setPage} 
-                    />
+                    <PaginatedList displayCount={5} results={searchResults?.map((result) => {return {
+                        book: result,
+                        user: userId,
+                        setBook: setBook
+                    }})} Child={BookSearchResult}/>
                 </Box>
             </Box>
             <Box 

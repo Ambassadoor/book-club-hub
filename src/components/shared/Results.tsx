@@ -33,7 +33,7 @@ export const Results = () => {
     return (
         <Box className="flex flex-col">
             <SearchBar1 adapters={[googleAdapter(bookSearch, navigate)]} hideOptions onSearchResults={(q,r) => setResults(r)} initialQuery={query} initialResults={results}/>
-            <PaginatedList results={results} Child={BookSearchResult}/>
+            <PaginatedList results={results.map(r => {return {book: r}})} Child={BookSearchResult}/>
         </Box>
     )
 }

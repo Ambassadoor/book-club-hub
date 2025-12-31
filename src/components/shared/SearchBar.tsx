@@ -1,11 +1,10 @@
 import * as React from "react"
 import { Search } from "@mui/icons-material"
-import { Autocomplete, type AutocompleteProps, IconButton, InputAdornment, TextField, type TextFieldProps } from "@mui/material"
+import { Autocomplete, type AutocompleteProps, IconButton, InputAdornment, TextField } from "@mui/material"
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { bchBooksClient, type BchSearchResults } from "../../api/bchBooksClient"
 import { googleBooksClient, type GoogleSearchResults } from "../../api/googleBooksClient"
-import { colors } from "../../styles/colors"
 import { useNavigate } from "react-router-dom"
 
 type Target = "googleBooks" | "bchbooks"
@@ -122,7 +121,7 @@ export const SearchBar =
                     const filteredResults = source.filter(book => {
                         if (typeof book === "object" && book !== null) { 
                             return Object.values(book).some(v =>                         
-                            String(v).toLocaleLowerCase().includes(searchTerm.toLowerCase())                        
+                            String(v).toLowerCase().includes(searchTerm.toLowerCase())                        
                     )
                 }
                 })

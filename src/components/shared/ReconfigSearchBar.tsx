@@ -21,7 +21,8 @@ type SearchBar1Props<T> = {
     viewMore? : boolean,
     initialQuery?: string,
     initialResults?: T[],
-    onSearchResults?: (query: string, results: T[]) => void
+    onSearchResults?: (query: string, results: T[]) => void,
+    getSearchTerm?: (term: string) => void
 }
 
 type ViewMoreOption = {
@@ -38,15 +39,20 @@ export const SearchBar1 =<T extends {type: string}>({
     viewMore=false,
     initialQuery,
     initialResults,
-    onSearchResults
+    onSearchResults,
+    getSearchTerm
 } : SearchBar1Props<T>) => {
     const [options, setOptions] = useState<T[]>(initialResults || [])
     const [searchTerm, setSearchTerm] = useState(initialQuery || "")
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null);
+    const getSearchTermRef = useRef(getSearchTerm);
     const navigate = useNavigate()
     
+    useEffect(() => {
+        getSearchTermRef.current = getSearchTerm;
+    });
     
     const adapterMap = useMemo(() => {
         const map = new Map<string, SearchAdapter<T>>()
@@ -144,6 +150,10 @@ export const SearchBar1 =<T extends {type: string}>({
         onSearchResults?.(searchTerm, options)
         }
     }, [options, searchTerm])
+
+    useEffect(() => {
+        getSearchTermRef.current?.(searchTerm)
+    }, [searchTerm])
 
     return (
 

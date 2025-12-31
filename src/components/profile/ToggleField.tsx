@@ -3,6 +3,7 @@ import { PasswordField } from "../shared/PasswordField"
 
 export type ToggleFieldProps = {
     editing: boolean
+    noLabel?: boolean
     textProps?: (FilledTextFieldProps | StandardTextFieldProps | OutlinedTextFieldProps)
     typeProps?: TypographyProps
 }
@@ -11,7 +12,7 @@ export type ToggleFieldProps = {
 
 
 // A custom field that switches between a TextField and a Typography. For quick edit forms. 
-export const ToggleField = ({editing, textProps, typeProps}: ToggleFieldProps) => {
+export const ToggleField = ({editing, noLabel=false, textProps, typeProps}: ToggleFieldProps) => {
 
     return (
         textProps?.type==="password" && editing ? (
@@ -26,7 +27,7 @@ export const ToggleField = ({editing, textProps, typeProps}: ToggleFieldProps) =
             <Typography
                 {...typeProps}
             >
-                {`${textProps?.label}: ${textProps?.value}`}
+                {noLabel ? `${textProps?.value}` : `${textProps?.label}: ${textProps?.value}`}
             </Typography>
         )
     )
