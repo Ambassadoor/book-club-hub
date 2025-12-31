@@ -5,7 +5,7 @@ export const googleAdapter = (search, navigate) => {
 
             {
                 const results = await search(term, index)
-                const formatted = results?.map(r => ({...r, type}))
+                const formatted = results.items?.map(r => ({...r, type}))
 
                 return formatted ? formatted : ""
 

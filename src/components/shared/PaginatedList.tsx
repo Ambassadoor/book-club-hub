@@ -4,6 +4,7 @@ import { useState } from "react"
 export const PaginatedList = ({results, displayCount=10, Child}) => {
     const [page, setPage] = useState(1)
 
+    //TODO: Add logic to check for additional results, display additional pages and handle fetching more results
     return (
         <Box>
             <List>

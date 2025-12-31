@@ -41,7 +41,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
     }
 
     const handleSubmit = async () => {
-        const response = await fetch(`http://localhost:8088/clubs/${clubId}`, {
+        await fetch(`http://localhost:8088/clubs/${clubId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -122,20 +122,16 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                     p: 4,
                 }}
             >
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col gap-2 w-full mb-4">
                 <div className="flex flex-wrap gap-2 items-center w-full min-w-0">
                     <div className="flex-1 min-w-0" style={{ minWidth: '250px' }}>
                         <ToggleField 
-                            variant="h5" 
-                            fullWidth 
-                            name="name" 
+                            typeProps={{variant: "h5"}}
+                            textProps={{fullWidth: true, name:"name", value: clubInfo.name, label: "Club Name", onChange: handleChange}}
                             editing={editing} 
-                            value={clubInfo.name} 
-                            label="Club Name" 
-                            onChange={handleChange}
                         />
                     </div>
-                    <div className="flex gap-1 items-center">
+                    {!editing && <div className="flex gap-1 items-center">
                         {userRole !== "guest" && userRole === "admin" ? (
                             <Chip size="small" color="secondary" label="Admin"/>
                         ) : user && (
@@ -148,18 +144,20 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                         ) : (
                             <LeaveClubButton userId={user} clubId={Number(clubId)} handleLeave={setUserRole}/>
                         )}
-                    </div>
+                    </div>}
                 </div>
                 <div className="w-full min-w-0">
                     <ToggleField 
-                        variant="body1" 
-                        fullWidth 
-                        multiline 
-                        name="description" 
+                        typeProps={{variant: "body1"}}
+                        textProps={{
+                            fullWidth: true,
+                            multiline: true,
+                            name:"description",
+                            value: clubInfo.description,
+                            label: "Description",
+                            onChange: handleChange
+                        }}
                         editing={editing} 
-                        value={clubInfo.description} 
-                        label="Description" 
-                        onChange={handleChange}
                     />
                 </div>
                 {editing && (
@@ -167,7 +165,7 @@ export const ClubDetails = ({user}: ClubDetailsProps) => {
                         <Button variant="outlined" color="error" size="small" onClick={handleDeleteClick}>
                             Delete Club
                         </Button>
-                        <div className="flex gap-1">
+                        <div className="flex gap-2">
                             <Button variant="outlined" onClick={handleCancel}>Cancel</Button>
                             <Button variant="contained" color="primary" onClick={handleSubmit}>Save Changes</Button>
                         </div>

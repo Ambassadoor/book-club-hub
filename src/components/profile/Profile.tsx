@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, IconButton, Typography } from "@mui/material"
+import { Avatar, Box, Button, IconButton, Typography, type StandardTextFieldProps, type TypographyProps } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUser, updateProfile, type User } from "../../services/userServices/userServices"
 import { ToggleField } from "./ToggleField"
@@ -12,6 +12,7 @@ type ProfileProps = {
 export const Profile = ({user}: ProfileProps) => {
     const [userInfo, setUserInfo] = useState<User>()
     const [editing, setEditing] = useState(false)
+    const [fields, setFields] = useState<StandardTextFieldProps[]>([])
 
     useEffect(() => {
         user && 
@@ -31,6 +32,23 @@ export const Profile = ({user}: ProfileProps) => {
             ...userInfo, [key]: e.target.value
         })
     }
+
+    useEffect(() => {
+        const fieldProps = [
+            {name: "firstName", label: "First Name", value: userInfo?.firstName},
+            {name: "lastName", label: "Last Name", value: userInfo?.lastName},
+            {name: "tagline", label: "Tagline", value: userInfo?.tagline},
+            {name: "userName", label: "Username", value: userInfo?.userName}, 
+        ]
+
+        const bchFieldProps = [
+            {name: "password", label: "Password", value: editing ? userInfo?.password : `••••••••`, type: "password"},
+            {name: "email", label: "Email", value: userInfo?.email}
+        ]
+        setFields(
+            userInfo?.method === "bch" ? fieldProps.concat(bchFieldProps) : fieldProps
+        )
+    }, [userInfo])
 
     const handleSave = () => {
         if (userInfo) {
@@ -86,21 +104,16 @@ export const Profile = ({user}: ProfileProps) => {
                 </Avatar>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: editing ? 3 : 0 }}>
-                <ToggleField name="firstName" editing={editing} label="First Name" value={userInfo.firstName} onChange={handleEditField}/>
-                <ToggleField name="lastName" editing={editing} label="Last Name" value={userInfo.lastName} onChange={handleEditField}/>
-                <ToggleField name="tagline" editing={editing} label="Tagline" value={userInfo.tagline} onChange={handleEditField}/>
-                <ToggleField name="userName" editing={editing} label="Username" value={userInfo.userName} onChange={handleEditField}/>
+                {
+                    fields.map((field, index) => (
+                        field && <ToggleField key={index} editing={editing} textProps={{...field, variant: "standard", onChange: handleEditField}}/>
+                    ))
+                }
                 {/* Only users who create account with BCH will have password, and cannot change email since it's associated with
                 google account. May implement secondary email address in future"
                 */}
                 
                 {/* TODO: Either add new email field to database to check google account logins or add secondary email */}
-                {userInfo.method === "bch" &&
-                <>
-                    <ToggleField name="password" editing={editing} label="Password" value={editing ? userInfo.password : `••••••••`} type="password" onChange={handleEditField}/>
-                    <ToggleField name="email" editing={editing} label="Email" value={userInfo.email} onChange={handleEditField}/>
-                </>
-                }
             </Box>
             {editing && 
                 <Box sx={{ display: 'flex', ml: 'auto', gap: 1 }}>

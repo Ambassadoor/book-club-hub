@@ -54,11 +54,11 @@ export const useBooksSearch = () => {
             }
             const data = await res.json()
 
-            memoryCache.set(key, data.items);
-            sessionStorage.setItem(key, JSON.stringify(data.items))
+            memoryCache.set(key, data);
+            sessionStorage.setItem(key, JSON.stringify(data))
 
 
-            return data.items;
+            return data;
         } catch (err) {
             if ((err as DOMException).name === "AbortError") {
                 console.log("Fetch aborted")

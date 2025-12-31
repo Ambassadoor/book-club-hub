@@ -1,40 +1,21 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material"
-import { IconButton, InputAdornment, TextField } from "@mui/material"
+import { IconButton, InputAdornment, TextField, type TextFieldProps } from "@mui/material"
 import { useState } from "react"
 
-type PasswordFieldProps = {
-    name?: string,
-    label?: string,
-    className?: string
-    fullWidth?: boolean
-    value?: string,
-    required?: boolean,
-    error?: boolean,
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+
 
 // A reusable password input field
-export const PasswordField = (props: PasswordFieldProps) => {
+export const PasswordField = ({...props}: TextFieldProps) => {
     const [ showPassword, setShowPassword] = useState(false)
-    const {name="password", label="Password", className, fullWidth=false, value, required, error=false, onChange} = props
 
     return (
         <TextField
-        error={error}
         helperText={
-            error
+            props.error
             ? "Incorrect Password"
             : " "
         }
-        className={className}
-        required={required || false}
-        margin="dense"
-        name={name}
-        label={label}
-        value={value}
         type={showPassword ? "text" : "password"}
-        fullWidth={fullWidth}
-        variant="standard"
         slotProps={{
             input: {
                 endAdornment: (
@@ -46,12 +27,12 @@ export const PasswordField = (props: PasswordFieldProps) => {
                 ),
             }
         }}
-        onChange={onChange}
         onKeyDown={e => {
             if (e.key === " ") {
                 e.preventDefault();
             }
         }}
+        {...props}
         />
     )
 }

@@ -26,7 +26,7 @@ export const Results = () => {
             const search =
                 source === "Google Books" ? bookSearch : clubSearch
 
-            search(query).then(setResults);
+            search(query).then((res) => setResults(res.items));
         } 
     }, [routerResults, source, query])
 

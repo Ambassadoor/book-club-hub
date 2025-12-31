@@ -90,6 +90,8 @@ export const LoginCard = ({setUser}: LoginCardProps) => {
                     />
                     <PasswordField 
                         name="password"
+                        margin="dense"
+                        label="Password"
                         fullWidth
                         value={formData.password}
                         error={signInError.type === "PasswordError"}

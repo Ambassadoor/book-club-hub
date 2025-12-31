@@ -1,49 +1,32 @@
-import { TextField, Typography } from "@mui/material"
+import { TextField, Typography, type FilledTextFieldProps, type StandardTextFieldProps, type OutlinedTextFieldProps, type TypographyProps } from "@mui/material"
 import { PasswordField } from "../shared/PasswordField"
 
-type ToggleFieldProps = {
-    variant?: string,
-    fullWidth?: boolean,
-    multiline?: boolean,
-    className?: string,
-    rows?: number,
-    name: string,
-    editing: boolean,
-    value: string,
-    label: string,
-    type?: string | null,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+export type ToggleFieldProps = {
+    editing: boolean
+    textProps?: (FilledTextFieldProps | StandardTextFieldProps | OutlinedTextFieldProps)
+    typeProps?: TypographyProps
 }
 
+
+
+
 // A custom field that switches between a TextField and a Typography. For quick edit forms. 
-export const ToggleField = (props: ToggleFieldProps) => {
-    const {variant, fullWidth=false, multiline=false, className, rows, name, editing, value, label, type, onChange} = props
+export const ToggleField = ({editing, textProps, typeProps}: ToggleFieldProps) => {
 
     return (
-        type==="password" && editing ? (
-            <PasswordField 
-                className={className} 
-                fullWidth={fullWidth} 
-                name={name}
-                value={value} 
-                onChange={onChange}
+        textProps?.type==="password" && editing ? (
+            <PasswordField
+                {...textProps}
             />
         ) : editing ? (
             <TextField 
-                className={className} 
-                fullWidth={fullWidth} 
-                multiline={multiline} 
-                rows={rows && rows} 
-                name={name} 
-                type={type ? type : "text"} 
-                label={label} 
-                value={value} 
-                variant="standard" 
-                onChange={onChange}
+                {...textProps}
             />
         ) : (
-            <Typography variant={variant} className={className} color="text.primary">
-                {`${label}: ${value}`}
+            <Typography
+                {...typeProps}
+            >
+                {`${textProps?.label}: ${textProps?.value}`}
             </Typography>
         )
     )
