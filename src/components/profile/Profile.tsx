@@ -48,7 +48,7 @@ export const Profile = ({user}: ProfileProps) => {
         setFields(
             userInfo?.method === "bch" ? fieldProps.concat(bchFieldProps) : fieldProps
         )
-    }, [userInfo])
+    }, [userInfo, editing])
 
     const handleSave = () => {
         if (userInfo) {
