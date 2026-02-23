@@ -15,8 +15,10 @@ export const Results = () => {
     const routerResults = location.state;
     const [results, setResults] = useState([])
     const navigate = useNavigate()
+    const [first, setFirst] = useState(true)
 
     useEffect(() => {
+        console.log(`Query: ${query}, Router Results: ${routerResults}`)
         if (routerResults) {
             setResults(routerResults);
             return
@@ -28,11 +30,17 @@ export const Results = () => {
 
             search(query).then((res) => setResults(res.items));
         } 
-    }, [routerResults, source, query])
+    }, [routerResults, source, query, location])
 
     return (
-        <Box className="flex flex-col">
-            <SearchBar1 adapters={[googleAdapter(bookSearch, navigate)]} hideOptions onSearchResults={(q,r) => setResults(r)} initialQuery={query} initialResults={results}/>
+        <Box className="flex flex-col max-w-150">
+            <SearchBar1 
+                adapters={[googleAdapter(bookSearch, navigate)]} 
+                hideOptions={!!routerResults}
+                onSearchResults={(q,r) => setResults(r)} 
+                initialQuery={query} 
+                initialResults={results}
+            />
             <PaginatedList results={results.map(r => {return {book: r}})} Child={BookSearchResult}/>
         </Box>
     )

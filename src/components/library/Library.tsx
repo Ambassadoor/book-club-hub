@@ -66,7 +66,7 @@ export const Library = () => {
             }}
         >
             <Box 
-                className="flex flex-col rounded-lg shadow-lg"
+                className="flex flex-col rounded-lg shadow-lg max-h-fit"
                 sx={{
                     flex: '0 0 auto',
                     width: { xs: '100%', lg: '480px' },
@@ -83,7 +83,7 @@ export const Library = () => {
                     />
                 </Box>
                 <Box 
-                    className="overflow-y-auto" 
+                    className="overflow-y-auto h-auto" 
                     sx={{ 
                         height: '600px',
                         p: 2,
@@ -92,7 +92,7 @@ export const Library = () => {
                     <PaginatedList displayCount={5} results={searchResults?.map((result) => {return {
                         book: result,
                         user: userId,
-                        setBook: setBook
+                        setBook: setBook,
                     }})} Child={BookSearchResult}/>
                 </Box>
             </Box>

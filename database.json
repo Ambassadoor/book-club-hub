@@ -69,10 +69,84 @@
   "clubs": [
     {
       "name": "Thursday Murder Book Club",
-      "description": "Join us as we read through the Thursday Murder Club series, a marvelous collection of mysteries investigated by four pensioners living in a retirement community in England.",
+      "description": "Join us as we read through the Thursday Murder Club series, a marvelous collection of mysteries investigated by four pensioners living in a retirement community in England. Meets on Fridays.",
       "ownerId": 1,
       "created_at": 1765301819597,
-      "id": 1
+      "id": 1,
+      "clubBooks": [
+        {
+          "id": 1,
+          "googleId": "jvRQEQAAQBAJ",
+          "clubId": 1,
+          "title": "The Strength of the Few",
+          "author": "James Islington",
+          "imageSmall": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=jvRQEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "description": "This highly anticipated sequel to The Will of the Many—one of 2023’s most lauded and bestselling fantasy novels—follows Vis as he grapples with a dangerous secret that could unravel history across alternate dimensions. Book two of the Hierarchy quartet.",
+          "addedOn": "2025-12-04T18:32:23.123Z",
+          "isCurrent": false
+        },
+        {
+          "googleId": "NvwqK-KEWbwC",
+          "clubId": 1,
+          "title": "The Hitch Hiker's Guide to the Galaxy Omnibus",
+          "author": "Douglas Adams",
+          "imageSmall": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=NvwqK-KEWbwC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "description": "The Hitchhiker's Guide to the Galaxy is a science fiction comedy series (created by Douglas Adams) that debuted as a radio comedy broadcast on BBC Radio 4 in 1978. Since then it has been adapted to other formats, slowly becoming an international multi-media phenomenon over a span of several years. The title The Hitchhiker's Guide to the Galaxy is often abbreviated as \"HHG\", \"HHGG\", \"HHGTTG\", or \"H2G2\". The series is also often referred to as \"The Hitchhiker's Guide\", \"Hitchhiker's\", or simply \"[The] Guide.\" This title can refer to any of the various incarnations of the story, of which the books, having been translated into more than 30 languages by 2005. Although the various versions follow the same basic plot, they are in many places mutually contradictory, as Adams rewrote the story substantially for each new adaptation. In all versions, the series follows the adventures of Arthur Dent, a hapless Englishman who escapes the demolition of Earth by a bureaucratic alien race called the Vogons with his friend Ford Prefect, an alien from a small planet somewhere in the vicinity of Betelgeuse and researcher for the eponymous guidebook. Zaphod Beeblebrox, Ford's semi-cousin and part-time Galactic President, unknowingly saves the pair from certain death. He brings them aboard his stolen spaceship, the Heart of Gold, whose crew rounds out the main cast of characters: Marvin the Paranoid Android, a severely depressed robot, and Trillian, formerly known as Tricia McMillan, a woman Arthur once met at a party who he soon realises is the only other survivor of Earth's destruction. After this, the characters embark on a quest to find the legendary planet of Magrathea and the Question to the Ultimate Answer.",
+          "addedOn": 1765508171460,
+          "isCurrent": false,
+          "id": 2
+        },
+        {
+          "googleId": "uWYRzgEACAAJ",
+          "clubId": 1,
+          "title": "The Thursday Murder Club",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=uWYRzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "description": "In a peaceful retirement village, four unlikely friends meet up once a week to investigate unsolved murders. But when a brutal killing takes place on their very doorstep, the Thursday Murder Club find themselves in the middle of their first live case. Elizabeth, Joyce, Ibrahim and Ron might be pushing eighty, but they still have a few tricks up their sleeves. Can our unorthodox but brilliant gang catch the killer before it's too late?",
+          "addedOn": 1765508657387,
+          "isCurrent": false,
+          "id": 3
+        },
+        {
+          "googleId": "mo01zwEACAAJ",
+          "clubId": 1,
+          "title": "The Bullet that Missed",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=mo01zwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+          "description": "\"It is an ordinary Thursday, and things should finally be returning to normal. Except trouble is never far away where the Thursday Murder Club are concerned. A decade-old cold case--their favorite kind--leads them to a local news legend and a murder with no body and no answers.The n a new foe pays Elizabeth a visit. Her mission? Kill or be killed. Suddenly the cold case has become red hot. While Elizabeth wrestles with her conscience (and a gun), Joyce, Ron, and Ibrahim chase down the clues with help from old friends and new. But can the gang solve the mystery and save Elizabeth before the murderer strikes again?\"--",
+          "addedOn": 1765508797846,
+          "isCurrent": false,
+          "id": 4
+        },
+        {
+          "googleId": "hFT5DwAAQBAJ",
+          "clubId": 1,
+          "title": "The Thursday Murder Club",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=hFT5DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "description": "\"First published in hardcover in Great Britain by Viking, an imprint of Penguin Books, a division of Penguin Random House Ltd., London\"--Copyright page.",
+          "addedOn": 1765509018072,
+          "isCurrent": false,
+          "id": 5
+        },
+        {
+          "googleId": "VU1PEQAAQBAJ",
+          "clubId": 1,
+          "title": "The Impossible Fortune",
+          "author": "Richard Osman",
+          "imageSmall": "http://books.google.com/books/content?id=VU1PEQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "imageLarge": "http://books.google.com/books/content?id=VU1PEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "description": "Elizabeth, Joyce, Ibrahim and Ron return in the brilliant new book by #1 bestseller Richard Osman in his record-breaking series The Thursday Murder Club",
+          "addedOn": 1765641812440,
+          "isCurrent": true,
+          "id": 8
+        }
+      ]
     },
     {
       "name": "Sunday Brunch Book Club",
@@ -87,6 +161,20 @@
       "ownerId": 3,
       "created_at": "2025-12-20T21:46:23.568Z",
       "id": 3
+    },
+    {
+      "name": "New Year New Book!",
+      "description": "Start a reading habit in the new year with us!",
+      "ownerId": 3,
+      "created_at": "2026-01-04T19:55:08.219Z",
+      "id": 4
+    },
+    {
+      "name": "The NSS Book Club",
+      "description": "We read books about web app development. ",
+      "ownerId": 1,
+      "created_at": "2026-02-23T18:09:53.277Z",
+      "id": 5
     }
   ],
   "clubMembers": [
@@ -135,7 +223,7 @@
       "clubId": 2,
       "isAdmin": false,
       "created_at": 1766264344544,
-      "isActive": true,
+      "isActive": false,
       "id": 9
     },
     {
@@ -145,6 +233,30 @@
       "created_at": 1766267183576,
       "isActive": true,
       "id": 10
+    },
+    {
+      "userId": 1,
+      "clubId": 3,
+      "isAdmin": false,
+      "created_at": 1767319718145,
+      "isActive": true,
+      "id": 11
+    },
+    {
+      "userId": 3,
+      "clubId": 4,
+      "isAdmin": true,
+      "created_at": 1767556508235,
+      "isActive": true,
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "clubId": 5,
+      "isAdmin": true,
+      "created_at": 1771870193603,
+      "isActive": true,
+      "id": 13
     }
   ],
   "clubBooks": [
@@ -229,7 +341,7 @@
       "imageLarge": "http://books.google.com/books/content?id=VU1PEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "Elizabeth, Joyce, Ibrahim and Ron return in the brilliant new book by #1 bestseller Richard Osman in his record-breaking series The Thursday Murder Club",
       "addedOn": 1765641812440,
-      "isCurrent": true,
+      "isCurrent": false,
       "id": 8
     },
     {
@@ -253,7 +365,7 @@
       "imageLarge": "http://books.google.com/books/content?id=CXKcJC76tgcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "description": "Sometimes, we fall in love on mission trips even though we know we’ll break up when we get back. Sometimes, you have to shot block a friend’s prayer because she’s asking God to bless an obviously bad dating relationship. Sometimes, you think, “I wish I had a t-shirt that said ‘I direct deposit my tithe’ so people wouldn’t judge me.” Sometimes, the stuff that comes with faith is funny. This is that stuff. Jonathan Acuff’s Stuff Christians Like Ebook is your field guide to all things Christian. You’ll learn the culinary magic of the crock-pot. Think you’ve got a Metro worship leader—use Acuff’s checklist. Want to avoid a prayer handholding faux pas? Acuff has you covered. Like a satirical grenade, Acuff brings us the humor and honesty that galvanized more than a million online readers from more than 200 countries in a new portable version. Welcome to the funny side of faith.",
       "addedOn": 1766267203180,
-      "isCurrent": true,
+      "isCurrent": false,
       "id": 10
     },
     {
@@ -267,6 +379,54 @@
       "addedOn": 1766368807725,
       "isCurrent": true,
       "id": 11
+    },
+    {
+      "googleId": "Y3EGwQEACAAJ",
+      "clubId": 4,
+      "title": "Celebrating the Chinese New Year",
+      "author": "Barbara Linde",
+      "imageSmall": "http://books.google.com/books/content?id=Y3EGwQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=Y3EGwQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "Many cultures had their own way of counting the year before the western calendar became accepted around the world. The Chinese New Year, one of the biggest holidays in modern China, is based on an ancient lunar calendar. Readers explore the long history of this celebration as well as find out about the animals associated with particular years, the food, and ways people still celebrate it today. Amazing full-color photographs show off the fun of the Chinese New Year in history and today to correlate with the text for beginning readers.",
+      "addedOn": 1767556537503,
+      "isCurrent": true,
+      "id": 12
+    },
+    {
+      "googleId": "kPiiEAAAQBAJ",
+      "clubId": 1,
+      "title": "The Last Devil to Die",
+      "author": "Richard Osman",
+      "imageSmall": "http://books.google.com/books/content?id=kPiiEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=kPiiEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "The fourth installment in the beloved and New York Times bestselling series from Richard Osman, now streaming on Netflix “The best Murder Club book yet. . . A poignant complement to both the fair-play mystery plot and the characters’ lively humor.” —The New York Times Book Review It's rarely a quiet day for the Thursday Murder Club. Shocking news reaches them—an old friend has been killed, and a dangerous package he was protecting has gone missing. The gang's search leads them into the antiques business, where the tricks of the trade are as old as the objects themselves. As they encounter drug dealers, art forgers, and online fraudsters—as well as heartache close to home—Elizabeth, Joyce, Ron, and Ibrahim have no idea whom to trust. With the body count rising, the clock ticking down, and trouble firmly on their tail, has their luck finally run out? And who will be the last devil to die?",
+      "addedOn": 1771870073800,
+      "isCurrent": true,
+      "id": 13
+    },
+    {
+      "googleId": "BG_cDwAAQBAJ",
+      "clubId": 5,
+      "title": "Beyond the Basic Stuff with Python",
+      "author": "Al Sweigart",
+      "imageSmall": "http://books.google.com/books/content?id=BG_cDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=BG_cDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "description": "BRIDGE THE GAP BETWEEN NOVICE AND PROFESSIONAL You've completed a basic Python programming tutorial or finished Al Sweigart's bestseller, Automate the Boring Stuff with Python. What's the next step toward becoming a capable, confident software developer? Welcome to Beyond the Basic Stuff with Python. More than a mere collection of advanced syntax and masterful tips for writing clean code, you'll learn how to advance your Python programming skills by using the command line and other professional tools like code formatters, type checkers, linters, and version control. Sweigart takes you through best practices for setting up your development environment, naming variables, and improving readability, then tackles documentation, organization and performance measurement, as well as object-oriented design and the Big-O algorithm analysis commonly used in coding interviews. The skills you learn will boost your ability to program--not just in Python but in any language. You'll learn: Coding style, and how to use Python's Black auto-formatting tool for cleaner code Common sources of bugs, and how to detect them with static analyzers How to structure the files in your code projects with the Cookiecutter template tool Functional programming techniques like lambda and higher-order functions How to profile the speed of your code with Python's built-in timeit and cProfile modules The computer science behind Big-O algorithm analysis How to make your comments and docstrings informative, and how often to write them How to create classes in object-oriented programming, and why they're used to organize code Toward the end of the book you'll read a detailed source-code breakdown of two classic command-line games, the Tower of Hanoi (a logic puzzle) and Four-in-a-Row (a two-player tile-dropping game), and a breakdown of how their code follows the book's best practices. You'll test your skills by implementing the program yourself. Of course, no single book can make you a professional software developer. But Beyond the Basic Stuff with Python will get you further down that path and make you a better programmer, as you learn to write readable code that's easy to debug and perfectly Pythonic Requirements: Covers Python 3.6 and higher",
+      "addedOn": 1771870231850,
+      "isCurrent": true,
+      "id": 14
+    },
+    {
+      "googleId": "3NbMW8NnHtgC",
+      "clubId": 3,
+      "title": "Stormbreaker",
+      "author": "Anthony Horowitz",
+      "imageSmall": "http://books.google.com/books/content?id=3NbMW8NnHtgC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=3NbMW8NnHtgC&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "After the death of the uncle who had been his guardian, fourteen-year-old Alex Rider is coerced to continue his uncle's dangerous work for Britain's intelligence agency, MI6.",
+      "addedOn": 1771870900267,
+      "isCurrent": true,
+      "id": 15
     }
   ],
   "userBooks": [
@@ -547,14 +707,14 @@
       "id": 32
     },
     {
-      "googleId": "S2Yvf-tWNdUC",
+      "googleId": "hTYmKQAACAAJ",
       "userId": 1,
-      "title": "Wuthering Heights in Plain and Simple English (Includes Study Guide, Complete Unabridged Book, Historical Context, Biography And",
-      "author": "Emily Brontë",
-      "imageSmall": "http://books.google.com/books/content?id=S2Yvf-tWNdUC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-      "imageLarge": "http://books.google.com/books/content?id=S2Yvf-tWNdUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-      "description": "Emily Brontë’s “Wuthering Heights” is considered one of the greatest novels ever wrote. It also can be difficult to understand--it is loaded with themes, imagery, and symbols. If you need a little help understanding it, let BookCaps help with this study guide. Along with chapter-by-chapter summaries and analysis, this book features the full text of Brontë's classic novel is also included. BookCap Study Guides are not meant to be purchased as alternatives to reading the book.",
-      "addedOn": 1766369168325,
+      "title": "The Lord of the Rings Official Movie Guide",
+      "author": "Brian Sibley",
+      "imageSmall": "http://books.google.com/books/content?id=hTYmKQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "imageLarge": "http://books.google.com/books/content?id=hTYmKQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      "description": "The mythos, landscapes and characters that Tolkien created are nothing short of spectacular, and it has taken four decades for cinema technology to reach the necessary level of sophistication to bring them to life. Now, Peter Jackson has accomplished the extraordinary feat of making three motion pictures simultaneously to capture Tolkien's vision in its entirety. For the past several years, Peter Jackson and his team of dedicated filmmakers have been working day and night to bring J.R.R. Tolkien's masterpiece of epic adventure, The Lord of the Rings, to the screen. They have filmed all over the landscapes of New Zealand, and drawn on the skills of a small army of artists -- including digital wizards, medieval weapons experts, stone sculptors, linguists, costumers, makeup designers, blacksmiths and model builders -- together with a cast of internationally renowned actors and literally thousands of extras, to make this ambitious dream come true. And the boundaries of special effects have been pushed to, and beyond, their limits to make The Lord of the Rings Trilogy a ground-breaking and visually stunning cinematic experience. Designed as a celebration of the films, The Lord of the Rings Official Movie Guide is a lavishly illustrated behind-the-scenes guide which includes full-color photos of the cast, locations, sets, monsters and costumes, together with exclusive interviews with Peter Jackson and all the principal cast. It also features an entertaining overview of the conception, design and filming of the trilogy over the last five years, which will give the reader a privileged insight into the making of the most important movie trilogy of the decade.",
+      "addedOn": 1771869992412,
       "status": "Not Started",
       "id": 33
     }

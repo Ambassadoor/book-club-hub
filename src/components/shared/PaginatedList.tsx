@@ -18,15 +18,24 @@ export const PaginatedList = ({results, displayCount=10, Child, emptyMessage="",
 
     useEffect(() => {
         setPage(1)
+        setMinHeight(undefined)
     }, [results])
 
     //TODO: Add logic to check for additional results, display additional pages and handle fetching more results
     return (
         <Box >
-            <List ref={ref} sx={{
+            <List 
+            className="rounded-lg"
+            ref={ref}
+            sx={{
+                bgcolor: 'background.paper',
                 minHeight: minHeight,
-                transition: "min-height 200ms ease"
-                }} {...props}>
+                transition: "min-height 200ms ease",
+                display: "flex",
+                flexDirection: "column",
+                }}
+            {...props}
+            >
                 {
                     results?.length > 0 ? results.slice((page-1)*displayCount, displayCount*page).map((result, index) => (
                         <Child key={index} {...result}/>

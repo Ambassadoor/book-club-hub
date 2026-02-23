@@ -1,7 +1,8 @@
 import { Book, LibraryAdd, LibraryAddCheck} from "@mui/icons-material"
-import { Avatar, Box, Button, Chip, IconButton, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography, useMediaQuery } from "@mui/material"
+import { Avatar, Box, Button, Chip, Divider, IconButton, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography, useMediaQuery } from "@mui/material"
 import { addBookToLibrary } from "../../services/libraryServices/libraryServices"
 import { useNavigate } from "react-router-dom"
+import { useLayoutEffect, useRef, useState } from "react"
 
 export type GoogleBookWithInLibrary = GoogleBook & { inLibrary?: boolean}
 type BookSearchResultProps = {
@@ -15,6 +16,8 @@ type BookSearchResultProps = {
 export const BookSearchResult = ({user, book, update, setBook}: BookSearchResultProps) => {
     const isMedium = useMediaQuery(`(min-width:640px)`)
     const navigate = useNavigate()
+
+
     // TODO: Add a navigate flag to determine if button click will navigate to detail page or not
     // const navigate = useNavigate()
 
@@ -50,33 +53,35 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
 
     return (
         book &&
+        <>
             <ListItem 
                 secondaryAction={secondaryAction}
                 key={book.id} 
                 alignItems="flex-start" 
                 disableGutters
                 sx={{
-                    my: 0.5,
-                    bgcolor: 'action.hover',
-                    borderRadius: 1,
-                    width: '100%',
-                    maxWidth: '100%',
+                    bgcolor: 'background.paper',                    
                     '&:hover': {
-                        bgcolor: 'action.selected',
+                        bgcolor: 'action.hover',
+                        borderColor: 'primary.main'
                     }
                 }}
             >
                 <ListItemButton 
                     sx={{ 
-                        px: 2, 
-                        py: 1,
                         width: '100%',
                         minWidth: 0,
+                        ":hover": {
+                            bgcolor: 'rgba(0, 0, 0, 0)'
+                        }
                     }} 
                     onClick={handleSelectBook}
                 >
-                    <ListItemAvatar sx={{ minWidth: 56, flexShrink: 0 }}>
+                    <ListItemAvatar sx={{ minWidth: 56, flexShrink: 0,}}>
                         <Avatar
+                            sx={{
+                                height: 75, width: 50
+                            }}
                             src={
                                 "imageSmall" in book
                                 ? book?.imageSmall || ""
@@ -91,37 +96,32 @@ export const BookSearchResult = ({user, book, update, setBook}: BookSearchResult
                         sx={{
                             flex: 1,
                             minWidth: 0,
-                            pr: 2,
+                            px: 2,
                         }}
-                        primary={
-                            <Typography 
-                                variant="body2" 
-                                sx={{ 
-                                    overflow: 'hidden', 
-                                    textOverflow: 'ellipsis', 
+                        primary={"title" in book ? book?.title || "" : book?.volumeInfo?.title || ""}
+                        secondary={"author" in book ? book?.author || "" : book?.volumeInfo?.authors?.join(", ") || ""}
+                        slotProps={{
+                            primary: {
+                                variant: "body2",
+                                sx: {
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
-                                    width: '100%',
-                                }}
-                            >
-                                {"title" in book ? book?.title || "" : book?.volumeInfo?.title || ""}
-                            </Typography>
-                        }
-                        secondary={
-                            <Typography 
-                                variant="caption" 
-                                color="text.secondary"
-                                sx={{ 
-                                    overflow: 'hidden', 
-                                    textOverflow: 'ellipsis', 
+                                }
+                            },
+                            secondary: {
+                                variant: "caption",
+                                sx: {
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
-                                    width: '100%',
-                                }}
-                            >
-                                {"author" in book ? book?.author || "" : book?.volumeInfo?.authors?.join(", ") || ""}
-                            </Typography>
-                        }
+                                }
+                            }
+                        }}
                     />
                 </ListItemButton>
             </ListItem>
+            <Divider/>
+            </>
     )
 }

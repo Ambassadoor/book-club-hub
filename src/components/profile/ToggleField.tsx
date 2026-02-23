@@ -13,15 +13,16 @@ export type ToggleFieldProps = {
 
 // A custom field that switches between a TextField and a Typography. For quick edit forms. 
 export const ToggleField = ({editing, noLabel=false, textProps, typeProps}: ToggleFieldProps) => {
+    const { type, ...otherTextProps } = textProps || {}
 
     return (
-        textProps?.type==="password" && editing ? (
+        type === "password" && editing ? (
             <PasswordField
-                {...textProps}
+                {...otherTextProps}
             />
         ) : editing ? (
             <TextField 
-                {...textProps}
+                {...otherTextProps}
             />
         ) : (
             <Typography

@@ -1,12 +1,16 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, List, Pagination, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography, useMediaQuery } from "@mui/material"
 import { SearchBar } from "../shared/SearchBar"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { BookSearchResult, type GoogleBookWithInLibrary } from "./BookSearchResult"
 import { useBchApi } from "../../hooks/useBchApi"
 import { BookFull } from "./BookFull"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { BookList } from "./BookList"
 import { ExpandMore } from "@mui/icons-material"
+import { SearchBar1 } from "../shared/ReconfigSearchBar"
+import { googleAdapter } from "../../services/searchAdapters/googleAdapter"
+import { useBooksSearch } from "../../hooks/useBooksSearch"
+import { PaginatedList } from "../shared/PaginatedList"
 
 type BooksProps = {
     user: number | null
@@ -16,13 +20,13 @@ type BooksProps = {
 export const Books = ({user}: BooksProps) => {
     const {clubId} = useParams()
     const [results, setResults] = useState<GoogleBookWithInLibrary[] | GoogleBook[]>([])
-    const [count, setCount] = useState<number>(1)
-    const [total, setTotal] = useState<number>(0)
-    const [page, setPage] = useState<number>(0)
-    const [open, setOpen] = useState(false)
     const { data: userBooks, refetch} = useBchApi(`?userId=${user}`)
     const [book, setBook] = useState<GoogleBook | GoogleBookWithInLibrary | UserBook | null>(null)
     const [expanded, setExpanded] = useState(true)
+
+    const isLarge = useMediaQuery(`(min-width:1024px)`)
+    const {search} = useBooksSearch()
+    const navigate = useNavigate()
 
     const checkUserLibrary = (res:GoogleBook[]) => {
         if (!userBooks) return
@@ -42,24 +46,23 @@ export const Books = ({user}: BooksProps) => {
     }
 
     useEffect(() => {
-        setCount(Math.ceil(total/10))
-    }, [total])
-
-    const handlePageChange = (_: unknown, value: number) => {
-        setPage(value-1)
-    }
-
-    useEffect(() => {
         if (results?.length > 0) {
-            setOpen(true)
             setExpanded(true)
         }
     },[results])
 
     useEffect(() => {
-        setOpen(false)
+        if (isLarge) return;
         setExpanded(false)
     }, [book])
+
+    const mappedResults = useMemo(() => 
+        results.map((r) => ({
+            user: user,
+            book: r,
+            setBook: setBook
+        }))
+    , [results, user])
 
     return (
         <Box 
@@ -74,20 +77,11 @@ export const Books = ({user}: BooksProps) => {
                 }}
             >
                 <Box className="p-3" sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <SearchBar 
-                        className="w-full" 
-                        close 
-                        fullWidth 
-                        targets={["googleBooks"]} 
-                        results={results} 
-                        setResults={user && !clubId ? checkUserLibrary : setResults} 
-                        setTotal={setTotal} 
-                        page={page} 
-                        setPage={setPage}
-                    />
+                    <SearchBar1 adapters={[googleAdapter(search, navigate)]} hideOptions onSearchResults={(q,r) => setResults(r)}/>
+
                 </Box>
                 <Box 
-                    className={`overflow-y-auto ${expanded && "h-[600px]"} w-full p-2`}
+                    className={`overflow-y-auto ${expanded && "h-full"} w-full p-2`}
                 >
                     <Accordion defaultExpanded expanded={expanded} onChange={() => setExpanded((prev) => !prev)}>
                         <AccordionSummary
@@ -96,12 +90,7 @@ export const Books = ({user}: BooksProps) => {
                             <Typography component="span">Search Results</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <BookList
-                                list={results}
-                                setBook={setBook}
-                                page={page}
-                                setPage={setPage}
-                            />
+                            <PaginatedList results={mappedResults} displayCount={7} Child={BookSearchResult}/>
                         </AccordionDetails>
                     </Accordion>
                 </Box>

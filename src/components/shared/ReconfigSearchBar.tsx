@@ -1,5 +1,5 @@
 import { Search } from "@mui/icons-material"
-import { Autocomplete, IconButton, InputAdornment, TextField } from "@mui/material"
+import { Autocomplete, type AutocompleteProps, IconButton, InputAdornment, TextField } from "@mui/material"
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -23,13 +23,14 @@ type SearchBar1Props<T> = {
     initialResults?: T[],
     onSearchResults?: (query: string, results: T[]) => void,
     getSearchTerm?: (term: string) => void
-}
+} & Omit<AutocompleteProps<T | ViewMoreOption | string, false, false, true>, 'renderInput' | 'options' | 'freeSolo' | 'onInputChange' | 'inputValue' | 'onChange' | 'getOptionLabel' | 'getOptionKey' | 'filterOptions' | 'groupBy' | 'open' | 'onOpen' | 'onClose'>
 
 type ViewMoreOption = {
     isViewMore: true,
     type: string
 }
 
+//TODO: Need to figure out issue with initial results. Logic is breaking onSearchResults
 export const SearchBar1 =<T extends {type: string}>({
     adapters,
     iconPosition="start",
@@ -40,9 +41,11 @@ export const SearchBar1 =<T extends {type: string}>({
     initialQuery,
     initialResults,
     onSearchResults,
-    getSearchTerm
+    getSearchTerm, 
+    ...props
 } : SearchBar1Props<T>) => {
     const [options, setOptions] = useState<T[]>(initialResults || [])
+    const [value, setValue] = useState(null)
     const [searchTerm, setSearchTerm] = useState(initialQuery || "")
     const [focus, setFocus] = useState(false)
     const [open, setOpen] = useState(false)
@@ -71,9 +74,10 @@ export const SearchBar1 =<T extends {type: string}>({
             Array.from(adapterMap.values()).map(async adapter => {
                 const results = await adapter?.search(term)
                 results && setOptions(prev => [...prev, ...results])
+                onSearchResults && results && onSearchResults(searchTerm, results)
             })
         )
-    }, 500), [adapterMap])
+    }, 500), [adapterMap, onSearchResults, searchTerm])
 
     const limitedOptions = useMemo(() => {
         if (!limit) return options
@@ -143,13 +147,13 @@ export const SearchBar1 =<T extends {type: string}>({
 
     useEffect(() => {
         handleSearch(searchTerm)
-    }, [searchTerm, handleSearch])
+    }, [searchTerm])
 
     useEffect(() => {
-        if (searchTerm !== initialQuery) {
-        onSearchResults?.(searchTerm, options)
+        if (onSearchResults && initialQuery && searchTerm !== initialQuery) {
+        onSearchResults(searchTerm, options)
         }
-    }, [options, searchTerm])
+    }, [options, searchTerm, onSearchResults, initialQuery])
 
     useEffect(() => {
         getSearchTermRef.current?.(searchTerm)
@@ -161,17 +165,27 @@ export const SearchBar1 =<T extends {type: string}>({
             className="flex h-fit"
             fullWidth
             size="small"
+            onBlur={() => {setSearchTerm("")}}
             getOptionLabel={getLabel}
             groupBy={adapters.length > 1 ? (option) => option.type: undefined}
             open={hideOptions ? false : open}
             options={limitedOptions}
+            value={value}
             freeSolo
-            onInputChange={(_,value) => {
+            onInputChange={(_,value, reason) => {
+                if (reason === "input") {
                 setSearchTerm(value)
+                }
             }}
             filterOptions={(x) => x}
             inputValue={searchTerm}
-            onChange={(_,option) => handleSelect(option)}
+            onChange={(_,option) => { 
+                if (!option) return;
+
+                handleSelect(option)
+                setValue(null)
+            }
+            }
             onOpen={() => setTimeout(() => setOpen(true), 300)}
             onClose={() => setOpen(false)}
             getOptionKey={getKey}
@@ -216,6 +230,7 @@ export const SearchBar1 =<T extends {type: string}>({
                     }}
                 />
             )}
+            {...props}
         />
     )}
 

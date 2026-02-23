@@ -14,7 +14,11 @@ import { useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { NavMenu } from "./NavMenu";
-import { SearchBar } from "../shared/SearchBar";
+import { SearchBar1 } from "../shared/ReconfigSearchBar";
+import { googleAdapter } from "../../services/searchAdapters/googleAdapter";
+import { clubAdapter } from "../../services/searchAdapters/clubAdapter";
+import { useBooksSearch } from "../../hooks/useBooksSearch";
+import { useClubSearch } from "../../hooks/useClubSearch";
 
 type NavBarProps = {
   user: number | null,
@@ -49,6 +53,8 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
   ];
 
   const navigate = useNavigate();
+  const {search: googleSearch} = useBooksSearch()
+  const {search: clubSearch} = useClubSearch()
 
   const handleNavLinkClick = (path: string) => {
     navigate(path);
@@ -87,13 +93,7 @@ export const NavBar = ({user, setUser}:NavBarProps): JSX.Element => {
             </Box>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <SearchBar<GoogleBook,false, false, true> 
-              className="self-center max-[480px]:hidden" 
-              targets={['googleBooks']} 
-              searchResults={results} 
-              setResults={setResults} 
-              expanding
-            />
+            <SearchBar1 adapters={[googleAdapter(googleSearch, navigate), clubAdapter(clubSearch, navigate)]} collapse limit={5} viewMore/>
             <IconButton onClick={toggleTheme} color="inherit">
               <DarkMode/>
             </IconButton>

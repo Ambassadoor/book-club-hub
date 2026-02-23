@@ -72,7 +72,7 @@ const App = () => {
         >
           <Route index element={ user ? <Dashboard user={user} /> : <LoginCard setUser={setUser}/>} />
           <Route path="clubs">
-            <Route index element={<Club/>} />
+            <Route index element={<Club user={user} getAll/>} />
             <Route path="myClubs/:userId" element={<Club />}/>
             <Route path="create" element={<CreateClubForm user={user} />}/>
             <Route path=":clubId" element={<ClubDetails user={user} />} />
